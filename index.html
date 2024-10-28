@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediChain</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .section-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin: 30px auto;
+            padding: 25px;
+            transition: transform 0.2s;
+        }
+
+        .section-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-header {
+            border-bottom: 2px solid #f8f9fa;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            color: #2d3436;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .github-link {
+            color: #2d3436;
+            transition: color 0.2s;
+        }
+
+        .github-link:hover {
+            color: #0366d6;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .file-item {
+            flex: 1 1 300px;
+            min-width: 300px;
+            margin: 5px;
+        }
+
+        .file-link {
+            color: #2d3436;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .file-link:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+            color: #0366d6;
+        }
+
+        .file-icon {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+            color: #0366d6;
+        }
+
+        footer {
+            background: white;
+            border-top: 1px solid #e1e4e8;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        footer a {
+            color: #2d3436;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #0366d6;
+        }
+
+        @media (max-width: 768px) {
+            .section-container {
+                margin: 15px;
+            }
+            
+            .file-link {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fa-brands fa-html5 text-danger"></i>
+                    MediChain
+                    <a href="https://github.com/ThisIs-Developer/MediChain/tree/main" 
+                       target="_blank" 
+                       class="github-link ms-auto">
+                        <i class="fa-brands fa-github fs-3"></i>
+                    </a>
+                </h2>
+            </div>
+            <ul class="file-list">
+                <li class="file-item">
+                    <a href="user.html" target="_blank" class="file-link">
+                        <i class="fa-regular fa-file-code file-icon"></i>
+                        User
+                    </a>
+                </li>
+            </ul>
+        </div>        
+    </div>
+
+    <footer>
+        <a href="https://github.com/ThisIs-Developer/MediChain" target="_blank">
+            <i class="fa-brands fa-github me-2"></i>
+            MediChain
+        </a>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
