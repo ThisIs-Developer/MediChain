@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Supply Chain Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #60a5fa;
+            --success-checkmark-color: #28a745;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .form-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        .back-link svg {
+            fill: currentColor;
+        }
+
+        .form-floating {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-control {
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(96, 165, 250, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 10px;
+            padding: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: block;
+        }
+
+        .success-checkmark circle {
+            fill: var(--success-checkmark-color);
+        }
+
+        .success-checkmark path {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .info-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+
+        @media (max-height: 700px) {
+            .container {
+                padding: 1rem 0;
+            }
+            .form-container {
+                padding: 2rem;
+            }
+            .logo {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Password Reset Request Form -->
+        <div class="form-container animate__animated animate__fadeIn" id="requestForm">
+            <a href="auth.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M15 8H3.83l3.58-3.59L6 3l-6 6 6 6 1.41-1.41L3.83 10H15z"/>
+                </svg>
+                Back to Login
+            </a>
+
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#2563eb" opacity="0.1"/>
+                    <path d="M30 50 L50 30 L70 50 L50 70 Z" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+                    <circle cx="50" cy="50" r="5" fill="#2563eb"/>
+                    <path d="M50 20 L50 35 M50 65 L50 80 M20 50 L35 50 M65 50 L80 50" stroke="#2563eb" stroke-width="2"/>
+                </svg>
+                <div class="brand-name">Supply Chain Hub</div>
+            </div>
+
+            <h4 class="text-center mb-3">Reset Your Password</h4>
+            <p class="text-muted text-center mb-4">
+                Enter your email address and we'll send you instructions to reset your password.
+            </p>
+
+            <form onsubmit="event.preventDefault(); showSuccess();">
+                <div class="form-floating mb-4">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                    <label for="email">Email address</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 btn-submit mb-3">
+                    Send Reset Link
+                </button>
+
+                <div class="info-text">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-2" style="vertical-align: -2px;">
+                        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm1-11.5A.5.5 0 0 0 8.5 4h-1a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-5zM8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1z"/>
+                    </svg>
+                    Make sure to check your spam folder if you don't receive the email
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div class="form-container animate__animated animate__fadeIn" id="successMessage" style="display: none;">
+            <div class="text-center">
+                <svg class="success-checkmark" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40"/>
+                    <path d="M30 50 L45 65 L70 35"/>
+                </svg>
+                <h4 class="text-center mb-3">Check Your Email</h4>
+                <p class="text-center text-muted mb-4">
+                    We've sent password reset instructions to your email address.
+                    The link will expire in 30 minutes.
+                </p>
+            </div>
+
+            <div class="d-grid gap-3">
+                <button onclick="showRequestForm()" class="btn btn-outline-primary btn-submit">
+                    Didn't receive the email?
+                </button>
+                <a href="auth.html" class="btn btn-primary btn-submit">
+                    Back to Login
+                </a>
+            </div>
+
+            <div class="info-text">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-2" style="vertical-align: -2px;">
+                    <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm1-11.5A.5.5 0 0 0 8.5 4h-1a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-5zM8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1z"/>
+                </svg>
+                If you don't see the email, check your spam folder
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showRequestForm() {
+            document.getElementById('requestForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        function showSuccess() {
+            document.getElementById('requestForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
