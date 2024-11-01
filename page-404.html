@@ -1,34 +1,104 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="assets/favicon.png" type="image/png">
-    <title>Error 404</title>
-    <link rel="stylesheet" href="css/simplebar.css">
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/feather.css">
-    <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
-    <link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
-  </head>
-  <body class="light ">
-    <div class="wrapper vh-100">
-      <div class="align-items-center h-100 d-flex w-50 mx-auto">
-        <div class="mx-auto text-center">
-          <h1 class="display-1 m-0 font-weight-bolder text-muted" style="font-size:80px;">404</h1>
-          <h1 class="mb-1 text-muted font-weight-bold">OOPS!</h1>
-          <h6 class="mb-3 text-muted">The page could not be found.</h6>
-          <a href="./index.html" class="btn btn-lg btn-primary px-5">Back to Dashboard</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0; /* Remove default margin */
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the content vertically and horizontally */
+        }
+
+        .error-page {
+            text-align: center;
+            padding: 20px; /* Reduced padding */
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            color: #2d3748;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            margin: 10px 0; /* Reduced margin */
+            line-height: 1;
+        }
+
+        .error-text {
+            font-size: 24px;
+            color: #4a5568;
+            margin: 10px 0; /* Adjusted margin */
+        }
+
+        .error-description {
+            color: #718096;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .error-illustration {
+            max-width: 300px;
+            margin: 10px auto; /* Adjusted margin */
+        }
+
+        .btn-home {
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.15s ease;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        /* SVG Animations */
+        .error-illustration svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- 404 Error Page -->
+    <div class="container error-page" id="error404">
+        <div class="error-illustration floating">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <rect x="60" y="60" width="80" height="80" rx="10" fill="#4299e1"/>
+                <circle cx="100" cy="100" r="30" fill="#ebf4ff"/>
+                <path d="M85 95 L115 105 M85 105 L115 95" stroke="#4299e1" stroke-width="4" stroke-linecap="round"/>
+            </svg>
         </div>
-      </div>
+        <h1 class="error-code">404</h1>
+        <h2 class="error-text">Page Not Found</h2>
+        <p class="error-description">
+            Oops! The page you're looking for seems to have gone missing. 
+            It might have been moved or doesn't exist anymore.
+        </p>
+        <a href="/" class="btn btn-primary btn-home">
+            Back to Home
+        </a>
     </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/simplebar.min.js"></script>
-    <script src="js/apps.js"></script>
-  </body>
-</html>
 </body>
 </html>
