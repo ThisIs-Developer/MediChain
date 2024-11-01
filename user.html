@@ -7,9 +7,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
         .sidebar {
             min-height: 100vh;
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
         .sidebar .nav-link {
             color: #333;
@@ -17,13 +22,10 @@
         }
         .sidebar .nav-link.active {
             background-color: #e9ecef;
-            color: #0d6efd;
+            color: #000;
         }
         .sidebar .nav-link:hover {
-            background-color: #f8f9fa;
-        }
-        .sidebar .nav-link i {
-            margin-right: 0.5rem;
+            background-color: #f0f0f0;
         }
         .section {
             display: none;
@@ -38,9 +40,40 @@
         }
         .stat-card {
             transition: transform 0.2s;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
         }
         .stat-card:hover {
             transform: translateY(-5px);
+        }
+        h1, h2 {
+            color: #000;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                z-index: 100;
+                left: -250px; /* Hide sidebar by default */
+                transition: left 0.3s;
+            }
+            .sidebar.show {
+                left: 0; /* Show sidebar on toggle */
+            }
+            main {
+                padding-left: 0; /* Adjust main content */
+            }
+            .navbar {
+                z-index: 101; /* Ensure navbar is above the sidebar */
+            }
+        }
+
+        @media (min-width: 768px) {
+            main {
+                padding-left: 250px; /* Adjust main content padding for larger screens */
+            }
         }
     </style>
 </head>
@@ -48,7 +81,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
                         <h5>MediChain</h5>
@@ -85,122 +118,30 @@
                                 Buy Medicine
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.html">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Logout
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
 
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Navbar for Hamburger Menu -->
+                <nav class="navbar navbar-light bg-light d-md-none">
+                    <button class="navbar-toggler" type="button" id="navbar-toggle">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <span class="navbar-brand mb-0 h1">MediChain</span>
+                </nav>
+
                 <!-- Dashboard Section -->
                 <div id="dashboard" class="section active py-4">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                         <h1 class="h2">Dashboard</h1>
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-download"></i> Export
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row g-4 py-3">
-                        <div class="col-md-3">
-                            <div class="card stat-card bg-primary text-white">
-                                <div class="card-body">
-                                    <h5 class="card-title">Total Medicines</h5>
-                                    <h2>1,234</h2>
-                                    <p class="mb-0"><i class="bi bi-arrow-up"></i> 12% increase</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card stat-card bg-success text-white">
-                                <div class="card-body">
-                                    <h5 class="card-title">Active Orders</h5>
-                                    <h2>56</h2>
-                                    <p class="mb-0"><i class="bi bi-arrow-up"></i> 5% increase</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card stat-card bg-warning text-white">
-                                <div class="card-body">
-                                    <h5 class="card-title">Pending Deliveries</h5>
-                                    <h2>28</h2>
-                                    <p class="mb-0"><i class="bi bi-arrow-down"></i> 2% decrease</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card stat-card bg-info text-white">
-                                <div class="card-body">
-                                    <h5 class="card-title">Total Revenue</h5>
-                                    <h2>$12,345</h2>
-                                    <p class="mb-0"><i class="bi bi-arrow-up"></i> 8% increase</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-4">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    Recent Transactions
-                                </div>
-                                <div class="card-body">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Medicine</th>
-                                                <th>Customer</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>#12345</td>
-                                                <td>Paracetamol</td>
-                                                <td>John Doe</td>
-                                                <td>$25.00</td>
-                                                <td><span class="badge bg-success">Completed</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#12346</td>
-                                                <td>Amoxicillin</td>
-                                                <td>Jane Smith</td>
-                                                <td>$32.50</td>
-                                                <td><span class="badge bg-warning">Pending</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    Low Stock Alert
-                                </div>
-                                <div class="card-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Aspirin
-                                            <span class="badge bg-danger rounded-pill">5</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Ibuprofen
-                                            <span class="badge bg-warning rounded-pill">12</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Vitamin C
-                                            <span class="badge bg-warning rounded-pill">15</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -233,7 +174,7 @@
                                             <label class="form-label">Phone</label>
                                             <input type="tel" class="form-control" value="+1 234 567 890">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                                        <button type="submit" class="btn btn-dark">Update Profile</button>
                                     </form>
                                 </div>
                             </div>
@@ -279,7 +220,7 @@
                                     <label class="form-label">Description</label>
                                     <textarea class="form-control" rows="3"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Add Medicine</button>
+                                <button type="submit" class="btn btn-dark">Add Medicine</button>
                             </form>
                         </div>
                     </div>
@@ -292,7 +233,7 @@
                         <div class="card-body">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Enter medicine name or ID...">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-dark" type="button">
                                     <i class="bi bi-search"></i> Search
                                 </button>
                             </div>
@@ -303,11 +244,11 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Medicine ID</th>
                                         <th>Medicine Name</th>
-                                        <th>Batch No.</th>
+                                        <th>Batch Number</th>
                                         <th>Expiry Date</th>
-                                        <th>Stock</th>
+                                        <th>Stock Quantity</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -316,17 +257,17 @@
                                         <td>#MED001</td>
                                         <td>Paracetamol</td>
                                         <td>BATCH123</td>
-                                        <td>2024-12-31</td>
-                                        <td>500</td>
+                                        <td>2025-06-01</td>
+                                        <td>200</td>
                                         <td><span class="badge bg-success">In Stock</span></td>
                                     </tr>
                                     <tr>
                                         <td>#MED002</td>
                                         <td>Amoxicillin</td>
-                                        <td>BATCH124</td>
-                                        <td>2024-10-15</td>
-                                        <td>12</td>
-                                        <td><span class="badge bg-warning">Low Stock</span></td>
+                                        <td>BATCH456</td>
+                                        <td>2025-09-15</td>
+                                        <td>50</td>
+                                        <td><span class="badge bg-danger">Low Stock</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -337,157 +278,36 @@
                 <!-- Buy Medicine Section -->
                 <div id="buy-medicine" class="section py-4">
                     <h2>Buy Medicine</h2>
-                    <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="/api/placeholder/400/200" class="card-img-top" alt="Medicine">
-                                <div class="card-body">
-                                    <h5 class="card-title">Paracetamol</h5>
-                                    <p class="card-text">Pain relief medication</p>
-                                    <p class="card-text"><strong>Price: </strong>$5.99</p>
-                                    <button class="btn btn-primary w-100 mb-2">Add to Cart</button>
-                                    <button class="btn btn-outline-secondary w-100">View Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="/api/placeholder/400/200" class="card-img-top" alt="Medicine">
-                                <div class="card-body">
-                                    <h5 class="card-title">Amoxicillin</h5>
-                                    <p class="card-text">Antibiotic medication</p>
-                                    <p class="card-text"><strong>Price: </strong>$12.99</p>
-                                    <button class="btn btn-primary w-100 mb-2">Add to Cart</button>
-                                    <button class="btn btn-outline-secondary w-100">View Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="/api/placeholder/400/200" class="card-img-top" alt="Medicine">
-                                <div class="card-body">
-                                    <h5 class="card-title">Vitamin C</h5>
-                                    <p class="card-text">Immune system support</p>
-                                    <p class="card-text"><strong>Price: </strong>$8.99</p>
-                                    <button class="btn btn-primary w-100 mb-2">Add to Cart</button>
-                                    <button class="btn btn-outline-secondary w-100">View Details</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Shopping Cart -->
-                    <div class="card mt-4">
-                        <div class="card-header">
-                            <h5 class="mb-0">Shopping Cart</h5>
-                        </div>
+                    <div class="card">
                         <div class="card-body">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
+                                        <th>Medicine Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
-                                        <th>Total</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Paracetamol</td>
-                                        <td>$5.99</td>
+                                        <td>Ibuprofen</td>
+                                        <td>$5.00</td>
                                         <td>
-                                            <div class="input-group" style="width: 120px;">
-                                                <button class="btn btn-outline-secondary btn-sm">-</button>
-                                                <input type="text" class="form-control text-center" value="2">
-                                                <button class="btn btn-outline-secondary btn-sm">+</button>
-                                            </div>
+                                            <input type="number" class="form-control" min="1" value="1" style="width: 60px;">
                                         </td>
-                                        <td>$11.98</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
+                                        <td><button class="btn btn-dark btn-sm">Add to Cart</button></td>
                                     </tr>
                                     <tr>
-                                        <td>Vitamin C</td>
-                                        <td>$8.99</td>
+                                        <td>Omeprazole</td>
+                                        <td>$8.00</td>
                                         <td>
-                                            <div class="input-group" style="width: 120px;">
-                                                <button class="btn btn-outline-secondary btn-sm">-</button>
-                                                <input type="text" class="form-control text-center" value="1">
-                                                <button class="btn btn-outline-secondary btn-sm">+</button>
-                                            </div>
+                                            <input type="number" class="form-control" min="1" value="1" style="width: 60px;">
                                         </td>
-                                        <td>$8.99</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
+                                        <td><button class="btn btn-dark btn-sm">Add to Cart</button></td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
-                                        <td>$20.97</td>
-                                        <td></td>
-                                    </tr>
-                                </tfoot>
                             </table>
-                            <div class="text-end">
-                                <button class="btn btn-secondary me-2">Clear Cart</button>
-                                <button class="btn btn-primary">Proceed to Checkout</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Order Summary Modal -->
-                    <div class="modal fade" id="checkoutModal" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Order Summary</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <h6>Delivery Details</h6>
-                                        <form>
-                                            <div class="mb-3">
-                                                <label class="form-label">Delivery Address</label>
-                                                <textarea class="form-control" rows="3"></textarea>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Contact Number</label>
-                                                <input type="tel" class="form-control">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="mb-3">
-                                        <h6>Order Items</h6>
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex justify-content-between">
-                                                <span>Paracetamol x 2</span>
-                                                <span>$11.98</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between">
-                                                <span>Vitamin C x 1</span>
-                                                <span>$8.99</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between">
-                                                <strong>Total</strong>
-                                                <strong>$20.97</strong>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary">Confirm Order</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -497,32 +317,20 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Section switching functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.section');
+        // Toggle sidebar on hamburger menu click
+        document.getElementById('navbar-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('show');
+        });
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links and sections
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    sections.forEach(s => s.classList.remove('active'));
-                    
-                    // Add active class to clicked link and corresponding section
-                    this.classList.add('active');
-                    const sectionId = this.getAttribute('data-section');
-                    document.getElementById(sectionId).classList.add('active');
+        // Change section on nav link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
                 });
-            });
-
-            // Initialize checkout modal
-            const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
-            
-            // Add click handler for checkout button
-            document.querySelector('button:contains("Proceed to Checkout")').addEventListener('click', function() {
-                checkoutModal.show();
+                document.getElementById(this.dataset.section).classList.add('active');
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
             });
         });
     </script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .form-container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        .info-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .info-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 576px) {
+            .form-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="logo-container">
+            <img src="assets/favicon-bg.png" alt="Logo" class="logo" />
+            <div class="brand-name">MediChain</div>
+        </div>
+
+        <h4 class="mb-3">You have been logged out</h4>
+        <p class="text-muted mb-4">Thank you for using MediChain. We hope to see you again soon!</p>
+
+        <a href="auth.html" class="btn btn-primary w-100">Back to Login</a>
+
+        <div class="info-text">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-2" style="vertical-align: -2px;">
+                <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <rect x="7" y="4" width="2" height="5" fill="currentColor"/>
+                <circle cx="8" cy="11" r="1" fill="currentColor"/>
+            </svg>             
+            If you don't see the email, check your spam folder
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
