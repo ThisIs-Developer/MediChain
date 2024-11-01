@@ -7,6 +7,7 @@
     <link rel="icon" href="assets/favicon.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=error" />
     <style>
         :root {
             --primary-color: #2563eb;
@@ -163,6 +164,12 @@
                 margin-bottom: 0.75rem;
             }
         }
+        @media (max-width: 576px) {
+            .form-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -198,7 +205,9 @@
 
                 <div class="info-text">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-2" style="vertical-align: -2px;">
-                        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm1-11.5A.5.5 0 0 0 8.5 4h-1a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-5zM8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1z"/>
+                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <rect x="7" y="4" width="2" height="5" fill="currentColor"/>
+                        <circle cx="8" cy="11" r="1" fill="currentColor"/>
                     </svg>
                     Make sure to check your spam folder if you don't receive the email
                 </div>
@@ -230,8 +239,10 @@
 
             <div class="info-text">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-2" style="vertical-align: -2px;">
-                    <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm1-11.5A.5.5 0 0 0 8.5 4h-1a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-5zM8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1z"/>
-                </svg>
+                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <rect x="7" y="4" width="2" height="5" fill="currentColor"/>
+                    <circle cx="8" cy="11" r="1" fill="currentColor"/>
+                </svg>             
                 If you don't see the email, check your spam folder
             </div>
         </div>
