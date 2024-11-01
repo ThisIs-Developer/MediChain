@@ -127,6 +127,16 @@
             height: 80px;
             margin: 0 auto 1.5rem;
             display: block;
+            animation: breath 2s infinite; /* Breathing effect */
+        }
+
+        @keyframes breath {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .success-checkmark circle {
@@ -218,8 +228,8 @@
         <div class="form-container animate__animated animate__fadeIn" id="successMessage" style="display: none;">
             <div class="text-center">
                 <svg class="success-checkmark" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="40"/>
-                    <path d="M30 50 L45 65 L70 35"/>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="var(--success-checkmark-color)" stroke-width="5"/>
+                    <path d="M30 50 L45 65 L70 35" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <h4 class="text-center mb-3">Check Your Email</h4>
                 <p class="text-center text-muted mb-4">
