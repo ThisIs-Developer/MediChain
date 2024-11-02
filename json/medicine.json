@@ -7,30 +7,31 @@
         "manufacturer": {
             "manufacturerId": "MANFA2022",
             "manufacturerName": "Manufacturer A",
-            "manufactureSoldDate": "2022-05-02",
+            "manufactureSoldDate": "2023-05-02",
             "manufacturerPrice": 95
         },
         "wholesaler": {
             "wholesalerId": "WHOBA2022",
             "wholesalerName": "Wholesaler B",
             "wholesalerPrice": 102,
-            "wholesalerSoldDate": "2022-05-02"
+            "wholesalerSoldDate": "2023-05-02"
         },
         "distributor": {
             "distributorId": "DISTC2022",
             "distributorName": "Distributor C",
             "distributorPrice": 110,
-            "distributorSoldDate": "2022-05-02"
+            "distributorSoldDate": "2023-05-02"
         },
         "pharmacy": {
             "pharmacyId": "PHARDA2022",
             "pharmacyName": "Pharmacy D",
             "pharmacyPrice": 120,
-            "pharmacySoldDate": "2022-05-02"
+            "pharmacySoldDate": "2023-05-02"
         },
         "consumer": {
             "consumerId": "CONSE2022",
-            "consumerName": "Consumer E"
+            "consumerName": "Consumer E",
+            "consumerSoldDate": "2023-05-02"
         }
     },
     {
@@ -41,30 +42,31 @@
         "manufacturer": {
             "manufacturerId": "MANFF2022",
             "manufacturerName": "Manufacturer F",
-            "manufactureSoldDate": "2022-04-02",
+            "manufactureSoldDate": "2023-04-02",
             "manufacturerPrice": 85
         },
         "wholesaler": {
             "wholesalerId": "WHOGA2022",
             "wholesalerName": "Wholesaler G",
             "wholesalerPrice": 92,
-            "wholesalerSoldDate": "2022-04-02"
+            "wholesalerSoldDate": "2023-04-02"
         },
         "distributor": {
             "distributorId": "DISH2022",
             "distributorName": "Distributor H",
             "distributorPrice": 100,
-            "distributorSoldDate": "2022-04-02"
+            "distributorSoldDate": "2023-04-02"
         },
         "pharmacy": {
             "pharmacyId": "PHARI2022",
             "pharmacyName": "Pharmacy I",
             "pharmacyPrice": 110,
-            "pharmacySoldDate": "2022-04-02"
+            "pharmacySoldDate": "2023-04-02"
         },
         "consumer": {
             "consumerId": "CONJ2022",
-            "consumerName": "Consumer J"
+            "consumerName": "Consumer J",
+            "consumerSoldDate": "2023-04-02"
         }
     },
     {
@@ -75,30 +77,31 @@
         "manufacturer": {
             "manufacturerId": "MANKK2022",
             "manufacturerName": "Manufacturer K",
-            "manufactureSoldDate": "2022-06-02",
+            "manufactureSoldDate": "2023-06-02",
             "manufacturerPrice": 105
         },
         "wholesaler": {
             "wholesalerId": "WHOL2022",
             "wholesalerName": "Wholesaler L",
             "wholesalerPrice": 112,
-            "wholesalerSoldDate": "2022-06-02"
+            "wholesalerSoldDate": "2023-06-02"
         },
         "distributor": {
             "distributorId": "DISM2022",
             "distributorName": "Distributor M",
             "distributorPrice": 120,
-            "distributorSoldDate": "2022-06-02"
+            "distributorSoldDate": "2023-06-02"
         },
         "pharmacy": {
             "pharmacyId": "PHARN2022",
             "pharmacyName": "Pharmacy N",
             "pharmacyPrice": 130,
-            "pharmacySoldDate": "2022-06-02"
+            "pharmacySoldDate": "2023-06-02"
         },
         "consumer": {
             "consumerId": "CONO2022",
-            "consumerName": "Consumer O"
+            "consumerName": "Consumer O",
+            "consumerSoldDate": "2023-06-02"
         }
     }
 ]
