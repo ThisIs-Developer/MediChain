@@ -122,3 +122,8 @@ function populateSupplyChainTable(medicine) {
 
     document.querySelector(".consumer-buy-id").textContent = medicine.consumer.consumerId;
 }
+
+document.getElementById("cancel-button").addEventListener("click", function () {
+    document.getElementById("track-form").reset();
+    document.getElementById("result-div").style.display = "none";
+});

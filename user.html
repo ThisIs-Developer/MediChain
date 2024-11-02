@@ -164,80 +164,84 @@
         </div>
 
         <!-- Track Medicine Section -->
-        <div id="track-medicine" class="content-section">
-            <h2 class="mb-4">Track Medicine</h2>
-            <div class="stat-card">
-                <form id="track-form">
-                    <div class="mb-3">
-                        <label class="form-label">Medicine ID</label>
-                        <input type="text" class="form-control" id="medicine-id" placeholder="Enter Medicine ID" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Upload QR Code</label>
-                        <input type="file" class="form-control" id="qr-code" accept="image/*">
-                    </div>
-                    <button type="submit" class="btn btn-dark">Track Medicine</button>
-                </form>
+<div id="track-medicine" class="content-section">
+    <h2 class="mb-4">Track Medicine</h2>
+    <div class="stat-card">
+        <form id="track-form" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Medicine ID</label>
+                <input type="text" class="form-control" id="medicine-id" placeholder="Enter Medicine ID" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Upload QR Code</label>
+                <input type="file" class="form-control" id="qr-code" accept="image/*">
+            </div>
+            <div class="col-md-12 mt-2">
+                <button type="submit" class="btn btn-dark">Track Medicine</button>
+                <button type="button" class="btn btn-secondary ms-2" id="cancel-button">Cancel</button>
+            </div>
+        </form>
 
-                <!-- Result Div -->
-                <div id="result-div" class="mt-4" style="display: none;">
-                    <div id="medicine-details"></div>
+        <!-- Result Div -->
+        <div id="result-div" class="mt-4" style="display: none;">
+            <div id="medicine-details"></div>
 
-                    <!-- Supply Chain Table -->
-                    <div id="supply-chain-table" class="mt-4" style="display: none;">
-                        <h5>Supply Chain</h5>
-                        <div class="table-responsive">
-                            <table class="custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>Details</th>
-                                        <th>Manufacturer</th>
-                                        <th>Wholesaler</th>
-                                        <th>Distributor</th>
-                                        <th>Pharmacy</th>
-                                        <th>Consumer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Buy ID</td>
-                                        <td class="manufacturer-buy-id"></td>
-                                        <td class="wholesaler-buy-id"></td>
-                                        <td class="distributor-buy-id"></td>
-                                        <td class="pharmacy-buy-id"></td>
-                                        <td class="consumer-buy-id"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sold ID</td>
-                                        <td class="manufacturer-sold-id"></td>
-                                        <td class="wholesaler-sold-id"></td>
-                                        <td class="distributor-sold-id"></td>
-                                        <td class="pharmacy-sold-id"></td>
-                                        <td class="consumer-sold-id"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sold Date</td>
-                                        <td class="manufacturer-sold-date"></td>
-                                        <td class="wholesaler-sold-date"></td>
-                                        <td class="distributor-sold-date"></td>
-                                        <td class="pharmacy-sold-date"></td>
-                                        <td class="consumer-sold-date"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Price</td>
-                                        <td class="manufacturer-price"></td>
-                                        <td class="wholesaler-price"></td>
-                                        <td class="distributor-price"></td>
-                                        <td class="pharmacy-price"></td>
-                                        <td class="consumer-price"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <!-- Supply Chain Table -->
+            <div id="supply-chain-table" class="mt-4" style="display: none;">
+                <h5>Supply Chain</h5>
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Details</th>
+                                <th>Manufacturer</th>
+                                <th>Wholesaler</th>
+                                <th>Distributor</th>
+                                <th>Pharmacy</th>
+                                <th>Consumer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Buy ID</td>
+                                <td class="manufacturer-buy-id"></td>
+                                <td class="wholesaler-buy-id"></td>
+                                <td class="distributor-buy-id"></td>
+                                <td class="pharmacy-buy-id"></td>
+                                <td class="consumer-buy-id"></td>
+                            </tr>
+                            <tr>
+                                <td>Sold ID</td>
+                                <td class="manufacturer-sold-id"></td>
+                                <td class="wholesaler-sold-id"></td>
+                                <td class="distributor-sold-id"></td>
+                                <td class="pharmacy-sold-id"></td>
+                                <td class="consumer-sold-id"></td>
+                            </tr>
+                            <tr>
+                                <td>Sold Date</td>
+                                <td class="manufacturer-sold-date"></td>
+                                <td class="wholesaler-sold-date"></td>
+                                <td class="distributor-sold-date"></td>
+                                <td class="pharmacy-sold-date"></td>
+                                <td class="consumer-sold-date"></td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td class="manufacturer-price"></td>
+                                <td class="wholesaler-price"></td>
+                                <td class="distributor-price"></td>
+                                <td class="pharmacy-price"></td>
+                                <td class="consumer-price"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
 
         <!-- Track Medicine Section -->
         <div id="track-medicine" class="content-section">
