@@ -63,7 +63,7 @@ document.getElementById("track-form").addEventListener("submit", async function 
         if (qrCodeText) {
             await trackById(qrCodeText);
         } else {
-            alert("Could not read the QR code. Please try again.");
+            document.getElementById("medicine-details").innerHTML = '<p class="text-danger">Medicine not found.</p>';
         }
     }
 });
@@ -171,7 +171,7 @@ function populateSupplyChainTable(medicine) {
 
     document.querySelector(".pharmacy-buy-id").textContent = medicine.pharmacy.pharmacyId;
     document.querySelector(".pharmacy-sold-id").textContent = medicine.consumer.consumerId;
-    document.querySelector(".pharmacy-sold-date").textContent = medicine.pharmacy.soldDate;
+    document.querySelector(".pharmacy-sold-date").textContent = medicine.pharmacy.pharmacySoldDate;
     document.querySelector(".pharmacy-price").textContent = medicine.pharmacy.pharmacyPrice;
 
     document.querySelector(".consumer-buy-id").textContent = medicine.consumer.consumerId;
