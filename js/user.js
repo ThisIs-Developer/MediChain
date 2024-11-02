@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
 
             if (link.id === "logout") {
-                window.location.href = "logout.html";
+                window.location.replace("logout.html");
                 return;
             }
 
