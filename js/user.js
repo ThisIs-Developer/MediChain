@@ -59,10 +59,59 @@ document.getElementById("track-form").addEventListener("submit", async function 
     if (medicineId) {
         await trackById(medicineId);
     } else if (qrCodeInput) {
-        alert("QR code handling not implemented yet.");
-        return;
+        const qrCodeText = await readQrCode(qrCodeInput);
+        if (qrCodeText) {
+            await trackById(qrCodeText);
+        } else {
+            alert("Could not read the QR code. Please try again.");
+        }
     }
 });
+
+async function readQrCode(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            const imageDataUrl = event.target.result;
+            const image = new Image();
+            image.src = imageDataUrl;
+
+            image.onload = async () => {
+                try {
+                    const qrCodeText = await decodeQrCode(image);
+                    resolve(qrCodeText);
+                } catch (error) {
+                    console.error("Error decoding QR code:", error);
+                    reject(error);
+                }
+            };
+        };
+
+        reader.onerror = (error) => {
+            console.error("Error reading file:", error);
+            reject(error);
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+async function decodeQrCode(image) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    canvas.width = image.width;
+    canvas.height = image.height;
+    context.drawImage(image, 0, 0, image.width, image.height);
+
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imageData.data, canvas.width, canvas.height);
+
+    if (code) {
+        return code.data;
+    } else {
+        throw new Error("No QR code found.");
+    }
+}
 
 async function trackById(medicineId) {
     let fetchedMedicine = null;
