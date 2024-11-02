@@ -3,334 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediChain Admin Panel</title>
+    <title>Medical Dashboard</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --accent-color: #000000;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+        }
+
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--secondary-bg);
+            font-family: 'Inter', sans-serif;
         }
+
+        /* Sidebar Styles */
         .sidebar {
-            min-height: 100vh;
-            background-color: #fff;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            background: var(--primary-bg);
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            padding-top: 2rem;
         }
-        .sidebar .nav-link {
-            color: #333;
-            padding: 1rem;
+
+        .brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            padding: 0 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
         }
-        .sidebar .nav-link.active {
-            background-color: #e9ecef;
-            color: #000;
+
+        .nav-link {
+            color: var(--text-primary);
+            padding: 0.8rem 1.5rem;
+            margin: 0.2rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
         }
-        .sidebar .nav-link:hover {
-            background-color: #f0f0f0;
+
+        .nav-link:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-color);
         }
-        .section {
+
+        .nav-link.active {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sub-nav {
+            padding-left: 2.5rem;
+        }
+
+        .sub-nav .nav-link {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .content-section {
             display: none;
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.3s ease;
         }
-        .section.active {
+
+        .content-section.active {
             display: block;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        /* Cards */
         .stat-card {
-            transition: transform 0.2s;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 0.5rem;
+            background: var(--primary-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
         }
+
         .stat-card:hover {
             transform: translateY(-5px);
         }
-        h1, h2 {
-            color: #000;
-        }
-        
-        /* Media Queries */
+
+        /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
-                position: absolute;
-                z-index: 100;
-                left: -250px; /* Hide sidebar by default */
-                transition: left 0.3s;
+                transform: translateX(-100%);
+                z-index: 1000;
+                transition: transform 0.3s ease;
+                width: 250px;
             }
+
             .sidebar.show {
-                left: 0; /* Show sidebar on toggle */
+                transform: translateX(0);
             }
-            main {
-                padding-left: 0; /* Adjust main content */
+
+            .main-content {
+                margin-left: 0;
             }
-            .navbar {
-                z-index: 101; /* Ensure navbar is above the sidebar */
+
+            .mobile-nav {
+                display: block !important;
             }
         }
 
-        @media (min-width: 768px) {
-            main {
-                padding-left: 250px; /* Adjust main content padding for larger screens */
-            }
+        .mobile-nav {
+            display: none;
+            padding: 1rem;
+            background: var(--primary-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logout-link {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            padding: 0 1.5rem;
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <div class="text-center mb-4">
-                        <h5>MediChain</h5>
-                        <p class="text-muted">Admin Panel</p>
-                    </div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-section="dashboard">
-                                <i class="bi bi-speedometer2"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="profile">
-                                <i class="bi bi-person"></i>
-                                Profile
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="add-medicine">
-                                <i class="bi bi-plus-circle"></i>
-                                Add Medicine
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="track-medicine">
-                                <i class="bi bi-search"></i>
-                                Track Medicine
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="buy-medicine">
-                                <i class="bi bi-cart"></i>
-                                Buy Medicine
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout.html">
-                                <i class="bi bi-box-arrow-right"></i>
-                                Logout
-                            </a>
-                        </li>
-                    </ul>
+    <!-- Sidebar -->
+    <div class="sidebar" style="width: 250px;">
+        <div class="brand">MediChain</div>
+        <ul class="nav flex-column mt-4">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-section="dashboard">
+                    <i class="bi bi-house-door"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="profile">
+                    <i class="bi bi-person"></i>
+                    Profile
+                </a>
+                <div class="sub-nav">
+                    <a class="nav-link" href="#" data-section="personal-info">
+                        Personal Info
+                    </a>
+                    <a class="nav-link" href="#" data-section="security">
+                        Security
+                    </a>
+                    <a class="nav-link" href="#" data-section="preferences">
+                        Preferences
+                    </a>
                 </div>
-            </nav>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="add-medicine">
+                    <i class="bi bi-plus-circle"></i>
+                    Add Medicine
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="track-medicine">
+                    <i class="bi bi-search"></i>
+                    Track Medicine
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="buy-medicine">
+                    <i class="bi bi-cart"></i>
+                    Buy Medicine
+                </a>
+            </li>
+        </ul>
+        <div class="logout-link">
+            <a class="nav-link" href="#" id="logout">
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+            </a>
+        </div>
+    </div>
 
-            <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <!-- Navbar for Hamburger Menu -->
-                <nav class="navbar navbar-light bg-light d-md-none">
-                    <button class="navbar-toggler" type="button" id="navbar-toggle">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <span class="navbar-brand mb-0 h1">MediChain</span>
-                </nav>
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <button class="btn" id="sidebar-toggle">
+            <i class="bi bi-list fs-4"></i>
+        </button>
+    </div>
 
-                <!-- Dashboard Section -->
-                <div id="dashboard" class="section active py-4">
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                        <h1 class="h2">Dashboard</h1>
-                    </div>
-                </div>
-
-                <!-- Profile Section -->
-                <div id="profile" class="section py-4">
-                    <h2>Profile</h2>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <img src="/api/placeholder/150/150" class="rounded-circle mb-3" alt="Profile Picture">
-                                    <h5 class="card-title">John Administrator</h5>
-                                    <p class="card-text text-muted">System Administrator</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label class="form-label">Full Name</label>
-                                            <input type="text" class="form-control" value="John Administrator">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" class="form-control" value="john@medichain.com">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Phone</label>
-                                            <input type="tel" class="form-control" value="+1 234 567 890">
-                                        </div>
-                                        <button type="submit" class="btn btn-dark">Update Profile</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active">
+            <h2 class="mb-4">Dashboard Overview</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3 class="fs-5 mb-3">Total Medicines</h3>
+                        <h4 class="fs-2 fw-bold">1,234</h4>
+                        <p class="text-success mb-0">
+                            <i class="bi bi-arrow-up"></i> In Stock
+                        </p>
                     </div>
                 </div>
-
-                <!-- Add Medicine Section -->
-                <div id="add-medicine" class="section py-4">
-                    <h2>Add Medicine</h2>
-                    <div class="card">
-                        <div class="card-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Medicine Name</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Generic Name</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Category</label>
-                                        <select class="form-select" required>
-                                            <option>Antibiotics</option>
-                                            <option>Pain Relief</option>
-                                            <option>Vitamins</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Price</label>
-                                        <input type="number" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Stock Quantity</label>
-                                        <input type="number" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Description</label>
-                                    <textarea class="form-control" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-dark">Add Medicine</button>
-                            </form>
-                        </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3 class="fs-5 mb-3">Orders</h3>
+                        <h4 class="fs-2 fw-bold">156</h4>
+                        <p class="text-success mb-0">
+                            <i class="bi bi-arrow-up"></i> Active
+                        </p>
                     </div>
                 </div>
-
-                <!-- Track Medicine Section -->
-                <div id="track-medicine" class="section py-4">
-                    <h2>Track Medicine</h2>
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter medicine name or ID...">
-                                <button class="btn btn-dark" type="button">
-                                    <i class="bi bi-search"></i> Search
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Medicine ID</th>
-                                        <th>Medicine Name</th>
-                                        <th>Batch Number</th>
-                                        <th>Expiry Date</th>
-                                        <th>Stock Quantity</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#MED001</td>
-                                        <td>Paracetamol</td>
-                                        <td>BATCH123</td>
-                                        <td>2025-06-01</td>
-                                        <td>200</td>
-                                        <td><span class="badge bg-success">In Stock</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MED002</td>
-                                        <td>Amoxicillin</td>
-                                        <td>BATCH456</td>
-                                        <td>2025-09-15</td>
-                                        <td>50</td>
-                                        <td><span class="badge bg-danger">Low Stock</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3 class="fs-5 mb-3">Tracked Items</h3>
+                        <h4 class="fs-2 fw-bold">45</h4>
+                        <p class="text-primary mb-0">
+                            <i class="bi bi-geo"></i> In Transit
+                        </p>
                     </div>
                 </div>
-
-                <!-- Buy Medicine Section -->
-                <div id="buy-medicine" class="section py-4">
-                    <h2>Buy Medicine</h2>
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Medicine Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Ibuprofen</td>
-                                        <td>$5.00</td>
-                                        <td>
-                                            <input type="number" class="form-control" min="1" value="1" style="width: 60px;">
-                                        </td>
-                                        <td><button class="btn btn-dark btn-sm">Add to Cart</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Omeprazole</td>
-                                        <td>$8.00</td>
-                                        <td>
-                                            <input type="number" class="form-control" min="1" value="1" style="width: 60px;">
-                                        </td>
-                                        <td><button class="btn btn-dark btn-sm">Add to Cart</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3 class="fs-5 mb-3">Low Stock</h3>
+                        <h4 class="fs-2 fw-bold">23</h4>
+                        <p class="text-warning mb-0">
+                            <i class="bi bi-exclamation-triangle"></i> Alert
+                        </p>
                     </div>
                 </div>
-            </main>
+            </div>
+        </div>
+
+        <!-- Profile Sections -->
+        <div id="profile" class="content-section">
+            <h2 class="mb-4">Profile Overview</h2>
+            <div class="stat-card">
+                <p>Main profile content...</p>
+            </div>
+        </div>
+
+        <div id="personal-info" class="content-section">
+            <h2 class="mb-4">Personal Information</h2>
+            <div class="stat-card">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" value="John Doe">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" value="john@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" value="+1 234 567 890">
+                    </div>
+                    <button type="submit" class="btn btn-dark">Update Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="security" class="content-section">
+            <h2 class="mb-4">Security Settings</h2>
+            <div class="stat-card">
+                <p>Security settings content...</p>
+            </div>
+        </div>
+
+        <div id="preferences" class="content-section">
+            <h2 class="mb-4">Preferences</h2>
+            <div class="stat-card">
+                <p>User preferences content...</p>
+            </div>
+        </div>
+
+        <!-- Add Medicine Section -->
+        <div id="add-medicine" class="content-section">
+            <h2 class="mb-4">Add New Medicine</h2>
+            <div class="stat-card">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Medicine Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="form-select">
+                            <option>Select Category</option>
+                            <option>Tablets</option>
+                            <option>Syrups</option>
+                            <option>Injections</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-dark">Add Medicine</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Track Medicine Section -->
+        <div id="track-medicine" class="content-section">
+            <h2 class="mb-4">Track Medicine</h2>
+            <div class="stat-card">
+                <p>Medicine tracking interface...</p>
+            </div>
+        </div>
+
+        <!-- Buy Medicine Section -->
+        <div id="buy-medicine" class="content-section">
+            <h2 class="mb-4">Buy Medicine</h2>
+            <div class="stat-card">
+                <p>Medicine purchase interface...</p>
+            </div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Toggle sidebar on hamburger menu click
-        document.getElementById('navbar-toggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('show');
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
 
-        // Change section on nav link click
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function () {
-                document.querySelectorAll('.section').forEach(section => {
-                    section.classList.remove('active');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    if (link.id === 'logout') {
+                        // Handle logout
+                        console.log('Logging out...');
+                        return;
+                    }
+
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked link and corresponding section
+                    link.classList.add('active');
+                    const sectionId = link.getAttribute('data-section');
+                    if (document.getElementById(sectionId)) {
+                        document.getElementById(sectionId).classList.add('active');
+                    }
+                    
+                    // Close sidebar on mobile
+                    if (window.innerWidth <= 768) {
+                        document.querySelector('.sidebar').classList.remove('show');
+                    }
                 });
-                document.getElementById(this.dataset.section).classList.add('active');
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
+            });
+
+            // Mobile sidebar toggle
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            sidebarToggle.addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.toggle('show');
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', (e) => {
+                const sidebar = document.querySelector('.sidebar');
+                const sidebarToggle = document.getElementById('sidebar-toggle');
+                
+                if (window.innerWidth <= 768 && 
+                    !sidebar.contains(e.target) && 
+                    !sidebarToggle.contains(e.target)) {
+                    sidebar.classList.remove('show');
+                }
             });
         });
     </script>
