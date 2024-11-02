@@ -27,6 +27,7 @@ body {
     position: fixed;
     box-shadow: var(--sidebar-shadow);
     padding: 1rem 0;
+    padding-top: 1.5rem;
     width: 280px;
     z-index: 1000;
     overflow-y: auto;
@@ -54,7 +55,7 @@ body {
 .brand {
     font-weight: 700;
     font-size: 1.5rem;
-    padding: 0 1.75rem 2rem;
+    padding: 0 1.75rem 1.5rem;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
@@ -62,7 +63,6 @@ body {
 }
 
 .brand-icon {
-    background: var(--accent-color);
     color: white;
     width: 35px;
     height: 35px;
@@ -250,7 +250,7 @@ body {
 
 .mobile-nav {
     display: none;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     background: var(--primary-bg);
     box-shadow: var(--card-shadow);
     position: sticky;
