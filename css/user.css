@@ -21,15 +21,34 @@ body {
     overflow-x: hidden;
 }
 
-/* Sidebar Styles */
 .sidebar {
     background: var(--primary-bg);
     height: 100vh;
     position: fixed;
     box-shadow: var(--sidebar-shadow);
-    padding-top: 1.5rem;
+    padding: 1rem 0;
     width: 280px;
     z-index: 1000;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--text-secondary);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
 }
 
 .brand {
@@ -93,7 +112,13 @@ body {
     opacity: 0.9;
 }
 
-/* Main Content */
+.logout-link {
+    margin-top: auto;
+    text-align: center;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
 .main-content {
     margin-left: 280px;
     padding: 2rem;
@@ -121,7 +146,6 @@ body {
     }
 }
 
-/* Cards */
 .stat-card {
     background: var(--primary-bg);
     border-radius: 16px;
@@ -154,7 +178,6 @@ body {
     color: var(--accent-color);
 }
 
-/* Form Styles */
 .form-control,
 .form-select {
     border: 1px solid var(--border-color);
@@ -176,7 +199,6 @@ body {
     color: var(--text-primary);
 }
 
-/* Button Styles */
 .btn-primary {
     background-color: var(--accent-color);
     border: none;
@@ -191,7 +213,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Profile Card */
 .profile-header {
     background: linear-gradient(to right, var(--accent-color), #1e293b);
     color: white;
@@ -208,7 +229,6 @@ body {
     padding: 4px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);
@@ -238,12 +258,6 @@ body {
     z-index: 900;
 }
 
-.logout-link {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-}
-
 .status-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
@@ -269,7 +283,6 @@ body {
     color: #1e40af;
 }
 
-/* Table Styles */
 .custom-table {
     width: 100%;
     border-collapse: separate;
