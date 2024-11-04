@@ -381,19 +381,19 @@ body {
     }
 }
 
-#medicine-cards .col-md-4 {
+#medicine-cards .col-md-4, .col-md-3 {
     max-width: 100%; 
 }
 
 @media (max-width: 1200px) {
-    #medicine-cards .col-md-4 {
+    #medicine-cards .col-md-4, .col-md-3 {
         flex: 0 0 50%;
         max-width: 50%;
     }
 }
 
 @media (max-width: 900px) {
-    #medicine-cards .col-md-4 {
+    #medicine-cards .col-md-4, .col-md-3 {
         flex: 0 0 100%;
         max-width: 100%;
     }
