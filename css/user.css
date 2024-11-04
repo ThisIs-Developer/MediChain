@@ -369,6 +369,12 @@ body {
 .overlay-content {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 16px;
     text-align: center;
+}
+
+@media (max-width: 576px) {
+    .overlay-content {
+        width: 90%;
+    }
 }
