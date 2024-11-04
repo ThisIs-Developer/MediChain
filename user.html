@@ -288,7 +288,15 @@
                         <label class="form-label">Upload QR Code</label>
                         <input type="file" class="form-control" id="qr-code" accept="image/*">
                     </div>
-                    <div class="col-md-12 mt-2">
+                    <div class="info-text">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-2" style="vertical-align: -2px;">
+                            <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <rect x="7" y="4" width="2" height="5" fill="currentColor"/>
+                            <circle cx="8" cy="11" r="1" fill="currentColor"/>
+                        </svg>
+                        Please provide either a Medicine ID or upload a QR code, but not both.
+                    </div>
+                    <div class="col-md-12 mt-3">
                         <button type="submit" class="btn btn-dark">Track Medicine</button>
                         <button type="button" class="btn btn-secondary ms-2" id="cancel-button">Cancel</button>
                     </div>
