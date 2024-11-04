@@ -155,6 +155,8 @@ body {
     transition: all 0.3s ease;
     height: 100%;
     border: 1px solid var(--border-color);
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .stat-card:hover {
@@ -378,3 +380,22 @@ body {
         width: 90%;
     }
 }
+
+#medicine-cards .col-md-4 {
+    max-width: 100%; 
+}
+
+@media (max-width: 1200px) {
+    #medicine-cards .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 900px) {
+    #medicine-cards .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
