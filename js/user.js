@@ -181,3 +181,84 @@ document.getElementById("cancel-button").addEventListener("click", function () {
     document.getElementById("track-form").reset();
     document.getElementById("result-div").style.display = "none";
 });
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const medicineCardsContainer = document.getElementById("medicine-cards");
+
+    try {
+        const response = await fetch('json/buy-medicine.json');
+        if (!response.ok) throw new Error('Failed to fetch medicine data');
+        const medicines = await response.json();
+
+        medicines.forEach(medicine => {
+            const cardHtml = `
+                <div class="col-md-4 mb-4">
+                    <div class="stat-card p-3 border">
+                        <h3 class="fs-5 mb-2 fw-bold">${medicine.medicineInformation.medicineName}</h3>
+                        <p>${medicine.medicineInformation.description}</p>
+                        <p>Price: $${medicine.pricing.price.toFixed(2)}</p>
+                        <p>Expiry Date: ${medicine.dates.expiryDate}</p>
+                        <p>Seller ID: ${medicine.manufacturerDetails.manufacturerId}</p>
+                        <button class="btn btn-primary w-100 buy-button" data-medicine='${JSON.stringify(medicine)}'>Buy</button>
+                    </div>
+                </div>`;
+            medicineCardsContainer.insertAdjacentHTML('beforeend', cardHtml);
+        });
+
+        const buyButtons = document.querySelectorAll(".buy-button");
+        buyButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const selectedMedicine = JSON.parse(button.getAttribute('data-medicine'));
+                displayPaymentDetails(selectedMedicine);
+            });
+        });
+
+    } catch (error) {
+        console.error(error);
+        medicineCardsContainer.innerHTML = '<p class="text-danger">Error loading medicine data.</p>';
+    }
+});
+
+function displayPaymentDetails(medicine) {
+    document.getElementById("medicine-cards").style.display = "none";
+    document.getElementById("payment-details").classList.remove("d-none");
+
+    document.getElementById("medicine-name").textContent = medicine.medicineInformation.medicineName;
+    document.getElementById("medicine-id").textContent = medicine.medicineInformation.medicineId;
+    document.getElementById("medicine-type").textContent = medicine.medicineInformation.medicineType;
+    document.getElementById("medicine-strength").textContent = medicine.medicineInformation.strength;
+    document.getElementById("medicine-description").textContent = medicine.medicineInformation.description;
+    document.getElementById("medicine-composition").textContent = medicine.medicineInformation.composition;
+
+    document.getElementById("manufacturer-id").textContent = medicine.manufacturerDetails.manufacturerId;
+    document.getElementById("manufacturer-name").textContent = medicine.manufacturerDetails.manufacturerName;
+    document.getElementById("manufacturer-contact").textContent = medicine.manufacturerDetails.contactInformation;
+
+    document.getElementById("batch-number").textContent = medicine.regulatoryInformation.batchNumber;
+    document.getElementById("drug-approval-number").textContent = medicine.regulatoryInformation.drugApprovalNumber;
+
+    document.getElementById("storage-conditions").textContent = medicine.packagingAndLabeling.storageConditions;
+    document.getElementById("barcode-qr-code").textContent = medicine.packagingAndLabeling.barcodesQrCodes;
+
+    document.getElementById("price").textContent = `$${medicine.pricing.price.toFixed(2)}`;
+    document.getElementById("currency").textContent = medicine.pricing.currency;
+
+    document.getElementById("manufacture-date").textContent = medicine.dates.manufactureDate;
+    document.getElementById("expiry-date").textContent = medicine.dates.expiryDate;
+
+    document.getElementById("cancel-payment").addEventListener("click", function () {
+        document.getElementById("payment-details").classList.add("d-none");
+        document.getElementById("medicine-cards").style.display = "flex";
+    });
+
+    document.getElementById("confirm-payment").addEventListener("click", function () {
+        const quantity = document.getElementById("quantity").value;
+        document.getElementById("success-overlay").style.display = "flex";
+    });
+}
+
+document.getElementById("close-overlay").addEventListener("click", function () {
+    document.getElementById("success-overlay").style.display = "none";
+    document.getElementById("payment-details").classList.add("d-none");
+    document.getElementById("medicine-cards").style.display = "flex";
+});

@@ -12,6 +12,7 @@
         0 2px 4px -2px rgb(0 0 0 / 0.1);
     --sidebar-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
         0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --success-checkmark-color: #28a745;
 }
 
 body {
@@ -321,4 +322,53 @@ body {
     background: #f3f4f6;
     border-radius: 8px;
     width: fit-content
+}
+
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: block;
+    animation: breath 2s infinite; /* Breathing effect */
+}
+
+@keyframes breath {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.success-checkmark circle {
+    fill: var(--success-checkmark-color);
+}
+
+.success-checkmark path {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.overlay-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
 }
