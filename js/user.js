@@ -304,12 +304,12 @@ document.getElementById('addWalletButton').addEventListener('click', function() 
     const walletAddress = document.getElementById('walletAddress').value;
     if (walletAddress) {
         const profileStatus = document.getElementById('profileVerificationStatus');
-        profileStatus.innerHTML = `<i class="bi bi-check-circle"></i>Verified`;
+        profileStatus.innerHTML = `<i class="bi bi-check-circle"></i>Authorized`;
         profileStatus.classList.remove('bg-danger');
         profileStatus.classList.add('bg-success');
 
         const securityStatus = document.getElementById('securityVerificationStatus');
-        securityStatus.innerHTML = `<i class="bi bi-check-circle"></i>Verified`;
+        securityStatus.innerHTML = `<i class="bi bi-check-circle"></i>Authorized`;
         securityStatus.classList.remove('bg-danger');
         securityStatus.classList.add('bg-success');
     } else {
