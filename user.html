@@ -311,102 +311,153 @@
         <div id="add-medicine" class="content-section">
             <h2 class="mb-4">Add New Medicine</h2>
             <div class="stat-card">
-                <form>
+                <form class="needs-validation" novalidate>
                     <!-- Manufacturer Details -->
                     <h4>Manufacturer Details</h4>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="manufacturerName" required>
-                        <label for="manufacturerName">Manufacturer Name</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="manufacturerName" placeholder="Manufacturer Name" required>
+                            <label for="manufacturerName">Manufacturer Name</label>
+                            <div class="invalid-feedback">Please enter the manufacturer name.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="manufacturerID" required>
-                        <label for="manufacturerID">Manufacturer ID</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="manufacturerID" placeholder="Manufacturer ID" required>
+                            <label for="manufacturerID">Manufacturer ID</label>
+                            <div class="invalid-feedback">Please enter the manufacturer ID.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="contactInfo" required>
-                        <label for="contactInfo">Contact Information</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="contactInfo" placeholder="Contact Information" required>
+                            <label for="contactInfo">Contact Information</label>
+                            <div class="invalid-feedback">Please enter contact information.</div>
+                        </div>
                     </div>
 
                     <!-- Medicine Information -->
                     <h4>Medicine Information</h4>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="medicineName" required>
-                        <label for="medicineName">Medicine Name</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="medicineName" placeholder="Medicine Name" required>
+                            <label for="medicineName">Medicine Name</label>
+                            <div class="invalid-feedback">Please enter the medicine name.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="medicineID" required>
-                        <label for="medicineID">Medicine ID</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="medicineID" placeholder="Medicine ID" required>
+                            <label for="medicineID">Medicine ID</label>
+                            <div class="invalid-feedback">Please enter the medicine ID.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="medicineType" required>
-                            <option value="" disabled selected>Select Type</option>
-                            <option>Tablet</option>
-                            <option>Capsule</option>
-                            <option>Syrup</option>
-                            <option>Injection</option>
-                        </select>
-                        <label for="medicineType">Medicine Type</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <select class="form-select" id="medicineType" required>
+                                <option value="">Select Type</option>
+                                <option value="tablet">Tablet</option>
+                                <option value="capsule">Capsule</option>
+                                <option value="syrup">Syrup</option>
+                                <option value="injection">Injection</option>
+                            </select>
+                            <label for="medicineType">Medicine Type</label>
+                            <div class="invalid-feedback">Please select a medicine type.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="strength" placeholder="e.g., 500 mg" required>
-                        <label for="strength">Strength</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="strength" placeholder="Strength" required>
+                            <label for="strength">Strength</label>
+                            <div class="invalid-feedback">Please enter the strength.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <textarea class="form-control" id="description" rows="3" required></textarea>
-                        <label for="description">Description</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="description" rows="3" placeholder="Description" required></textarea>
+                            <label for="description">Description</label>
+                            <div class="invalid-feedback">Please enter a description.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <textarea class="form-control" id="composition" rows="3" required></textarea>
-                        <label for="composition">Composition</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="composition" rows="3" placeholder="Composition" required></textarea>
+                            <label for="composition">Composition</label>
+                            <div class="invalid-feedback">Please enter the composition.</div>
+                        </div>
                     </div>
 
                     <!-- Regulatory Information -->
                     <h4>Regulatory Information</h4>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="batchNumber" required>
-                        <label for="batchNumber">Batch Number</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="batchNumber" placeholder="Batch Number" required>
+                            <label for="batchNumber">Batch Number</label>
+                            <div class="invalid-feedback">Please enter the batch number.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="drugApprovalNumber" required>
-                        <label for="drugApprovalNumber">Drug Approval Number</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="drugApprovalNumber" placeholder="Drug Approval Number" required>
+                            <label for="drugApprovalNumber">Drug Approval Number</label>
+                            <div class="invalid-feedback">Please enter the drug approval number.</div>
+                        </div>
                     </div>
 
                     <!-- Packaging and Labeling -->
                     <h4>Packaging and Labeling</h4>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="storageConditions" required>
-                        <label for="storageConditions">Storage Conditions</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="storageConditions" placeholder="Storage Conditions" required>
+                            <label for="storageConditions">Storage Conditions</label>
+                            <div class="invalid-feedback">Please enter the storage conditions.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="barcodes" required>
-                        <label for="barcodes">Barcodes/QR Codes</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="barcodes" placeholder="Barcodes/QR Codes" required>
+                            <label for="barcodes">Barcodes/QR Codes</label>
+                            <div class="invalid-feedback">Please enter barcodes or QR codes.</div>
+                        </div>
                     </div>
 
                     <!-- Pricing -->
                     <h4>Pricing</h4>
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="currency" required>
-                            <option value="" disabled selected>Select Currency</option>
-                            <option>USD</option>
-                            <option>EUR</option>
-                            <option>INR</option>
-                        </select>
-                        <label for="currency">Currency</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <select class="form-select" id="currency" required>
+                                <option value="">Select Currency</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="INR">INR</option>
+                            </select>
+                            <label for="currency">Currency</label>
+                            <div class="invalid-feedback">Please select a currency.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="price" required>
-                        <label for="price">Price</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="price" placeholder="Price" required>
+                            <label for="price">Price</label>
+                            <div class="invalid-feedback">Please enter the price.</div>
+                        </div>
                     </div>
 
                     <!-- Dates -->
                     <h4>Dates</h4>
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="manufactureDate" required>
-                        <label for="manufactureDate">Manufacture Date</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="manufactureDate" required>
+                            <label for="manufactureDate">Manufacture Date</label>
+                            <div class="invalid-feedback">Please enter the manufacture date.</div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="expiryDate" required>
-                        <label for="expiryDate">Expiry Date</label>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="expiryDate" required>
+                            <label for="expiryDate">Expiry Date</label>
+                            <div class="invalid-feedback">Please enter the expiry date.</div>
+                        </div>
                     </div>
 
                     <!-- Submit and Reset Buttons -->
