@@ -519,7 +519,7 @@ body {
     border: 1px solid #dee2e6;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 830px) {
     .danger-zone .d-flex {
         flex-direction: column;
     }
