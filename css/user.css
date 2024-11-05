@@ -506,4 +506,7 @@ body {
     background: #f3f4f6;
     border-radius: 8px;
     width: fit-content;
+    margin-left: 0.81rem;
+    margin-right: 0.81rem;
+    border: 1px solid #dee2e6;
 }
