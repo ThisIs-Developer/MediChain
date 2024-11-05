@@ -353,3 +353,40 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const confirmationOverlay = document.getElementById("confirmation-overlay");
+    const confirmActionButton = document.getElementById("confirmAction");
+    const cancelActionButton = document.getElementById("cancelAction");
+    const confirmationTitle = document.getElementById("confirmation-title");
+    const confirmationMessage = document.getElementById("confirmation-message");
+
+    let actionToConfirm = null;
+
+    document.getElementById("deactivateButton").addEventListener("click", function () {
+        actionToConfirm = "deactivate";
+        confirmationTitle.textContent = "Deactivate Account";
+        confirmationMessage.textContent = "You can reactivate it later, but you'll lose access to your account features temporarily.";
+        confirmationOverlay.style.display = "flex";
+    });
+
+    document.getElementById("deleteButton").addEventListener("click", function () {
+        actionToConfirm = "delete";
+        confirmationTitle.textContent = "Delete Account";
+        confirmationMessage.textContent = "This action is irreversible, and all your data will be permanently removed.";
+        confirmationOverlay.style.display = "flex";
+    });
+
+    confirmActionButton.addEventListener("click", function () {
+        if (actionToConfirm === "deactivate") {
+            window.location.replace("logout.html");
+        } else if (actionToConfirm === "delete") {
+            window.location.replace("logout.html");
+        }
+    });
+
+    cancelActionButton.addEventListener("click", function () {
+        confirmationOverlay.style.display = "none";
+        actionToConfirm = null;
+    });
+});
+

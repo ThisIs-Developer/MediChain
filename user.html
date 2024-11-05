@@ -276,6 +276,7 @@
                     </div>
                 </div>
 
+                <!-- Danger Zone -->
                 <div class="danger-zone p-4 rounded mt-4">
                     <h5 class="text-danger mb-4">Danger Zone</h5>
                     <div class="d-flex justify-content-between mb-3">
@@ -283,7 +284,7 @@
                             <h6 class="mb-1">Deactivate Account</h6>
                             <p class="text-muted mb-0 small">Temporarily disable your account</p>
                         </div>
-                        <button class="btn btn-warning action-button">
+                        <button class="btn btn-warning action-button" id="deactivateButton">
                             <i class="bi bi-power me-2"></i>Deactivate
                         </button>
                     </div>
@@ -292,12 +293,11 @@
                             <h6 class="mb-1">Delete Account</h6>
                             <p class="text-muted mb-0 small">This action cannot be undone</p>
                         </div>
-                        <button class="btn btn-danger action-button">
+                        <button class="btn btn-danger action-button" id="deleteButton">
                             <i class="bi bi-x-octagon me-2"></i>Delete
                         </button>
                     </div>
                 </div>
-                
             </div>
         </div>
 
@@ -626,6 +626,18 @@
                 <h3>Payment Successful!</h3>
                 <p>Thank you for your purchase. Your order has been confirmed.</p>
                 <button id="close-overlay" class="btn btn-secondary mt-3">Close</button>
+            </div>
+        </div>
+
+        <!-- Confirmation Overlay -->
+        <div id="confirmation-overlay" class="overlay">
+            <div class="overlay-content">
+                <h3 class="text-danger" id="confirmation-title"></h3>
+                <p id="confirmation-message"></p>
+                <div class="d-flex justify-content-center mt-4">
+                    <button id="confirmAction" class="btn btn-danger">Confirm</button>
+                    <button id="cancelAction" class="btn btn-secondary ms-4">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
