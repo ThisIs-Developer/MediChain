@@ -328,3 +328,28 @@ document.getElementById("uploadInput").addEventListener("change", function(event
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('json/profile.json')
+        .then(response => response.json())
+        .then(data => {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const randomUser = data[randomIndex];
+
+            document.getElementById('fullName').value = randomUser.full_name;
+            document.getElementById('role').value = randomUser.role.toLowerCase();
+            document.getElementById('email').value = randomUser.email_address;
+            document.getElementById('phone').value = randomUser.contact_number;
+
+            document.getElementById('fullNameDisplay').textContent = randomUser.full_name;
+            document.getElementById('userId').textContent = `ID: ${randomUser.userid}`;
+
+            document.getElementById('profileImage').src = 'assets/favicon.png';
+            document.querySelector('.status-badge').textContent = 'Unauthorized';
+            document.querySelector('.status-badge').classList.toggle('bg-danger', true);
+            document.querySelector('.status-badge').classList.toggle('bg-success', false);
+        })
+        .catch(error => {
+            console.error('Error fetching user data:', error);
+        });
+});
+
