@@ -316,3 +316,15 @@ document.getElementById('addWalletButton').addEventListener('click', function() 
         alert('Please enter a wallet address.');
     }
 });
+
+document.getElementById("uploadInput").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("profileImage").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+

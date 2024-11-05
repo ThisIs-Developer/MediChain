@@ -121,13 +121,15 @@
         <div id="profile" class="content-section">
             <h2 class="mb-4">Profile Overview</h2>
             <div class="row g-4">
-                <!-- Profile Picture Section -->
                 <div class="col-lg-4">
                     <div class="profile-card p-4 text-center">
                         <div class="profile-picture-container mb-3 position-relative">
-                            <img src="assets/favicon.png" alt="Profile Picture" class="profile-picture" width="150">
-                            <div class="upload-overlay">
-                                <i class="bi bi-camera-fill"></i>
+                            <img src="assets/favicon.png" alt="Profile Picture" class="profile-picture" width="150" id="profileImage">
+                            <div class="upload-overlay" id="uploadOverlay">
+                                <label for="uploadInput" class="upload-label">
+                                    <i class="bi bi-camera-fill"></i>
+                                </label>
+                                <input type="file" id="uploadInput" class="d-none" accept="image/*">
                             </div>
                         </div>
                         <h4 class="mb-1">Baivab Sarkar</h4>
@@ -138,14 +140,8 @@
                         </div>
                         
                         <p class="text-muted mb-3">ID: MANFA2022</p>
-                        
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-dark">
-                                <i class="bi bi-pencil-square me-2"></i>Edit Profile
-                            </button>
-                        </div>
                     </div>
-                </div>                
+                </div>
 
                 <!-- Personal Details Section -->
                 <div class="col-lg-8">
