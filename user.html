@@ -301,7 +301,7 @@
             </div>
         </div>
 
-        <!-- Add Medicine Section -->
+        <!-- Add Medicine Section (remove required)-->
         <div id="add-medicine" class="content-section">
             <h2 class="mb-4">Add New Medicine</h2>
             <div class="stat-card">
@@ -310,21 +310,21 @@
                     <h4>Manufacturer Details</h4>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="manufacturerName" placeholder="Manufacturer Name" required>
+                            <input type="text" class="form-control" id="manufacturerName" placeholder="Manufacturer Name">
                             <label for="manufacturerName">Manufacturer Name</label>
                             <div class="invalid-feedback">Please enter the manufacturer name.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="manufacturerID" placeholder="Manufacturer ID" required>
+                            <input type="text" class="form-control" id="manufacturerID" placeholder="Manufacturer ID">
                             <label for="manufacturerID">Manufacturer ID</label>
                             <div class="invalid-feedback">Please enter the manufacturer ID.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="contactInfo" placeholder="Contact Information" required>
+                            <input type="text" class="form-control" id="contactInfo" placeholder="Contact Information">
                             <label for="contactInfo">Contact Information</label>
                             <div class="invalid-feedback">Please enter contact information.</div>
                         </div>
@@ -334,21 +334,21 @@
                     <h4>Medicine Information</h4>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="medicineName" placeholder="Medicine Name" required>
+                            <input type="text" class="form-control" id="medicineName" placeholder="Medicine Name">
                             <label for="medicineName">Medicine Name</label>
                             <div class="invalid-feedback">Please enter the medicine name.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="medicineID" placeholder="Medicine ID" required>
+                            <input type="text" class="form-control" id="medicineID" placeholder="Medicine ID">
                             <label for="medicineID">Medicine ID</label>
                             <div class="invalid-feedback">Please enter the medicine ID.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <select class="form-select" id="medicineType" required>
+                            <select class="form-select" id="medicineType">
                                 <option value="">Select Type</option>
                                 <option value="tablet">Tablet</option>
                                 <option value="capsule">Capsule</option>
@@ -361,21 +361,21 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="strength" placeholder="Strength" required>
+                            <input type="text" class="form-control" id="strength" placeholder="Strength">
                             <label for="strength">Strength</label>
                             <div class="invalid-feedback">Please enter the strength.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <textarea class="form-control" id="description" rows="3" placeholder="Description" required></textarea>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Description"></textarea>
                             <label for="description">Description</label>
                             <div class="invalid-feedback">Please enter a description.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <textarea class="form-control" id="composition" rows="3" placeholder="Composition" required></textarea>
+                            <textarea class="form-control" id="composition" rows="3" placeholder="Composition"></textarea>
                             <label for="composition">Composition</label>
                             <div class="invalid-feedback">Please enter the composition.</div>
                         </div>
@@ -385,14 +385,14 @@
                     <h4>Regulatory Information</h4>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="batchNumber" placeholder="Batch Number" required>
+                            <input type="text" class="form-control" id="batchNumber" placeholder="Batch Number">
                             <label for="batchNumber">Batch Number</label>
                             <div class="invalid-feedback">Please enter the batch number.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="drugApprovalNumber" placeholder="Drug Approval Number" required>
+                            <input type="text" class="form-control" id="drugApprovalNumber" placeholder="Drug Approval Number">
                             <label for="drugApprovalNumber">Drug Approval Number</label>
                             <div class="invalid-feedback">Please enter the drug approval number.</div>
                         </div>
@@ -402,14 +402,14 @@
                     <h4>Packaging and Labeling</h4>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="storageConditions" placeholder="Storage Conditions" required>
+                            <input type="text" class="form-control" id="storageConditions" placeholder="Storage Conditions">
                             <label for="storageConditions">Storage Conditions</label>
                             <div class="invalid-feedback">Please enter the storage conditions.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="barcodes" placeholder="Barcodes/QR Codes" required>
+                            <input type="text" class="form-control" id="barcodes" placeholder="Barcodes/QR Codes">
                             <label for="barcodes">Barcodes/QR Codes</label>
                             <div class="invalid-feedback">Please enter barcodes or QR codes.</div>
                         </div>
@@ -419,7 +419,7 @@
                     <h4>Pricing</h4>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <select class="form-select" id="currency" required>
+                            <select class="form-select" id="currency">
                                 <option value="">Select Currency</option>
                                 <option value="USD">USD</option>
                                 <option value="EUR">EUR</option>
@@ -431,7 +431,7 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="price" placeholder="Price" required>
+                            <input type="number" class="form-control" id="price" placeholder="Price">
                             <label for="price">Price</label>
                             <div class="invalid-feedback">Please enter the price.</div>
                         </div>
@@ -441,14 +441,14 @@
                     <h4>Dates</h4>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="date" class="form-control" id="manufactureDate" required>
+                            <input type="date" class="form-control" id="manufactureDate">
                             <label for="manufactureDate">Manufacture Date</label>
                             <div class="invalid-feedback">Please enter the manufacture date.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="date" class="form-control" id="expiryDate" required>
+                            <input type="date" class="form-control" id="expiryDate">
                             <label for="expiryDate">Expiry Date</label>
                             <div class="invalid-feedback">Please enter the expiry date.</div>
                         </div>
@@ -623,8 +623,8 @@
                     <circle cx="50" cy="50" r="40" fill="none" stroke="var(--success-checkmark-color)" stroke-width="5"/>
                     <path d="M30 50 L45 65 L70 35" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <h3>Payment Successful!</h3>
-                <p>Thank you for your purchase. Your order has been confirmed.</p>
+                <h3 id="success-title"></h3>
+                <p id="success-message"></p>
                 <button id="close-overlay" class="btn btn-secondary mt-3">Close</button>
             </div>
         </div>
