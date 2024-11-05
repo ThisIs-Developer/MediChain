@@ -124,17 +124,17 @@
                 <!-- Profile Picture Section -->
                 <div class="col-lg-4">
                     <div class="profile-card p-4 text-center">
-                        <div class="profile-picture-container mb-3">
-                            <img src="assets/favicon-bg.png" alt="Profile Picture" class="profile-picture rounded-circle" width="150">
+                        <div class="profile-picture-container mb-3 position-relative">
+                            <img src="assets/favicon.png" alt="Profile Picture" class="profile-picture" width="150">
                             <div class="upload-overlay">
-                                <i class="fas fa-camera text-primary"></i>
+                                <i class="bi bi-camera text-primary"></i>
                             </div>
                         </div>
                         <h4 class="mb-1">John Doe</h4>
                         <p class="text-muted mb-3">ID: #12345</p>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary">
-                                <i class="fas fa-edit me-2"></i>Edit Profile
+                                <i class="bi bi-pencil-square me-2"></i>Edit Profile
                             </button>
                         </div>
                     </div>
@@ -207,30 +207,58 @@
         <div id="security" class="content-section mt-4">
             <h2 class="mb-4">Security Settings</h2>
             <div class="profile-card p-4">
-                <h3 class="section-title mb-4">Security Settings</h3>
                 
                 <div class="mb-4">
                     <div class="d-flex align-items-center gap-3 mb-3">
                         <span class="status-badge bg-danger text-white">
-                            <i class="fas fa-times-circle me-2"></i>Not Verified
+                            <i class="bi bi-x-circle me-2"></i>Not Verified
                         </span>
                         <span class="text-muted">Blockchain verification status</span>
                     </div>
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Enter Wallet Address">
                         <button class="btn btn-primary">
-                            <i class="fas fa-plus me-2"></i>Add Wallet
+                            <i class="bi bi-plus-circle me-2"></i>Add Wallet
                         </button>
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <button class="btn btn-outline-primary">
-                        <i class="fas fa-key me-2"></i>Update Password
-                    </button>
+                <!-- Password Update Section -->
+                <h3 class="section-title mb-4">Update Password</h3>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form id="passwordForm">
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="newPassword" placeholder="New Password" required>
+                                    <button class="btn btn-dark" type="button" id="toggleNewPassword"><i class="bi bi-eye-slash"></i></button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                                    <button class="btn btn-dark" type="button" id="toggleConfirmPassword"><i class="bi bi-eye-slash"></i></button>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content mt-4">
+                                <button type="submit" class="btn btn-dark">Update</button>
+                                <button type="button" class="btn btn-secondary ms-2" id="cancelButton">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 instruction">
+                        <h5>Password Requirements</h5>
+                        <ul>
+                            <li>At least 8 characters long</li>
+                            <li>Includes both upper and lower case letters</li>
+                            <li>Contains at least one number</li>
+                            <li>Has at least one special character</li>
+                            <li>Do not use the same password across multiple accounts</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="danger-zone p-4 border border-danger rounded">
+                <div class="danger-zone p-4 border border-danger rounded mt-4">
                     <h5 class="text-danger mb-4">Danger Zone</h5>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
@@ -238,7 +266,7 @@
                             <p class="text-muted mb-0 small">Temporarily disable your account</p>
                         </div>
                         <button class="btn btn-warning">
-                            <i class="fas fa-power-off me-2"></i>Deactivate
+                            <i class="bi bi-power me-2"></i>Deactivate
                         </button>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
@@ -247,7 +275,7 @@
                             <p class="text-muted mb-0 small">This action cannot be undone</p>
                         </div>
                         <button class="btn btn-danger">
-                            <i class="fas fa-trash-alt me-2"></i>Delete
+                            <i class="bi bi-trash me-2"></i>Delete
                         </button>
                     </div>
                 </div>

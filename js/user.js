@@ -262,3 +262,40 @@ document.getElementById("close-overlay").addEventListener("click", function () {
     document.getElementById("payment-details").classList.add("d-none");
     document.getElementById("medicine-cards").style.display = "flex";
 });
+
+document.getElementById('toggleNewPassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('newPassword');
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+
+    const icon = this.querySelector('i');
+    icon.classList.toggle('bi-eye');
+    icon.classList.toggle('bi-eye-slash');
+});
+
+document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('confirmPassword');
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+
+    const icon = this.querySelector('i');
+    icon.classList.toggle('bi-eye');
+    icon.classList.toggle('bi-eye-slash');
+});
+
+document.getElementById('passwordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (newPassword === confirmPassword) {
+        alert('Password updated successfully!');
+    } else {
+        alert('Passwords do not match!');
+    }
+});
+
+document.getElementById('cancelButton').addEventListener('click', function() {
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmPassword').value = '';
+});

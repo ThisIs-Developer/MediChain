@@ -457,13 +457,15 @@ body {
     border-radius: 8px;
     padding: 12px;
 }
-.btn {
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-weight: 500;
-}
+
 .danger-zone {
     border: 1px solid #dee2e6;
     border-radius: 12px;
     background: #fff5f5;
+}
+
+@media (max-width: 990px) {
+    .instruction {
+        margin-top: 1.5rem;
+    }
 }
