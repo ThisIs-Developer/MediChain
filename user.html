@@ -131,9 +131,9 @@
                             </div>
                         </div>
                         <h4 class="mb-1">John Doe</h4>
-                        <p class="text-muted mb-3">ID: #12345</p>
+                        <p class="text-muted mb-3">ID: MANFA2022</p>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-dark">
                                 <i class="bi bi-pencil-square me-2"></i>Edit Profile
                             </button>
                         </div>
@@ -148,7 +148,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="fullName" value="John Doe">
+                                        <input type="text" class="form-control" id="fullName" value="Baivab Sarkar">
                                         <label for="fullName">Full Name</label>
                                     </div>
                                 </div>
@@ -166,13 +166,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" value="john@example.com">
+                                        <input type="email" class="form-control" id="email" value="exmaple@gmail.com">
                                         <label for="email">Email Address</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="tel" class="form-control" id="phone" value="+1 234 567 890">
+                                        <input type="tel" class="form-control" id="phone" value="+91 9874563210">
                                         <label for="phone">Phone Number</label>
                                     </div>
                                 </div>
@@ -180,18 +180,30 @@
                                     <h5 class="mb-3">Address</h5>
                                     <div class="row g-3">
                                         <div class="col-12">
-                                            <input type="text" class="form-control" placeholder="Street Address">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="streetAddress" placeholder="Street Address">
+                                                <label for="streetAddress">Street Address</label>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" placeholder="City">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="city" placeholder="City">
+                                                <label for="city">City</label>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" placeholder="State">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="state" placeholder="State">
+                                                <label for="state">State</label>
+                                            </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <input type="text" class="form-control" placeholder="ZIP">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="zip" placeholder="ZIP">
+                                                <label for="zip">ZIP</label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                             <div class="d-grid mt-4">
@@ -210,18 +222,23 @@
                 
                 <div class="mb-4">
                     <div class="d-flex align-items-center gap-3 mb-3">
-                        <span class="status-badge bg-danger text-white">
+                        <span class="status-badge bg-danger text-white" id="verificationStatus">
                             <i class="bi bi-x-circle me-2"></i>Not Verified
                         </span>
                         <span class="text-muted">Blockchain verification status</span>
                     </div>
+                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <p class="mb-0">To get verified and start purchasing, you need to add your wallet address.</p>
+                    </div>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enter Wallet Address">
-                        <button class="btn btn-primary">
+                        <input type="text" class="form-control" id="walletAddress" placeholder="Enter Wallet Address">
+                        <button class="btn btn-primary" id="addWalletButton">
                             <i class="bi bi-plus-circle me-2"></i>Add Wallet
                         </button>
                     </div>
                 </div>
+                               
 
                 <!-- Password Update Section -->
                 <h3 class="section-title mb-4">Update Password</h3>
@@ -258,7 +275,7 @@
                     </div>
                 </div>
 
-                <div class="danger-zone p-4 border border-danger rounded mt-4">
+                <div class="danger-zone p-4 rounded mt-4">
                     <h5 class="text-danger mb-4">Danger Zone</h5>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
@@ -275,7 +292,7 @@
                             <p class="text-muted mb-0 small">This action cannot be undone</p>
                         </div>
                         <button class="btn btn-danger">
-                            <i class="bi bi-trash me-2"></i>Delete
+                            <i class="bi bi-x-octagon me-2"></i>Delete
                         </button>
                     </div>
                 </div>

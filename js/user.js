@@ -299,3 +299,17 @@ document.getElementById('cancelButton').addEventListener('click', function() {
     document.getElementById('newPassword').value = '';
     document.getElementById('confirmPassword').value = '';
 });
+
+document.getElementById('addWalletButton').addEventListener('click', function() {
+    const walletAddress = document.getElementById('walletAddress').value;
+    if (walletAddress) {
+        document.getElementById('verificationStatus').innerHTML = `
+            <i class="bi bi-check-circle"></i>Verified
+        `;
+        document.getElementById('verificationStatus').classList.remove('bg-danger');
+        document.getElementById('verificationStatus').classList.add('bg-success');
+    } else {
+        alert('Please enter a wallet address.');
+    }
+});
+
