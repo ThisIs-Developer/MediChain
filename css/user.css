@@ -470,6 +470,12 @@ body {
     }
 }
 
+@media (max-width: 1303px) {
+    .instruction {
+        margin-top: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .status-badge {
         display: inline-flex;
@@ -511,14 +517,14 @@ body {
     border: 1px solid #dee2e6;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
     .danger-zone .d-flex {
         flex-direction: column;
     }
 
     .danger-zone .action-button {
         width: 100%;
-        margin-top: 0.5rem; /* Add some space between buttons */
+        margin-top: 0.5rem;
     }
 
     .danger-zone .d-flex .btn {
