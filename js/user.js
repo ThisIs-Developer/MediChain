@@ -303,13 +303,16 @@ document.getElementById('cancelButton').addEventListener('click', function() {
 document.getElementById('addWalletButton').addEventListener('click', function() {
     const walletAddress = document.getElementById('walletAddress').value;
     if (walletAddress) {
-        document.getElementById('verificationStatus').innerHTML = `
-            <i class="bi bi-check-circle"></i>Verified
-        `;
-        document.getElementById('verificationStatus').classList.remove('bg-danger');
-        document.getElementById('verificationStatus').classList.add('bg-success');
+        const profileStatus = document.getElementById('profileVerificationStatus');
+        profileStatus.innerHTML = `<i class="bi bi-check-circle"></i>Verified`;
+        profileStatus.classList.remove('bg-danger');
+        profileStatus.classList.add('bg-success');
+
+        const securityStatus = document.getElementById('securityVerificationStatus');
+        securityStatus.innerHTML = `<i class="bi bi-check-circle"></i>Verified`;
+        securityStatus.classList.remove('bg-danger');
+        securityStatus.classList.add('bg-success');
     } else {
         alert('Please enter a wallet address.');
     }
 });
-
