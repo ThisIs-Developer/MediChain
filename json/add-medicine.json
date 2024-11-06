@@ -1,0 +1,53 @@
+[
+    {
+      "manufacturer_name": "Shree Pharma Pvt. Ltd.",
+      "manufacturer_id": "MANFA2022",
+      "contact_information": "contact@shreepharma.com, +91 9876543210, Mumbai, Maharashtra"
+    },
+    {
+      "manufacturer_name": "AstraPharm Labs",
+      "manufacturer_id": "MANFA2023",
+      "contact_information": "info@astrapharm.com, +91 9888776655, Bangalore, Karnataka"
+    },
+    {
+      "manufacturer_name": "VedaLife Pharmaceuticals",
+      "manufacturer_id": "MANFA2024",
+      "contact_information": "support@vedalifepharma.com, +91 9888881234, Chennai, Tamil Nadu"
+    },
+    {
+      "manufacturer_name": "Nova Therapeutics",
+      "manufacturer_id": "MANFA2025",
+      "contact_information": "nova@therapeutics.com, +91 9991122334, Hyderabad, Telangana"
+    },
+    {
+      "manufacturer_name": "Medico Labs",
+      "manufacturer_id": "MANFA2026",
+      "contact_information": "contact@medicolabs.com, +91 9012345678, Pune, Maharashtra"
+    },
+    {
+      "manufacturer_name": "IndoMedic Pharmaceuticals",
+      "manufacturer_id": "MANFA2027",
+      "contact_information": "sales@indomedicpharma.com, +91 9600726384, Delhi"
+    },
+    {
+      "manufacturer_name": "Eagle Pharma",
+      "manufacturer_id": "MANFA2028",
+      "contact_information": "support@eaglepharma.com, +91 9001234567, Kolkata, West Bengal"
+    },
+    {
+      "manufacturer_name": "BioMedi Pharmaceuticals",
+      "manufacturer_id": "MANFA2029",
+      "contact_information": "info@biomedi.com, +91 9445667788, Ahmedabad, Gujarat"
+    },
+    {
+      "manufacturer_name": "Green Pharma Co.",
+      "manufacturer_id": "MANFA2030",
+      "contact_information": "greenpharma@co.com, +91 9988776655, Surat, Gujarat"
+    },
+    {
+      "manufacturer_name": "Lifeline Medico",
+      "manufacturer_id": "MANFA2031",
+      "contact_information": "lifeline@medico.com, +91 9222333444, Jaipur, Rajasthan"
+    }
+  ]
+  

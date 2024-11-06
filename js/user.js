@@ -285,6 +285,18 @@ document.addEventListener("DOMContentLoaded", function () {
         successOverlay.style.display = "flex";
     }
 
+    fetch("json/add-medicine.json")
+        .then(response => response.json())
+        .then(data => {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const manufacturer = data[randomIndex];
+
+            document.getElementById("manufacturerName").value = manufacturer.manufacturer_name;
+            document.getElementById("manufacturerID").value = manufacturer.manufacturer_id;
+            document.getElementById("contactInfo").value = manufacturer.contact_information;
+        })
+        .catch(error => console.error("Error fetching the JSON data:", error));
+
     addMedicineForm.addEventListener("submit", function (event) {
         event.preventDefault();
         showSuccessOverlay("Medicine Added!", "The medicine has been added successfully.");
