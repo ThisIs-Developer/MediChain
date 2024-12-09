@@ -5,22 +5,30 @@ contract RegistrationLogin {
     struct User {
         string firstName;
         string lastName;
-        string email;
+        bytes32 emailHash; // Use hashed email for storage
         string phone;
         string role;
-        bytes32 passwordHash;
+        bytes32 passwordHash; // Store only the hashed password
         bool termsAccepted;
     }
 
-    mapping(string => User) private users; // Mapping from email to User
-    mapping(string => bool) private registeredEmails; // To check email existence
+    mapping(bytes32 => User) private users; // Mapping from hashed email to User
+    mapping(bytes32 => bool) private registeredEmails; // To check email existence
 
     event UserRegistered(string email, string role);
     event UserLoggedIn(string email);
 
+    string[] private validRoles = [
+        "Manufacturer",
+        "Wholesaler",
+        "Distributor",
+        "Pharmacy",
+        "Customer"
+    ];
+
     // Modifier to check if the user exists
-    modifier userExists(string memory email) {
-        require(registeredEmails[email], "User not registered.");
+    modifier userExists(bytes32 emailHash) {
+        require(registeredEmails[emailHash], "User not registered.");
         _;
     }
 
@@ -32,22 +40,16 @@ contract RegistrationLogin {
         string memory phone,
         string memory role,
         string memory password,
-        string memory confirmPassword,
         bool terms
     ) public {
+        bytes32 emailHash = keccak256(abi.encodePacked(email));
+
         // Validate input
         require(bytes(firstName).length > 0, "First name is required.");
         require(bytes(lastName).length > 0, "Last name is required.");
         require(bytes(email).length > 0, "Email is required.");
         require(bytes(phone).length == 10, "Phone number must be 10 digits.");
-        require(
-            keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked("Manufacturer")) ||
-            keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked("Wholesaler")) ||
-            keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked("Distributor")) ||
-            keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked("Pharmacy")) ||
-            keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked("Customer")),
-            "Invalid role selected."
-        );
+        require(isValidRole(role), "Invalid role selected.");
         require(
             bytes(password).length >= 8 &&
             hasUpperCase(password) &&
@@ -55,35 +57,33 @@ contract RegistrationLogin {
             hasNumber(password),
             "Password must meet complexity requirements."
         );
-        require(
-            keccak256(abi.encodePacked(password)) == keccak256(abi.encodePacked(confirmPassword)),
-            "Passwords do not match."
-        );
         require(terms, "You must accept the terms and conditions.");
-        require(!registeredEmails[email], "Email already registered.");
+        require(!registeredEmails[emailHash], "Email already registered.");
 
         // Register user
-        users[email] = User(
+        users[emailHash] = User(
             firstName,
             lastName,
-            email,
+            emailHash,
             phone,
             role,
-            keccak256(abi.encodePacked(password)), // Store password as hash
+            keccak256(abi.encodePacked(password)), // Store password as a hash
             terms
         );
-        registeredEmails[email] = true;
+        registeredEmails[emailHash] = true;
 
         emit UserRegistered(email, role);
     }
 
     // Login function
     function login(string memory email, string memory password)
-    public
-    userExists(email)
-    returns (string memory)
+        public
+        userExists(keccak256(abi.encodePacked(email)))
+        returns (string memory)
     {
-        User memory user = users[email];
+        bytes32 emailHash = keccak256(abi.encodePacked(email));
+        User memory user = users[emailHash];
+
         require(
             user.passwordHash == keccak256(abi.encodePacked(password)),
             "Invalid password."
@@ -93,10 +93,20 @@ contract RegistrationLogin {
         return "Login successful.";
     }
 
+    // Check if the role is valid
+    function isValidRole(string memory role) private view returns (bool) {
+        for (uint256 i = 0; i < validRoles.length; i++) {
+            if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked(validRoles[i]))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Utility function to check for uppercase
     function hasUpperCase(string memory str) private pure returns (bool) {
         bytes memory b = bytes(str);
-        for (uint i = 0; i < b.length; i++) {
+        for (uint256 i = 0; i < b.length; i++) {
             if (b[i] >= 0x41 && b[i] <= 0x5A) {
                 return true;
             }
@@ -107,7 +117,7 @@ contract RegistrationLogin {
     // Utility function to check for lowercase
     function hasLowerCase(string memory str) private pure returns (bool) {
         bytes memory b = bytes(str);
-        for (uint i = 0; i < b.length; i++) {
+        for (uint256 i = 0; i < b.length; i++) {
             if (b[i] >= 0x61 && b[i] <= 0x7A) {
                 return true;
             }
@@ -118,7 +128,7 @@ contract RegistrationLogin {
     // Utility function to check for numbers
     function hasNumber(string memory str) private pure returns (bool) {
         bytes memory b = bytes(str);
-        for (uint i = 0; i < b.length; i++) {
+        for (uint256 i = 0; i < b.length; i++) {
             if (b[i] >= 0x30 && b[i] <= 0x39) {
                 return true;
             }
