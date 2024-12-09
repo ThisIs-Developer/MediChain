@@ -3,304 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication</title>
-    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <title>MediChain</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #60a5fa;
-        }
-        
         body {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background-color: #f8f9fa;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 2rem 0;
+            padding-bottom: 80px;
         }
 
-        .logo-container {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1rem;
-        }
-
-        .brand-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 2rem;
+        .section-container {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin: 30px auto;
+            padding: 25px;
+            transition: transform 0.2s;
         }
 
-        .nav-tabs {
-            border-bottom: 2px solid #e5e7eb;
-            margin-bottom: 1.5rem;
+        .section-container:hover {
+            transform: translateY(-5px);
         }
 
-        .nav-tabs .nav-link {
-            color: #6b7280;
-            border: none;
-            padding: 1rem 1.5rem;
+        footer {
+            background: white;
+            border-top: 1px solid #e1e4e8;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        footer a {
+            color: #2d3436;
+            text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: color 0.2s;
         }
 
-        .nav-tabs .nav-link:hover {
-            color: var(--primary-color);
+        footer a:hover {
+            color: #0366d6;
         }
 
-        .nav-tabs .nav-link.active {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--primary-color);
-            background: transparent;
-        }
-
-        .form-floating {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-control, .form-select {
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.25rem rgba(96, 165, 250, 0.25);
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 0.8rem;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-1px);
-        }
-
-        .password-requirements {
-            font-size: 0.8rem;
-            color: #6b7280;
-            margin-top: 0.5rem;
-            padding-left: 0.5rem;
-        }
-
-        .form-check-input:checked {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .text-decoration-none {
-            color: var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        .text-decoration-none:hover {
-            color: var(--secondary-color);
-        }
-
-        @media (max-width: 576px) {
-            .form-container {
-                margin: 1rem;
-                padding: 1.5rem;
+        @media (max-width: 768px) {
+            .section-container {
+                margin: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <!-- Logo and Brand -->
-            <div class="logo-container">
-                <img src="assets/favicon-bg.png" alt="Logo" class="logo" />
-                <div class="brand-name">MediChain</div>
-                <p class="text-muted">Streamline your supply chain operations</p>
-            </div>     
-
-            <!-- Navigation Tabs -->
-            <ul class="nav nav-tabs justify-content-center" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#register" type="button">Register</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#login" type="button">Login</button>
-                </li>
-            </ul>
-
-            <!-- Tab Content -->
-            <div class="tab-content">
-                <!-- Registration Form -->
-                <div class="tab-pane fade show active" id="register">
-                    <form class="needs-validation" novalidate>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
-                                    <label for="firstName">First Name</label>
-                                    <div class="invalid-feedback">
-                                        Please enter your first name.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
-                                    <label for="lastName">Last Name</label>
-                                    <div class="invalid-feedback">
-                                        Please enter your last name.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
-                            <label for="email">Email address</label>
-                            <div class="invalid-feedback">
-                                Please enter a valid email address.
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="tel" class="form-control" id="phone" placeholder="Phone Number" 
-                                   pattern="[0-9]{10}" required>
-                            <label for="phone">Phone Number</label>
-                            <div class="invalid-feedback">
-                                Please enter a valid 10-digit phone number.
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            <select class="form-select" id="role" required>
-                                <option value="">Select Role</option>
-                                <option value="manufacturer">Manufacturer</option>
-                                <option value="wholesaler">Wholesaler</option>
-                                <option value="distributor">Distributor</option>
-                                <option value="pharmacy">Pharmacy</option>
-                                <option value="customer">Customer</option>
-                            </select>
-                            <label for="role">Role</label>
-                            <div class="invalid-feedback">
-                                Please select a role.
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="password" placeholder="Password" 
-                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                            <label for="password">Password</label>
-                            <div class="password-requirements">
-                                Password must contain at least 8 characters, including uppercase, lowercase letters and numbers
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
-                            <label for="confirmPassword">Confirm Password</label>
-                            <div class="invalid-feedback">
-                                Passwords must match.
-                            </div>
-                        </div>
-
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="terms" required>
-                            <label class="form-check-label" for="terms">
-                                I agree to the Terms and Conditions
-                            </label>
-                            <div class="invalid-feedback">
-                                You must agree before submitting.
-                            </div>
-                        </div>
-
-                        <button class="w-100 btn btn-primary" type="submit">Register</button>
-                    </form>
+    <div class="container py-4">
+        <!-- Registration Section -->
+        <div class="section-container mb-4">
+            <h2>MediChain User Registration</h2>
+            <form id="registrationForm" onsubmit="registerUser(event)">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" id="firstName" class="form-control" required>
                 </div>
-
-                <!-- Login Form -->
-                <div class="tab-pane fade" id="login">
-                    <form class="needs-validation" novalidate>
-                        <div class="form-floating">
-                            <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com" required>
-                            <label for="loginEmail">Email address</label>
-                            <div class="invalid-feedback">
-                                Please enter a valid email address.
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
-                            <label for="loginPassword">Password</label>
-                            <div class="invalid-feedback">
-                                Please enter your password.
-                            </div>
-                        </div>
-
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Remember me</label>
-                        </div>
-
-                        <button class="w-100 btn btn-primary" type="submit">Login</button>
-
-                        <div class="text-center mt-3">
-                            <a href="reset.html" class="text-decoration-none">Forgot Password?</a>
-                        </div>
-                    </form>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" id="lastName" class="form-control" required>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" id="phone" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select id="role" class="form-control" required>
+                        <option value="Manufacturer">Manufacturer</option>
+                        <option value="Wholesaler">Wholesaler</option>
+                        <option value="Distributor">Distributor</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Customer">Customer</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" id="terms" class="form-check-input" required>
+                    <label for="terms" class="form-check-label">I accept the terms and conditions</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+
+        <!-- Login Section -->
+        <div class="section-container">
+            <h2>MediChain User Login</h2>
+            <form id="loginForm" onsubmit="loginUser(event)">
+                <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Form validation
-        (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
+    <footer>
+        <a href="https://github.com/ThisIs-Developer/MediChain" target="_blank">
+            <i class="fa-brands fa-github me-2"></i>
+            MediChain
+        </a>
+    </footer>
 
-            // Password confirmation validation
-            const password = document.getElementById('password')
-            const confirmPassword = document.getElementById('confirmPassword')
-            if (password && confirmPassword) {
-                confirmPassword.addEventListener('input', () => {
-                    if (confirmPassword.value !== password.value) {
-                        confirmPassword.setCustomValidity('Passwords do not match')
-                    } else {
-                        confirmPassword.setCustomValidity('')
-                    }
-                })
+    <!-- Include Web3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.10.0/web3.min.js"></script>
+    <script>
+        let contract;
+        let account;
+
+        // Load Contract and MetaMask
+        async function loadContract() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    account = accounts[0];
+                    console.log("Connected Account:", account);
+
+                    const web3 = new Web3(window.ethereum);
+                    const contractAddress = '0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8'; // Replace with your deployed contract address
+                    const contractABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "login",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "firstName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "lastName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phone",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "role",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "password",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "terms",
+				"type": "bool"
+			}
+		],
+		"name": "register",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			}
+		],
+		"name": "UserLoggedIn",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "role",
+				"type": "string"
+			}
+		],
+		"name": "UserRegistered",
+		"type": "event"
+	}
+]; // Replace this with your ABI JSON
+
+                    contract = new web3.eth.Contract(contractABI, contractAddress);
+                    console.log("Contract Loaded:", contract);
+                } catch (error) {
+                    console.error("Error connecting to MetaMask or contract:", error);
+                }
+            } else {
+                alert("MetaMask not detected. Please install it!");
             }
-        })()
+        }
+
+        // Register User
+        async function registerUser(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const role = document.getElementById('role').value;
+            const password = document.getElementById('password').value;
+            const terms = document.getElementById('terms').checked;
+
+            try {
+                await contract.methods
+                    .register(firstName, lastName, email, phone, role, password, terms)
+                    .send({ from: account });
+
+                alert("User registered successfully!");
+            } catch (error) {
+                console.error("Registration Error:", error);
+                alert("Registration failed: " + error.message);
+            }
+        }
+
+        // Login User
+        // Login User
+async function loginUser(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+        // Use send() instead of call() for non-view functions
+        const response = await contract.methods
+            .login(email, password)
+            .send({ from: account }); // Ensure account is correctly initialized
+
+        alert("Login Successful! Welcome, " + response);
+    } catch (error) {
+        console.error("Login Error:", error);
+        alert("Login failed: " + error.message);
+    }
+}
+
+
+        // Load contract on page load
+        window.onload = loadContract;
     </script>
 </body>
 </html>
