@@ -2,56 +2,63 @@
 pragma solidity ^0.8.0;
 
 contract AddNewMedicine {
+    // Enum for Medicine Type
+    enum MedicineType { Tablet, Capsule, Syrup, Injection }
+    // Enum for Currency Type
+    enum CurrencyType { USD, INR, EUR }
+
     // Structure to store medicine details
     struct Medicine {
         // Manufacturer Details
-        string manufacturerId;
+        uint manufacturerId;
         // Medicine Information
         string medicineName;
-        string medicineId;
-        string medicineType;
-        string strength;
+        uint medicineId;
+        MedicineType medicineType;
+        uint strength;
         // Regulatory Information
-        string batchNumber;
+        uint batchNumber;
         // Packaging and Labeling
         string storageConditions;
         // Pricing
-        string currency;
-        uint256 price;
+        CurrencyType currency;
+        uint price;
         // Dates (represented as Unix timestamps)
-        uint256 manufactureDate;
-        uint256 expiryDate;
+        uint manufactureDate;
+        uint expiryDate;
         // Address of the account that added the medicine
         address addedBy;
     }
 
     // Mapping from Medicine ID to its details
-    mapping(string => Medicine) public medicines;
+    mapping(uint => Medicine) public medicines;
 
     // Event emitted when a new medicine is added
     event MedicineAdded(
-        string medicineId,
+        uint medicineId,
         string medicineName,
         address indexed addedBy,
-        uint256 timestamp
+        uint timestamp
     );
 
     // Function to add a new medicine record
     function addMedicine(
-        string memory _manufacturerId,
+        uint _manufacturerId,
         string memory _medicineName,
-        string memory _medicineId,
-        string memory _medicineType,
-        string memory _strength,
-        string memory _batchNumber,
+        uint _medicineId,
+        MedicineType _medicineType,
+        uint _strength,
+        uint _batchNumber,
         string memory _storageConditions,
-        string memory _currency,
-        uint256 _price,
-        uint256 _manufactureDate,
-        uint256 _expiryDate
+        CurrencyType _currency,
+        uint _price,
+        uint _manufactureDate,
+        uint _expiryDate
     ) public {
+        // Ensure that the medicine ID is not zero
+        require(_medicineId != 0, "Medicine ID cannot be zero");
         // Ensure that a medicine with the same ID does not already exist
-        require(bytes(medicines[_medicineId].medicineId).length == 0, "Medicine already exists");
+        require(medicines[_medicineId].addedBy == address(0), "Medicine already exists");
 
         // Create a new Medicine struct and store it in the mapping
         medicines[_medicineId] = Medicine({
