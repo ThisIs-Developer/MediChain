@@ -161,9 +161,93 @@ body {
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-        0 8px 10px -6px rgb(0 0 0 / 0.1);
+    box-shadow: var(--card-shadow);
 }
+.hit {
+    cursor: pointer;
+}
+
+/* History Overlay Styling */
+.history-overlay {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 55%;
+    /* Calculate left so the overlay is centered in the main content area */
+    left: calc(265px + ((100vw - 280px) - ((100vw - 265px) * 0.9)) / 2);
+    transform: translateY(-50%);
+    width: calc((100vw - 280px) * 0.9);
+    height: 80vh;
+    background-color: #fff;
+    box-shadow: 0 25px 56px 120px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    z-index: 1000;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 11px;
+    box-sizing: content-box;
+}
+
+/* Close Button Styling */
+.history-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: 1px solid #c9c9c9;
+    font-size: 24px;
+    border-radius: 5px;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+.history-close:hover {
+    color: rgb(255, 0, 0);
+    border: 1px solid red;
+}
+
+/* History Content Styling */
+.history-content {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.history-content table {
+    width: auto;
+    min-width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+.history-content th,
+.history-content td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.history-content thead {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .stat-icon {
     width: 48px;
@@ -331,13 +415,17 @@ body {
     height: 80px;
     margin: 0 auto 1.5rem;
     display: block;
-    animation: breath 2s infinite; /* Breathing effect */
+    animation: breath 2s infinite;
+    /* Breathing effect */
 }
 
 @keyframes breath {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.1);
     }
@@ -382,19 +470,24 @@ body {
     }
 }
 
-#medicine-cards .col-md-4, .col-md-3 {
-    max-width: 100%; 
+#medicine-cards .col-md-4,
+.col-md-3 {
+    max-width: 100%;
 }
 
 @media (max-width: 1200px) {
-    #medicine-cards .col-md-4, .col-md-3 {
+
+    #medicine-cards .col-md-4,
+    .col-md-3 {
         flex: 0 0 50%;
         max-width: 50%;
     }
 }
 
 @media (max-width: 900px) {
-    #medicine-cards .col-md-4, .col-md-3 {
+
+    #medicine-cards .col-md-4,
+    .col-md-3 {
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -403,26 +496,30 @@ body {
 .profile-card {
     background: white;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s;
 }
+
 .profile-card:hover {
     transform: translateY(-5px);
 }
+
 .profile-picture-container {
     position: relative;
     width: 150px;
     height: 150px;
     margin: 0 auto;
 }
+
 .profile-picture {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
+
 .upload-overlay {
     position: absolute;
     bottom: 0;
@@ -432,15 +529,17 @@ body {
     width: 40px;
     height: 40px;
     padding: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
+
 .section-title {
     color: #2c3e50;
     font-weight: 600;
     position: relative;
     padding-bottom: 10px;
 }
+
 .section-title::after {
     content: '';
     position: absolute;
@@ -451,12 +550,15 @@ body {
     background: #0d6efd;
     border-radius: 2px;
 }
+
 .status-badge {
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 0.9rem;
 }
-.form-control, .form-select {
+
+.form-control,
+.form-select {
     border-radius: 8px;
     padding: 12px;
 }
@@ -534,4 +636,3 @@ body {
         width: 100%;
     }
 }
-
