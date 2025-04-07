@@ -1,0 +1,733 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "manufacturerId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "medicineName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "ManufacturerHistoryRecorded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "medicineName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "manufacturerId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "MedicineAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "buyerId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint8",
+				"name": "buyerType",
+				"type": "uint8"
+			}
+		],
+		"name": "MedicinePurchased",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum MedicineManagement.MedicineState",
+				"name": "newState",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "MedicineStateUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "sellerId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "buyerId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "priceAtSale",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint8",
+				"name": "buyerType",
+				"type": "uint8"
+			}
+		],
+		"name": "SaleHistoryRecorded",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "COMMISSION_PHARMACY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "COMMISSION_WHOLESALER",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "TAX_RATE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "manufacturerId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineType",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "strength",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batchNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "storageConditions",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "manufactureDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "expiryDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "quantity",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct MedicineManagement.MedicineInput",
+				"name": "input",
+				"type": "tuple"
+			}
+		],
+		"name": "addMedicine",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllMedicines",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "manufacturerId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineType",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "strength",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batchNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "storageConditions",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "manufactureDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "expiryDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "quantity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum MedicineManagement.MedicineState",
+						"name": "state",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct MedicineManagement.Medicine[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_medicineId",
+				"type": "string"
+			}
+		],
+		"name": "getMedicine",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "manufacturerId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "medicineType",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "strength",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batchNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "storageConditions",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "manufactureDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "expiryDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "quantity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum MedicineManagement.MedicineState",
+						"name": "state",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct MedicineManagement.Medicine",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMedicineCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "manufacturerHistory",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "manufacturerId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "medicineName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "medicineIds",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "medicines",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "manufacturerId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "medicineName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "medicineType",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "strength",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "batchNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "storageConditions",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "manufactureDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "expiryDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum MedicineManagement.MedicineState",
+				"name": "state",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_medicineId",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_quantity",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "buyerType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "_buyerId",
+				"type": "string"
+			}
+		],
+		"name": "purchaseMedicine",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "saleHistory",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "medicineId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "sellerId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "buyerId",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "priceAtSale",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "buyerType",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "soldCounter",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_medicineId",
+				"type": "string"
+			},
+			{
+				"internalType": "enum MedicineManagement.MedicineState",
+				"name": "_state",
+				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "_manufacturerId",
+				"type": "string"
+			}
+		],
+		"name": "updateMedicineState",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
