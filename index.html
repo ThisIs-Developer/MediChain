@@ -720,9 +720,13 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">MedChain</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-flex gap-3">
+                <button class="btn btn-primary-custom px-4 d-lg-none ms-2" onclick="window.location.href='auth.html'">Login</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -740,8 +744,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#team">Team</a>
                     </li>
-                    <li class="nav-item ms-3">
-                        <button class="btn btn-primary-custom px-4" data-bs-toggle="modal" onclick="window.location.href='auth.html'">Login</button>
+                    <li class="nav-item ms-3 d-none d-lg-block">
+                        <button class="btn btn-primary-custom px-4" onclick="window.location.href='auth.html'">Login</button>
                     </li>
                 </ul>
             </div>
