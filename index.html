@@ -3,187 +3,1119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediChain</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>MedChain</title>
     <link rel="icon" href="assets/favicon.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #000000;
+            --primary-dark: #333333;
+            --secondary: #666666;
+            --dark: #000000;
+            --light: #f5f5f5;
+            --gray: #757575;
+        }
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
         body {
-            background-color: #f8f9fa;
-            min-height: 100vh;
-            padding-bottom: 80px;
+            overflow-x: hidden;
         }
-
-        .section-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            margin: 30px auto;
-            padding: 25px;
-            transition: transform 0.2s;
+        
+        .bg-primary-custom {
+            background-color: var(--primary);
         }
-
-        .section-container:hover {
-            transform: translateY(-5px);
+        
+        .text-primary-custom {
+            color: var(--primary);
         }
-
-        .section-header {
-            border-bottom: 2px solid #f8f9fa;
+        
+        .btn-primary-custom {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline-primary-custom {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary-custom:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            background-color: white;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark) !important;
+            margin: 0 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%);
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.05);
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.03);
+            bottom: -50px;
+            left: -50px;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-weight: 700;
+            font-size: 3.5rem;
             margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 80%;
+        }
+        
+        .feature-card {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            background-color: white;
+            border-bottom: 4px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--primary);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .how-it-works {
+            background-color: var(--light);
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--dark);
+            position: relative;
             padding-bottom: 15px;
         }
-
-        .section-title {
-            color: #2d3436;
-            font-weight: 600;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .github-link {
-            color: #2d3436;
-            transition: color 0.2s;
-        }
-
-        .github-link:hover {
-            color: #0366d6;
-        }
-
-        .file-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .file-item {
-            flex: 1 1 300px;
-            min-width: 300px;
-            margin: 5px;
-        }
-
-        .file-link {
-            color: #2d3436;
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            border-radius: 8px;
-            background: #f8f9fa;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .file-link:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-            color: #0366d6;
-        }
-
-        .file-icon {
-            margin-right: 15px;
-            width: 20px;
-            text-align: center;
-            color: #0366d6;
-        }
-
-        footer {
-            background: white;
-            border-top: 1px solid #e1e4e8;
-            padding: 20px;
-            position: fixed;
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
             bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .step-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .benefits {
+            padding: 100px 0;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .benefit-icon {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-right: 20px;
+        }
+        
+        /* Modern Team Section Styles */
+        .team {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.03);
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .team::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.02);
+            bottom: -50px;
+            left: -50px;
+            z-index: 0;
+        }
+
+        .team .section-title {
+            margin-bottom: 70px;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 300px;
+        }
+
+        .team-card-inner {
+            position: relative;
             width: 100%;
+            height: 100%;
             text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
-        footer a {
-            color: #2d3436;
-            text-decoration: none;
+        .team-card:hover .team-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .team-card-front, .team-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: white;
+        }
+
+        .team-card-front {
+            background: white;
+        }
+
+        .team-card-back {
+            background: var(--primary);
+            color: white;
+            transform: rotateY(180deg);
+            justify-content: space-between;
+        }
+
+        .team-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-card h4 {
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .team-role {
+            color: var(--primary);
             font-weight: 500;
-            transition: color 0.2s;
+            font-size: 0.9rem;
         }
 
-        footer a:hover {
-            color: #0366d6;
+        .team-social {
+            width: 100%;
+            margin-top: 20px;
         }
 
-        @media (max-width: 768px) {
-            .section-container {
-                margin: 15px;
+        .team-social-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .team-social-link:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .team-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .team-container {
+                grid-template-columns: 1fr;
             }
             
-            .file-link {
-                padding: 10px 15px;
+            .team-card {
+                height: 250px;
+            }
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+            text-decoration: none;
+            padding-left: 5px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: white;
+            color: black;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 50px;
+            text-align: center;
+            color: #aaa;
+        }
+        
+        /* Login Modal */
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-footer {
+            border: none;
+            padding: 20px 30px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        /* QR Code Animation */
+        .qr-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+        
+        .qr-animation {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .qr-code {
+            width: 160px;
+            height: 160px;
+            background-color: white;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qr-code::before {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            top: 10px;
+            left: 10px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMTQwIDE0MCI+CiAgPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiB4PSIxMCIgeT0iMTAiIGZpbGw9IiMwMDAwMDAiLz4KICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHg9IjUwIiB5PSIxMCIgZmlsbD0iIzAwMDAwMCIvPgogIDxyZWN0IHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgeD0iNzAiIHk9IjEwIiBmaWxsPSIjMDAwMDAwIi8+CiAgPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiB4PSI5MCIgeT0iMTAiIGZpbGw9IiMwMDAwMDAiLz4KCiAgPHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiB4PSIxMCIgeT0iNTAiIGZpbGw9IiMwMDAwMDAiLz4KICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHg9IjMwIiB5PSI1MCIgZmlsbD0iIzAwMDAwMCIvPgogIDxyZWN0IHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgeD0iNTAiIHk9IjUwIiBmaWxsPSIjMDAwMDAwIi8+CiAgPHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiB4PSI3MCIgeT0iNTAiIGZpbGw9IiMwMDAwMDAiLz4KICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHg9IjkwIiB5PSI1MCIgZmlsbD0iIzAwMDAwMCIvPgogIDxyZWN0IHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgeD0iMTIwIiB5PSI1MCIgZmlsbD0iIzAwMDAwMCIvPgoKICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHg9IjEwIiB5PSI3MCIgZmlsbD0iIzAwMDAwMCIvPgogIDxyZWN0IHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgeD0iMzAiIHk9IjcwIiBmaWxsPSIjMDAwMDAwIi8+CiAgPHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjEwIiB4PSI1MCIgeT0iNzAiIGZpbGw9IiMwMDAwMDAiLz4KICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHg9IjkwIiB5PSI3MCIgZmlsbD0iIzAwMDAwMCIvPgogIDxyZWN0IHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgeD0iMTIwIiB5PSI3MCIgZmlsbD0iIzAwMDAwMCIvPgoKICA8cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHg9IjEwIiB5PSI5MCIgZmlsbD0iIzAwMDAwMCIvPgogIDxyZWN0IHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgeD0iNjAiIHk9IjkwIiBmaWxsPSIjMDAwMDAwIi8+CiAgPHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiB4PSI4MCIgeT0iOTAiIGZpbGw9IiMwMDAwMDAiLz4KICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHg9IjEwMCIgeT0iOTAiIGZpbGw9IiMwMDAwMDAiLz4KICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHg9IjEyMCIgeT0iOTAiIGZpbGw9IiMwMDAwMDAiLz4KPC9zdmc+Cg==');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            top: 0;
+            left: 0;
+            box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.5);
+            animation: scanAnimation 2s linear infinite;
+        }
+        
+        @keyframes scanAnimation {
+            0% {
+                top: 0;
+            }
+            50% {
+                top: 100%;
+            }
+            100% {
+                top: 0;
+            }
+        }
+        
+        .tracking-data {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeInOut 4s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            25%, 75% {
+                opacity: 1;
+            }
+        }
+        
+        .blockchain-animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .block {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            animation: blockAnimation 4s infinite;
+        }
+        
+        .block:nth-child(1) { animation-delay: 0s; }
+        .block:nth-child(2) { animation-delay: 0.5s; }
+        .block:nth-child(3) { animation-delay: 1s; }
+        .block:nth-child(4) { animation-delay: 1.5s; }
+        .block:nth-child(5) { animation-delay: 2s; }
+        
+        @keyframes blockAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            10%, 90% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-description {
+                max-width: 100%;
+            }
+            
+            .qr-container {
+                height: 300px;
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0 60px;
+                text-align: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .feature-card, .step-card {
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .feature-icon {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container py-4">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fa-brands fa-html5 text-danger"></i>
-                    MediChain
-                    <a href="https://github.com/ThisIs-Developer/MediChain/tree/main" 
-                       target="_blank" 
-                       class="github-link ms-auto">
-                        <i class="fa-brands fa-github fs-3"></i>
-                    </a>
-                </h2>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">MedChain</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#benefits">Benefits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Team</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <button class="btn btn-primary-custom px-4" data-bs-toggle="modal" onclick="window.location.href='auth.html'">Login</button>
+                    </li>
+                </ul>
             </div>
-            <ul class="file-list">
-                <li class="file-item">
-                    <a href="user.html" target="_blank" class="file-link">
-                        <i class="fa-regular fa-file-code file-icon"></i>
-                        User
-                    </a>
-                </li>
-                <li class="file-item">
-                    <a href="404.html" target="_blank" class="file-link">
-                        <i class="fa-regular fa-file-code file-icon"></i>
-                        Page 404
-                    </a>
-                </li>
-                <li class="file-item">
-                    <a href="500.html" target="_blank" class="file-link">
-                        <i class="fa-regular fa-file-code file-icon"></i>
-                        Page 500
-                    </a>
-                </li>
-                <li class="file-item">
-                    <a href="auth.html" target="_blank" class="file-link">
-                        <i class="fa-regular fa-file-code file-icon"></i>
-                        Authentication
-                    </a>
-                </li>
-                <li class="file-item">
-                    <a href="reset.html" target="_blank" class="file-link">
-                        <i class="fa-regular fa-file-code file-icon"></i>
-                        Reset Password
-                    </a>
-                </li>
-                <li class="file-item">
-                    <a href="logout.html" target="_blank" class="file-link">
-                        <i class="fa-regular fa-file-code file-icon"></i>
-                        Logout
-                    </a>
-                </li>
-            </ul>
-        </div>        
-    </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title animate-fadeInUp">Transforming Medical Logistics with Blockchain</h1>
+                    <p class="hero-description animate-fadeInUp delay-1">Secure end-to-end pharmaceutical tracking system using blockchain technology for transparent, efficient, and counterfeit-free supply chains.</p>
+                    <div class="d-flex flex-wrap gap-3 animate-fadeInUp delay-2">
+                        <a href="#how-it-works" class="btn btn-primary-custom px-4 py-2">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-fadeInUp delay-3">
+                    <div class="qr-container">
+                        <div class="qr-animation">
+                            <div class="qr-code">
+                                <div class="scan-line"></div>
+                            </div>
+                            <div class="blockchain-animation">
+                                <div class="block">BLK1</div>
+                                <div class="block">BLK2</div>
+                                <div class="block">BLK3</div>
+                                <div class="block">BLK4</div>
+                                <div class="block">BLK5</div>
+                            </div>
+                            <div class="tracking-data">
+                                <p class="mb-0"><small>Medicine: PARACETAMOL</small></p>
+                                <p class="mb-0"><small>Batch: B2025042</small></p>
+                                <p class="mb-0"><small>Status: <span class="text-success">Verified ✓</span></small></p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features py-5" id="features">
+        <div class="container">
+            <h2 class="text-center section-title">Key Features</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Immutable Records</h4>
+                        <p>Tamper-proof blockchain records ensure complete data integrity throughout the entire supply chain.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>Real-time Tracking</h4>
+                        <p>Monitor pharmaceutical products from manufacturing to patient delivery with real-time location updates.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <h4>Environmental Monitoring</h4>
+                        <p>IoT sensors track temperature, humidity, and other vital parameters to ensure drug integrity during transit.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <h4>Instant Verification</h4>
+                        <p>QR code scanning allows healthcare providers and patients to verify drug authenticity in seconds.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h4>Automated Alerts</h4>
+                        <p>Receive instant notifications for anomalies or environmental condition violations during transport.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h4>Smart Contracts</h4>
+                        <p>Automate ownership transfers and enforce compliance with predefined conditions through smart contracts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="text-center section-title">How It Works</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Product Registration</h4>
+                        <p>Manufacturers register drug details on the blockchain, creating an immutable entry with batch information, expiry date, and unique identifiers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>IoT Integration</h4>
+                        <p>IoT sensors attached to drug packages continuously monitor environmental conditions and feed data to the blockchain.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Chain of Custody</h4>
+                        <p>Every ownership transfer is securely recorded through smart contracts, creating a complete chain of custody from manufacturer to patient.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Verification</h4>
+                        <p>Healthcare providers and patients can scan QR codes to instantly verify product authenticity and access complete history.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="text-center section-title">Benefits</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <div>
+                            <h4>Counterfeit Prevention</h4>
+                            <p>Eliminate fake drugs from the supply chain by ensuring every product can be traced to its authentic source.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div>
+                            <h4>Enhanced Transparency</h4>
+                            <p>Complete visibility into the entire supply chain increases trust among all stakeholders.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Improved Efficiency</h4>
+                            <p>Streamlined processes reduce paperwork and administrative overhead, saving time and resources.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Faster Recall Management</h4>
+                            <p>Instantly identify and locate affected products in case of recalls, minimizing health risks.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h4>Data-Driven Insights</h4>
+                            <p>Leverage supply chain data for analytics and continuous improvement opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <h4>Patient Safety</h4>
+                            <p>Ensure patients receive genuine, properly handled medications every time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section - Modern Design -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="text-center section-title">The Minds Behind MedChain</h2>
+            
+            <div class="team-container">
+                <!-- Team Member 1 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <div class="team-icon">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <h4>Baivab Sarkar</h4>
+                            <p class="team-role">Lead Full Stack Developer</p>
+                        </div>
+                        <div class="team-card-back">
+                            <p>Develops seamless, end-to-end user experiences while integrating blockchain logic into dynamic web interfaces.</p>
+                            <div class="team-social">
+                                <a href="https://github.com/ThisIs-Developer" target="_blank" class="team-social-link">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Team Member 2 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <div class="team-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <h4>Arpan Bhattacharya</h4>
+                            <p class="team-role">Smart Contract Developer</p>
+                        </div>
+                        <div class="team-card-back">
+                            <p>Designs and implements secure smart contracts to automate trustless transactions and streamline blockchain operations.</p>
+                            <div class="team-social">
+                                <a href="https://github.com/Arpan550" target="_blank" class="team-social-link">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Team Member 3 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <div class="team-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h4>Ayan Chatterjee</h4>
+                            <p class="team-role">Blockchain Developer</p>
+                        </div>
+                        <div class="team-card-back">
+                            <p>Specializes in distributed systems and core blockchain integration, with a focus on architecture and smart contract infrastructure.</p>
+                            <div class="team-social">
+                                <a href="https://github.com/Ayan123C" target="_blank" class="team-social-link">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Team Member 4 -->
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <div class="team-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h4>Bhishmadev Ghosh</h4>
+                            <p class="team-role">System Analyst / Research Coordinator</p>
+                        </div>
+                        <div class="team-card-back">
+                            <p>Focuses on system planning, compliance mapping, and project documentation, ensuring technical alignment and research integrity.</p>
+                            <div class="team-social">
+                                <a href="https://github.com/bhishma620" target="_blank" class="team-social-link">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+
+    <!-- Footer -->
     <footer>
-        <a href="https://github.com/ThisIs-Developer/MediChain" target="_blank">
-            <i class="fa-brands fa-github me-2"></i>
-            MediChain
-        </a>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="text-white mb-4">MedChain</h3>
+                    <p>Transforming pharmaceutical supply chains with blockchain technology for enhanced security, transparency, and efficiency.</p>
+                    <div class="social-links mt-3">
+                        <a href="https://github.com/ThisIs-Developer/MediChain"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#how-it-works">How It Works</a></li>
+                            <li><a href="#benefits">Benefits</a></li>
+                            <li><a href="#team">Team</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 MedChain. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Web3.js (for future blockchain integration) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.1/web3.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close navbar collapse on mobile when link is clicked
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarCollapse.classList.remove('show');
+                }
+            });
+        });
+        
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '10px 0';
+                navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.padding = '15px 0';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+        
+    </script>
 </body>
 </html>
