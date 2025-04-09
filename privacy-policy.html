@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedChain | Privacy Policy</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #000000;
+      --primary-dark: #333333;
+      --secondary: #666666;
+      --dark: #000000;
+      --light: #f5f5f5;
+      --gray: #757575;
+    }
+    * {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+    }
+    .bg-primary-custom {
+      background-color: var(--primary);
+    }
+    .text-primary-custom {
+      color: var(--primary);
+    }
+    .btn-primary-custom {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .btn-primary-custom:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .btn-outline-primary-custom {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+    .btn-outline-primary-custom:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .navbar {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+      background-color: white;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+    .nav-link {
+      font-weight: 500;
+      color: var(--dark) !important;
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%);
+      padding: 120px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.05);
+      top: -100px;
+      right: -100px;
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.03);
+      bottom: -50px;
+      left: -50px;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-title {
+      font-weight: 700;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+    }
+    .hero-description {
+      font-size: 1.2rem;
+      color: var(--gray);
+      margin-bottom: 30px;
+      max-width: 80%;
+    }
+    .section-title {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 50px 0 20px;
+    }
+    .footer-links h5 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-links h5::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: white;
+    }
+    .footer-links ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .footer-links ul li {
+      margin-bottom: 10px;
+    }
+    .footer-links ul li a {
+      color: #ddd;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer-links ul li a:hover {
+      color: white;
+      text-decoration: none;
+      padding-left: 5px;
+    }
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      text-align: center;
+      line-height: 40px;
+      margin-right: 10px;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      background-color: white;
+      color: black;
+      transform: translateY(-3px);
+    }
+    .copyright {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      margin-top: 50px;
+      text-align: center;
+      color: #aaa;
+    }
+    /* Additional styling for Privacy Policy sections */
+    .privacy-section {
+      padding: 80px 0;
+    }
+    .privacy-section h3 {
+      font-weight: 600;
+      margin-top: 40px;
+      color: var(--primary);
+    }
+    .privacy-section p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: var(--gray);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">MedChain</a>
+      <div class="d-flex gap-3">
+        <button class="btn btn-primary-custom px-4 d-lg-none ms-2" onclick="window.location.href='auth.html'">Login</button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#how-it-works">How It Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#benefits">Benefits</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#team">Team</a></li>
+          <li class="nav-item ms-3 d-none d-lg-block">
+            <button class="btn btn-primary-custom px-4" onclick="window.location.href='auth.html'">Login</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section for Privacy Policy -->
+  <section class="hero" id="privacy-hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-12 text-center hero-content">
+          <h1 class="hero-title">Privacy Policy</h1>
+          <p class="hero-description">Your privacy is our priority. Read our detailed privacy policy to learn how we protect your personal data and ensure transparency in our operations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Policy Details -->
+  <section class="privacy-section">
+    <div class="container">
+      <h2 class="text-center section-title">Our Privacy Practices</h2>
+      <p>MedChain is committed to maintaining the confidentiality and security of your personal data. This privacy policy outlines the types of information we collect, how we use it, the measures we take to protect your information, and your rights regarding your data.</p>
+      
+      <!-- Section: Information Collection -->
+      <h3>Information Collection</h3>
+      <p>
+        We collect information when you register on our platform, use our services, or interact with our website. The types of data we collect include:
+      </p>
+      <ul>
+        <li><strong>Personal Information:</strong> Name, email address, phone number, and other contact details provided during registration and login.</li>
+        <li><strong>Transaction Data:</strong> Details regarding pharmaceutical transactions, including drug registration, purchase information, and ownership transfers processed by our blockchain system.</li>
+        <li><strong>Technical Data:</strong> IP addresses, browser types, access times, and other diagnostic data collected automatically when you visit our site.</li>
+        <li><strong>IoT and Sensor Data:</strong> For supply chain tracking, environmental conditions (such as temperature and humidity) and geolocation data from IoT devices are recorded to ensure product integrity.</li>
+      </ul>
+      
+      <!-- Section: Use of Information -->
+      <h3>Use of Information</h3>
+      <p>
+        Your information is used for the following purposes:
+      </p>
+      <ul>
+        <li>To facilitate user registration and secure authentication.</li>
+        <li>To process and record pharmaceutical transactions through our blockchain.</li>
+        <li>To monitor supply chain conditions and trigger automated alerts for deviations.</li>
+        <li>To provide a seamless and personalized user experience on our platform.</li>
+        <li>To comply with regulatory requirements and ensure data integrity.</li>
+      </ul>
+      
+      <!-- Section: Data Security -->
+      <h3>Data Security</h3>
+      <p>
+        We implement robust security measures to protect your data from unauthorized access, alteration, disclosure, or destruction. These measures include:
+      </p>
+      <ul>
+        <li>Encryption of sensitive information both in transit and at rest.</li>
+        <li>Storing critical transaction records on an immutable blockchain ledger.</li>
+        <li>Regular security audits and continuous monitoring of system vulnerabilities.</li>
+        <li>Strict access controls ensuring that only authorized personnel have access to sensitive data.</li>
+      </ul>
+      
+      <!-- Section: Cookies and Tracking -->
+      <h3>Cookies and Tracking</h3>
+      <p>
+        Our website uses cookies and similar technologies to enhance your user experience and analyze site usage. These technologies help us understand user behavior and improve our services. You can control cookie preferences through your browser settings.
+      </p>
+      
+      <!-- Section: User Rights -->
+      <h3>Your Rights</h3>
+      <p>
+        You have the right to access, correct, update, or request deletion of your personal information. If you have any questions regarding your data or wish to exercise your rights, please contact us at the address provided in the Contact section below.
+      </p>
+      
+      <!-- Section: Changes to This Privacy Policy -->
+      <h3>Changes to This Privacy Policy</h3>
+      <p>
+        We may update our privacy policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We encourage you to review this page periodically for the latest information on our privacy practices.
+      </p>
+      
+      <!-- Section: Contact Information -->
+      <h3>Contact Information</h3>
+      <p>
+        If you have any questions or concerns about this privacy policy or our treatment of your personal data, please contact us:
+      </p>
+      <ul>
+        <li><strong>Email:</strong> support@medchain.com</li>
+        <li><strong>Address:</strong> 123 Blockchain Avenue, Secure City, Country</li>
+        <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+      </ul>
+      
+      <p>
+        By using MedChain’s services, you acknowledge that you have read and understood this privacy policy.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <h3 class="text-white mb-4">MedChain</h3>
+          <p>Transforming pharmaceutical supply chains with blockchain technology for enhanced security, transparency, and efficiency.</p>
+          <div class="social-links mt-3">
+            <a href="https://github.com/ThisIs-Developer/MediChain"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <div class="footer-links">
+            <h5>Quick Links</h5>
+            <ul>
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#how-it-works">How It Works</a></li>
+              <li><a href="index.html#benefits">Benefits</a></li>
+              <li><a href="index.html#team">Team</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 mb-4">
+          <div class="footer-links">
+            <h5>Support</h5>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 MedChain. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Smooth Scrolling Script -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+        // Close navbar collapse on mobile when link is clicked
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse.classList.contains('show')) {
+          navbarCollapse.classList.remove('show');
+        }
+      });
+    });
+
+    // Navbar background change on scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.padding = '10px 0';
+        navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+      } else {
+        navbar.style.padding = '15px 0';
+        navbar.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
