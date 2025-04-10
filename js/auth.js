@@ -214,7 +214,7 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
     console.log("Reset token:", token);
 
     // --- Step 2: Send token and email to your backend ---
-    const response = await fetch("http://localhost:8080/sendResetEmail", {
+    const response = await fetch("https://emailsenderservice-springboot-production.up.railway.app/sendResetEmail", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, token }),
