@@ -287,3 +287,24 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
 
 
 window.onload = loadContract;
+
+function toggleView(viewToShow) {
+  if (viewToShow === 'loginView') {
+    document.getElementById('loginView').style.display = 'block';
+    document.getElementById('registerView').style.display = 'none';
+  } else {
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('registerView').style.display = 'block';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('switchToRegister').addEventListener('click', function(e) {
+    e.preventDefault();
+    toggleView('registerView');
+  });
+  document.getElementById('switchToLogin').addEventListener('click', function(e) {
+    e.preventDefault();
+    toggleView('loginView');
+  });
+});
