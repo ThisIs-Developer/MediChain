@@ -1,7 +1,7 @@
 let contract;
 let account;
 let web3;
-
+ 
 async function loadContract() {
   if (typeof window.ethereum !== "undefined") {
     try {
@@ -11,9 +11,9 @@ async function loadContract() {
       account = accounts[0];
       // For MetaMask interactions use window.ethereum provider:
       web3 = new Web3(window.ethereum);
-
+ 
       const contractAddress = "0x686b2F6f4aF473eF13F2BFE25889C096131fDD43";
-
+ 
       const response = await fetch("json/registrationABI.json");
       const abi = await response.json();
       contract = new web3.eth.Contract(abi, contractAddress);
@@ -25,7 +25,40 @@ async function loadContract() {
     alert("MetaMask not detected. Please install it!");
   }
 }
-
+ 
+function toggleView(viewToShow) {
+  if (viewToShow === "loginView") {
+    document.getElementById("loginView").style.display = "block";
+    document.getElementById("registerView").style.display = "none";
+  } else {
+    document.getElementById("loginView").style.display = "none";
+    document.getElementById("registerView").style.display = "block";
+  }
+}
+ 
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("switchToRegister")
+    .addEventListener("click", function (e) {
+      e.preventDefault();
+      toggleView("registerView");
+    });
+  document
+    .getElementById("switchToLogin")
+    .addEventListener("click", function (e) {
+      e.preventDefault();
+      toggleView("loginView");
+    });
+});
+ 
+function togglePassword(fieldId, icon) {
+  const input = document.getElementById(fieldId);
+  const type = input.type === 'password' ? 'text' : 'password';
+  input.type = type;
+  icon.classList.toggle('fa-eye');
+  icon.classList.toggle('fa-eye-slash');
+}
+ 
 // ================== Generate Unique ID ==================
 function generateUniqueId(role, email) {
   const rolePrefixes = {
@@ -34,26 +67,26 @@ function generateUniqueId(role, email) {
     Pharmacy: "PMC",
   };
   const prefix = rolePrefixes[role] || "USR";
-
+ 
   let storedId = localStorage.getItem(`userId_${email}`);
   if (storedId) return storedId;
-
+ 
   const randomNum = Math.floor(100 + Math.random() * 900);
   const uniqueId = `${prefix}${randomNum}`;
-
+ 
   localStorage.setItem(`userId_${email}`, uniqueId);
   return uniqueId;
 }
-
+ 
 // Password validation function
 function validatePassword(password) {
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
   return regex.test(password);
 }
-
+ 
 async function registerUser(event) {
   event.preventDefault();
-
+ 
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -61,7 +94,7 @@ async function registerUser(event) {
   const role = document.getElementById("role").value;
   const password = document.getElementById("password").value;
   const terms = document.getElementById("terms").checked;
-
+ 
   if (!validatePassword(password)) {
     Swal.fire({
       icon: "error",
@@ -70,7 +103,7 @@ async function registerUser(event) {
     });
     return;
   }
-
+ 
   const existingPassword = localStorage.getItem("userPassword");
   if (existingPassword && existingPassword === password) {
     Swal.fire({
@@ -80,14 +113,14 @@ async function registerUser(event) {
     });
     return;
   }
-
+ 
   const addressDetails = {
     street: "",
     city: "",
     state: "",
     zip: "",
   };
-
+ 
   const id = generateUniqueId(role, email);
   const userInput = {
     id: id,
@@ -100,7 +133,7 @@ async function registerUser(event) {
     terms: terms,
     addressDetails: addressDetails,
   };
-
+ 
   try {
     await contract.methods.register(userInput).send({ from: account });
     Swal.fire({
@@ -124,25 +157,25 @@ async function registerUser(event) {
     });
   }
 }
-
+ 
 async function loginUser(event) {
   event.preventDefault();
-
+ 
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value;
-
+ 
   try {
     if (!account) {
       const accounts = await web3.eth.getAccounts();
       account = accounts[0];
     }
-
+ 
     let deactivatedAt = await contract.methods
       .getDeactivationTimestamp(email)
       .call();
     const currentTime = Math.floor(Date.now() / 1000);
     const THIRTY_DAYS = 30 * 24 * 60 * 60;
-
+ 
     if (parseInt(deactivatedAt) > 0) {
       if (currentTime < parseInt(deactivatedAt) + THIRTY_DAYS) {
         Swal.fire({
@@ -162,13 +195,13 @@ async function loginUser(event) {
         });
       }
     }
-
+ 
     await contract.methods.login(email, password).send({ from: account });
     const userDetails = await contract.methods
       .getUserDetails(email, password)
       .call();
     localStorage.setItem(`userId_${email}`, userDetails.id);
-
+ 
     Swal.fire({
       icon: "success",
       title: "Login Successful!",
@@ -190,43 +223,58 @@ async function loginUser(event) {
     });
   }
 }
-
-document.getElementById("forgotPasswordForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const email = document.getElementById("forgotPasswordEmail").value;
-
-  try {
-    // Check that the Ethereum provider is available.
-    if (!window.ethereum) {
-      throw new Error("Ethereum wallet is not available. Please install MetaMask.");
-    }
-
-    // Request user's Ethereum accounts.
-    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-    const userAddress = accounts[0];
-
-    // --- Step 1: Request Password Reset Token ---
-    // Call requestPasswordReset with a transaction to store the token on-chain.
-    await contract.methods.requestPasswordReset(email).send({ from: userAddress });
-    
-    // Retrieve the stored reset token using the new getter function.
-    const token = await contract.methods.getStoredResetToken(email).call();
-    console.log("Reset token:", token);
-
-    // --- Step 2: Send token and email to your backend ---
-    const response = await fetch("https://emailsenderservice-springboot-production.up.railway.app/sendResetEmail", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, token }),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to send reset email. Status: " + response.status);
-    }
-    Swal.fire("Success!", "Reset link sent to your email.", "success");
-
-    // --- Step 3: Update Modal with Reset Password Form ---
-    const modalBody = document.querySelector("#forgotPasswordModal .modal-body");
-    modalBody.innerHTML = `
+ 
+document
+  .getElementById("forgotPasswordForm")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = document.getElementById("forgotPasswordEmail").value;
+ 
+    try {
+      // Check that the Ethereum provider is available.
+      if (!window.ethereum) {
+        throw new Error(
+          "Ethereum wallet is not available. Please install MetaMask."
+        );
+      }
+ 
+      // Request user's Ethereum accounts.
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      const userAddress = accounts[0];
+ 
+      // --- Step 1: Request Password Reset Token ---
+      // Call requestPasswordReset with a transaction to store the token on-chain.
+      await contract.methods
+        .requestPasswordReset(email)
+        .send({ from: userAddress });
+ 
+      // Retrieve the stored reset token using the new getter function.
+      const token = await contract.methods.getStoredResetToken(email).call();
+      console.log("Reset token:", token);
+ 
+      // --- Step 2: Send token and email to your backend ---
+      const response = await fetch(
+        "https://emailsenderservice-springboot-production.up.railway.app/sendResetEmail",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, token }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(
+          "Failed to send reset email. Status: " + response.status
+        );
+      }
+      Swal.fire("Success!", "Reset link sent to your email.", "success");
+ 
+      // --- Step 3: Update Modal with Reset Password Form ---
+      const modalBody = document.querySelector(
+        "#forgotPasswordModal .modal-body"
+      );
+      modalBody.innerHTML = `
       <form id="resetPasswordForm">
         <div class="mb-3">
           <label for="resetEmail" class="form-label">Email</label>
@@ -247,64 +295,54 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
         <button type="submit" class="btn btn-primary">Reset Password</button>
       </form>
     `;
-
-    // --- Step 4: Handle Reset Password Form Submission ---
-    document.getElementById("resetPasswordForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const resetEmail = document.getElementById("resetEmail").value;
-      const resetToken = document.getElementById("resetToken").value;
-      const newPassword = document.getElementById("newPassword").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-
-      if (newPassword !== confirmPassword) {
-        Swal.fire("Error", "Passwords do not match.", "error");
-        return;
-      }
-
-      try {
-        // Call the contract's resetPassword function via a transaction.
-        const resetReceipt = await contract.methods
-          .resetPassword(resetEmail, newPassword, resetToken)
-          .send({ from: userAddress });
-        console.log("Reset receipt:", resetReceipt);
-        Swal.fire("Success", "Your password has been reset.", "success");
-
-        // Optionally, close the modal after successful reset.
-        const modalEl = document.getElementById("forgotPasswordModal");
-        const modalInstance = bootstrap.Modal.getInstance(modalEl);
-        modalInstance.hide();
-      } catch (resetError) {
-        console.error("Error during password reset:", resetError);
-        Swal.fire("Error", "Failed to reset password on blockchain.", "error");
-      }
-    });
-  } catch (error) {
-    console.error("Error during password reset:", error);
-    Swal.fire("Error", error.message || "An error occurred during password reset.", "error");
-  }
-});
-
-
-
+ 
+      // --- Step 4: Handle Reset Password Form Submission ---
+      document
+        .getElementById("resetPasswordForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const resetEmail = document.getElementById("resetEmail").value;
+          const resetToken = document.getElementById("resetToken").value;
+          const newPassword = document.getElementById("newPassword").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+ 
+          if (newPassword !== confirmPassword) {
+            Swal.fire("Error", "Passwords do not match.", "error");
+            return;
+          }
+ 
+          try {
+            // Call the contract's resetPassword function via a transaction.
+            const resetReceipt = await contract.methods
+              .resetPassword(resetEmail, newPassword, resetToken)
+              .send({ from: userAddress });
+            console.log("Reset receipt:", resetReceipt);
+            Swal.fire("Success", "Your password has been reset.", "success");
+ 
+            // Optionally, close the modal after successful reset.
+            const modalEl = document.getElementById("forgotPasswordModal");
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+            modalInstance.hide();
+          } catch (resetError) {
+            console.error("Error during password reset:", resetError);
+            Swal.fire(
+              "Error",
+              "Failed to reset password on blockchain.",
+              "error"
+            );
+          }
+        });
+    } catch (error) {
+      console.error("Error during password reset:", error);
+      Swal.fire(
+        "Error",
+        error.message || "An error occurred during password reset.",
+        "error"
+      );
+    }
+  });
+ 
 window.onload = loadContract;
-
-function toggleView(viewToShow) {
-  if (viewToShow === 'loginView') {
-    document.getElementById('loginView').style.display = 'block';
-    document.getElementById('registerView').style.display = 'none';
-  } else {
-    document.getElementById('loginView').style.display = 'none';
-    document.getElementById('registerView').style.display = 'block';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('switchToRegister').addEventListener('click', function(e) {
-    e.preventDefault();
-    toggleView('registerView');
-  });
-  document.getElementById('switchToLogin').addEventListener('click', function(e) {
-    e.preventDefault();
-    toggleView('loginView');
-  });
-});
+ 
+ 
