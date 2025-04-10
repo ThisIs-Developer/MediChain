@@ -1,107 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error 404</title>
-    <link rel="icon" href="assets/favicon.png" type="image/png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            min-height: 100vh;
-            margin: 0; /* Remove default margin */
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Center the content vertically and horizontally */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 – Page Not Found | MediChain</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #000;
+      --accent-color: #2563eb;
+      --bg-color: #f5f7fa;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(0, 0, 0, 0.05);
+    }
 
-        .error-page {
-            text-align: center;
-            padding: 20px; /* Reduced padding */
-        }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--primary-color);
+    }
 
-        .error-code {
-            font-size: 120px;
-            font-weight: bold;
-            color: #2d3748;
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-            margin: 10px 0; /* Reduced margin */
-            line-height: 1;
-        }
+    .error-container {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 60px 40px;
+      max-width: 580px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-        .error-text {
-            font-size: 24px;
-            color: #4a5568;
-            margin: 10px 0; /* Adjusted margin */
-        }
+    .error-code {
+      font-size: 64px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
 
-        .error-description {
-            color: #718096;
-            margin-bottom: 30px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .error-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
 
-        .error-illustration {
-            max-width: 300px;
-            margin: 10px auto; /* Adjusted margin */
-        }
+    .error-description {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 24px;
+    }
 
-        .btn-home {
-            padding: 12px 30px;
-            font-size: 16px;
-            border-radius: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-            transition: all 0.15s ease;
-        }
+    .error-help {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 32px;
+    }
 
-        .btn-home:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-        }
+    .error-help a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
 
-        /* SVG Animations */
-        .error-illustration svg {
-            max-width: 100%;
-            height: auto;
-        }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
+    .btn-home {
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 30px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
 
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-    </style>
+    .btn-home:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-dark {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .footer span {
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .error-container {
+        padding: 50px 30px;
+      }
+
+      .error-code {
+        font-size: 56px;
+      }
+
+      .error-title {
+        font-size: 20px;
+      }
+
+      .error-description,
+      .error-help {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .error-container {
+        padding: 40px 20px;
+      }
+
+      .error-code {
+        font-size: 48px;
+      }
+
+      .error-title {
+        font-size: 18px;
+      }
+
+      .error-description,
+      .error-help {
+        font-size: 14px;
+      }
+
+      .btn-home {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- 404 Error Page -->
-    <div class="container error-page" id="error404">
-        <div class="error-illustration floating">
-            <svg viewBox="30 30 140 140" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
-                <rect x="60" y="60" width="80" height="80" rx="10" fill="#4299e1"/>
-                <circle cx="100" cy="100" r="30" fill="#ebf4ff"/>
-                <path d="M85 95 L115 105 M85 105 L115 95" stroke="#4299e1" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-        </div>
-        <h1 class="error-code">404</h1>
-        <h2 class="error-text">Page Not Found</h2>
-        <p class="error-description">
-            Oops! The page you're looking for seems to have gone missing. 
-            It might have been moved or doesn't exist anymore.
-        </p>
-        <div class="d-flex justify-content-center gap-3">
-            <a href="index.html" class="btn btn-primary btn-home">
-                Back to Home
-            </a>
-        </div>
+  <main class="error-container">
+    <div>
+      <div class="error-code">404</div>
+      <div class="error-title">Page Not Found</div>
+      <div class="error-description">
+        Oops! The page you're looking for doesn't exist or may have been moved.
+      </div>
+      <div class="error-help">
+        If you encounter any issues, visit our
+        <a href="help-center.html">Help Center</a>
+        for FAQs and to contact our support team.
+      </div>
+      <div class="btn-group">
+        <a href="user.html" class="btn btn-dark btn-home">Back to Home</a>
+      </div>
     </div>
+
+    <div class="footer">
+      © 2025 <span>MediChain</span>. All rights reserved.
+    </div>
+  </main>
 </body>
 </html>
