@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #000000;
@@ -20,64 +22,64 @@
             --light: #f5f5f5;
             --gray: #757575;
         }
-        
+
         * {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
         }
-        
+
         body {
             overflow-x: hidden;
         }
-        
+
         .bg-primary-custom {
             background-color: var(--primary);
         }
-        
+
         .text-primary-custom {
             color: var(--primary);
         }
-        
+
         .btn-primary-custom {
             background-color: var(--primary);
             color: white;
             border: none;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary-custom:hover {
             color: white;
             background-color: var(--primary-dark);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .btn-outline-primary-custom {
             border: 2px solid var(--primary);
             color: var(--primary);
             background: transparent;
             transition: all 0.3s ease;
         }
-        
+
         .btn-outline-primary-custom:hover {
             background-color: var(--primary);
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .navbar {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 15px 0;
             background-color: white;
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             font-size: 1.8rem;
             color: var(--primary);
         }
-        
+
         .nav-link {
             font-weight: 500;
             color: var(--dark) !important;
@@ -85,7 +87,7 @@
             position: relative;
             transition: all 0.3s ease;
         }
-        
+
         .nav-link:after {
             content: '';
             position: absolute;
@@ -96,18 +98,18 @@
             left: 0;
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover:after {
             width: 100%;
         }
-        
+
         .hero {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%);
             padding: 120px 0 100px;
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -119,7 +121,7 @@
             right: -100px;
             z-index: 0;
         }
-        
+
         .hero::after {
             content: '';
             position: absolute;
@@ -131,26 +133,26 @@
             left: -50px;
             z-index: 0;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 1;
         }
-        
+
         .hero-title {
             font-weight: 700;
             font-size: 3.5rem;
             margin-bottom: 20px;
             color: var(--dark);
         }
-        
+
         .hero-description {
             font-size: 1.2rem;
             color: var(--gray);
             margin-bottom: 30px;
             max-width: 80%;
         }
-        
+
         .feature-card {
             padding: 30px;
             border-radius: 15px;
@@ -160,24 +162,24 @@
             background-color: white;
             border-bottom: 4px solid transparent;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             border-bottom: 4px solid var(--primary);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
-        
+
         .feature-icon {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 20px;
         }
-        
+
         .how-it-works {
             background-color: var(--light);
             padding: 100px 0;
         }
-        
+
         .section-title {
             font-weight: 700;
             font-size: 2.5rem;
@@ -186,7 +188,7 @@
             position: relative;
             padding-bottom: 15px;
         }
-        
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -197,7 +199,7 @@
             height: 3px;
             background-color: var(--primary);
         }
-        
+
         .step-card {
             background-color: white;
             padding: 30px;
@@ -206,7 +208,7 @@
             margin-bottom: 30px;
             position: relative;
         }
-        
+
         .step-number {
             position: absolute;
             top: -15px;
@@ -222,23 +224,23 @@
             font-weight: 700;
             font-size: 1.5rem;
         }
-        
+
         .benefits {
             padding: 100px 0;
         }
-        
+
         .benefit-item {
             display: flex;
             align-items: flex-start;
             margin-bottom: 30px;
         }
-        
+
         .benefit-icon {
             color: var(--primary);
             font-size: 2rem;
             margin-right: 20px;
         }
-        
+
         /* Modern Team Section Styles */
         .team {
             padding: 120px 0;
@@ -304,7 +306,8 @@
             transform: rotateY(180deg);
         }
 
-        .team-card-front, .team-card-back {
+        .team-card-front,
+        .team-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -390,25 +393,25 @@
             .team-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .team-card {
                 height: 250px;
             }
         }
-        
+
         footer {
             background-color: var(--dark);
             color: white;
             padding: 50px 0 20px;
         }
-        
+
         .footer-links h5 {
             font-weight: 600;
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
         }
-        
+
         .footer-links h5::after {
             content: '';
             position: absolute;
@@ -418,28 +421,28 @@
             height: 2px;
             background-color: white;
         }
-        
+
         .footer-links ul {
             list-style: none;
             padding-left: 0;
         }
-        
+
         .footer-links ul li {
             margin-bottom: 10px;
         }
-        
+
         .footer-links ul li a {
             color: #ddd;
             text-decoration: none;
             transition: all 0.3s ease;
         }
-        
+
         .footer-links ul li a:hover {
             color: white;
             text-decoration: none;
             padding-left: 5px;
         }
-        
+
         .social-links a {
             display: inline-block;
             width: 40px;
@@ -452,13 +455,13 @@
             margin-right: 10px;
             transition: all 0.3s ease;
         }
-        
+
         .social-links a:hover {
             background-color: white;
             color: black;
             transform: translateY(-3px);
         }
-        
+
         .copyright {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 20px;
@@ -466,7 +469,7 @@
             text-align: center;
             color: #aaa;
         }
-        
+
         /* Login Modal */
         .modal-content {
             border-radius: 15px;
@@ -474,44 +477,56 @@
             border: none;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
-        
+
         .modal-header {
             background-color: var(--primary);
             color: white;
             border: none;
             padding: 20px 30px;
         }
-        
+
         .modal-body {
             padding: 30px;
         }
-        
+
         .modal-footer {
             border: none;
             padding: 20px 30px;
         }
-        
+
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .animate-fadeInUp {
             animation: fadeInUp 0.6s ease forwards;
         }
-        
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-        
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+
         /* QR Code Animation */
         .qr-container {
             position: relative;
@@ -520,7 +535,7 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
             height: 400px;
         }
-        
+
         .qr-animation {
             position: relative;
             width: 100%;
@@ -531,7 +546,7 @@
             justify-content: center;
             overflow: hidden;
         }
-        
+
         .qr-code {
             width: 160px;
             height: 160px;
@@ -541,7 +556,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .qr-code::before {
             content: '';
             position: absolute;
@@ -553,7 +568,7 @@
             background-repeat: no-repeat;
             background-size: contain;
         }
-        
+
         .scan-line {
             position: absolute;
             width: 100%;
@@ -564,19 +579,21 @@
             box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.5);
             animation: scanAnimation 2s linear infinite;
         }
-        
+
         @keyframes scanAnimation {
             0% {
                 top: 0;
             }
+
             50% {
                 top: 100%;
             }
+
             100% {
                 top: 0;
             }
         }
-        
+
         .tracking-data {
             position: absolute;
             bottom: 20px;
@@ -590,16 +607,20 @@
             text-align: center;
             animation: fadeInOut 4s infinite;
         }
-        
+
         @keyframes fadeInOut {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0;
             }
-            25%, 75% {
+
+            25%,
+            75% {
                 opacity: 1;
             }
         }
-        
+
         .blockchain-animation {
             position: absolute;
             top: 50%;
@@ -612,7 +633,7 @@
             align-items: center;
             gap: 5px;
         }
-        
+
         .block {
             width: 40px;
             height: 40px;
@@ -627,84 +648,102 @@
             opacity: 0;
             animation: blockAnimation 4s infinite;
         }
-        
-        .block:nth-child(1) { animation-delay: 0s; }
-        .block:nth-child(2) { animation-delay: 0.5s; }
-        .block:nth-child(3) { animation-delay: 1s; }
-        .block:nth-child(4) { animation-delay: 1.5s; }
-        .block:nth-child(5) { animation-delay: 2s; }
-        
+
+        .block:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .block:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .block:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .block:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        .block:nth-child(5) {
+            animation-delay: 2s;
+        }
+
         @keyframes blockAnimation {
             0% {
                 opacity: 0;
                 transform: translateY(20px);
             }
-            10%, 90% {
+
+            10%,
+            90% {
                 opacity: 1;
                 transform: translateY(0);
             }
+
             100% {
                 opacity: 0;
                 transform: translateY(-20px);
             }
         }
-        
+
         /* Responsive styles */
         @media (max-width: 992px) {
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .hero-description {
                 max-width: 100%;
             }
-            
+
             .qr-container {
                 height: 300px;
                 margin-top: 30px;
             }
         }
-        
+
         @media (max-width: 768px) {
             .hero {
                 padding: 80px 0 60px;
                 text-align: center;
             }
-            
+
             .section-title {
                 font-size: 2rem;
             }
-            
+
             .hero-description {
                 font-size: 1rem;
             }
-            
-            .feature-card, .step-card {
+
+            .feature-card,
+            .step-card {
                 margin-bottom: 20px;
             }
         }
-        
+
         @media (max-width: 576px) {
             .hero-title {
                 font-size: 2rem;
                 padding-top: 3rem;
             }
-            
+
             .feature-icon {
                 font-size: 2rem;
             }
-            
+
             .section-title {
                 font-size: 1.8rem;
             }
-            
+
             .step-number {
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
             }
         }
-        
+
         .row {
             --bs-gutter-x: 1.5rem;
             --bs-gutter-y: 0;
@@ -715,62 +754,75 @@
             margin-left: calc(0.2 * var(--bs-gutter-x));
         }
 
-            /* Medicine Slideshow Styles */
-    .medicine-slideshow {
-        width: 100%;
-        position: relative;
-    }
-    
-    .medicine-item {
-        display: none;
-        opacity: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        transition: opacity 0.8s ease-in-out;
-    }
-    
-    .medicine-item.active {
-        display: block;
-        opacity: 1;
-        position: relative;
-    }
-    
-    /* Update the fadeInOut animation for the tracking-data */
-    .tracking-data {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80%;
-        padding: 15px;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        animation: blinkContainer 10s infinite;
-    }
-    
-    @keyframes blinkContainer {
-        0%, 20%, 40%, 60%, 80%, 100% {
-            background-color: rgba(255, 255, 255, 0.9);
+        /* Medicine Slideshow Styles */
+        .medicine-slideshow {
+            width: 100%;
+            position: relative;
         }
-        10%, 30%, 50%, 70%, 90% {
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-    }
 
+        .medicine-item {
+            display: none;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .medicine-item.active {
+            display: block;
+            opacity: 1;
+            position: relative;
+        }
+
+        /* Update the fadeInOut animation for the tracking-data */
+        .tracking-data {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: blinkContainer 10s infinite;
+        }
+
+        @keyframes blinkContainer {
+
+            0%,
+            20%,
+            40%,
+            60%,
+            80%,
+            100% {
+                background-color: rgba(255, 255, 255, 0.9);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                background-color: rgba(255, 255, 255, 0.7);
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">MediChain</a>
             <div class="d-flex gap-3">
-                <button class="btn btn-primary-custom px-4 d-lg-none ms-2" onclick="window.location.href='auth.html'">Login</button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="btn btn-primary-custom px-4 d-lg-none ms-2"
+                    onclick="window.location.href='auth.html'">Login</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -793,7 +845,7 @@
                         <a class="nav-link" href="#team">Team</a>
                     </li>
                     <li class="nav-item ms-3 d-none d-lg-block">
-                        <button class="btn btn-primary-custom px-4" onclick="window.location.href='auth.html'">Login</button>
+                        <button class="btn btn-primary-custom px-4" onclick="checkSessionOrLogin()">Login</button>
                     </li>
                 </ul>
             </div>
@@ -806,7 +858,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content">
                     <h1 class="hero-title animate-fadeInUp">Transforming Medical Logistics with Blockchain</h1>
-                    <p class="hero-description animate-fadeInUp delay-1">Secure end-to-end pharmaceutical tracking system using blockchain technology for transparent, efficient, and counterfeit-free supply chains.</p>
+                    <p class="hero-description animate-fadeInUp delay-1">Secure end-to-end pharmaceutical tracking
+                        system using blockchain technology for transparent, efficient, and counterfeit-free supply
+                        chains.</p>
                     <div class="d-flex flex-wrap gap-3 animate-fadeInUp delay-2">
                         <a href="#how-it-works" class="btn btn-primary-custom px-4 py-2">Learn More</a>
                     </div>
@@ -829,38 +883,44 @@
                                     <div class="medicine-item active">
                                         <p class="mb-0"><small>Medicine: PARACETAMOL</small></p>
                                         <p class="mb-0"><small>Batch: B20K5831</small></p>
-                                        <p class="mb-0"><small>Status: <span class="text-success">Verified ✓</span></small></p>
+                                        <p class="mb-0"><small>Status: <span class="text-success">Verified
+                                                    ✓</span></small></p>
                                     </div>
                                     <div class="medicine-item">
                                         <p class="mb-0"><small>Medicine: AMOXICILLIN</small></p>
                                         <p class="mb-0"><small>Batch: I20P7194</small></p>
-                                        <p class="mb-0"><small>Status: <span class="text-success">Verified ✓</span></small></p>
+                                        <p class="mb-0"><small>Status: <span class="text-success">Verified
+                                                    ✓</span></small></p>
                                     </div>
                                     <div class="medicine-item">
                                         <p class="mb-0"><small>Medicine: METFORMIN</small></p>
                                         <p class="mb-0"><small>Batch: K20L8652</small></p>
-                                        <p class="mb-0"><small>Status: <span class="text-success">Verified ✓</span></small></p>
+                                        <p class="mb-0"><small>Status: <span class="text-success">Verified
+                                                    ✓</span></small></p>
                                     </div>
                                     <div class="medicine-item">
                                         <p class="mb-0"><small>Medicine: ATORVASTATIN</small></p>
                                         <p class="mb-0"><small>Batch: M20Z3907</small></p>
-                                        <p class="mb-0"><small>Status: <span class="text-success">Verified ✓</span></small></p>
+                                        <p class="mb-0"><small>Status: <span class="text-success">Verified
+                                                    ✓</span></small></p>
                                     </div>
                                     <div class="medicine-item">
                                         <p class="mb-0"><small>Medicine: LISINOPRIL</small></p>
                                         <p class="mb-0"><small>Batch: A20B6428</small></p>
-                                        <p class="mb-0"><small>Status: <span class="text-success">Verified ✓</span></small></p>
+                                        <p class="mb-0"><small>Status: <span class="text-success">Verified
+                                                    ✓</span></small></p>
                                     </div>
                                     <div class="medicine-item">
                                         <p class="mb-0"><small>Medicine: AZITHROMYCIN</small></p>
                                         <p class="mb-0"><small>Batch: W20S7716</small></p>
-                                        <p class="mb-0"><small>Status: <span class="text-success">Verified ✓</span></small></p>
+                                        <p class="mb-0"><small>Status: <span class="text-success">Verified
+                                                    ✓</span></small></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -876,7 +936,8 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h4>Immutable Records</h4>
-                        <p>Tamper-proof blockchain records ensure complete data integrity throughout the entire supply chain.</p>
+                        <p>Tamper-proof blockchain records ensure complete data integrity throughout the entire supply
+                            chain.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -885,7 +946,8 @@
                             <i class="fas fa-search"></i>
                         </div>
                         <h4>Real-time Tracking</h4>
-                        <p>Monitor pharmaceutical products from manufacturing to patient delivery with real-time location updates.</p>
+                        <p>Monitor pharmaceutical products from manufacturing to patient delivery with real-time
+                            location updates.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -894,7 +956,8 @@
                             <i class="fas fa-thermometer-half"></i>
                         </div>
                         <h4>Environmental Monitoring</h4>
-                        <p>IoT sensors track temperature, humidity, and other vital parameters to ensure drug integrity during transit.</p>
+                        <p>IoT sensors track temperature, humidity, and other vital parameters to ensure drug integrity
+                            during transit.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -903,7 +966,8 @@
                             <i class="fas fa-qrcode"></i>
                         </div>
                         <h4>Instant Verification</h4>
-                        <p>QR code scanning allows healthcare providers and patients to verify drug authenticity in seconds.</p>
+                        <p>QR code scanning allows healthcare providers and patients to verify drug authenticity in
+                            seconds.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -912,7 +976,8 @@
                             <i class="fas fa-bell"></i>
                         </div>
                         <h4>Automated Alerts</h4>
-                        <p>Receive instant notifications for anomalies or environmental condition violations during transport.</p>
+                        <p>Receive instant notifications for anomalies or environmental condition violations during
+                            transport.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -921,7 +986,8 @@
                             <i class="fas fa-file-contract"></i>
                         </div>
                         <h4>Smart Contracts</h4>
-                        <p>Automate ownership transfers and enforce compliance with predefined conditions through smart contracts.</p>
+                        <p>Automate ownership transfers and enforce compliance with predefined conditions through smart
+                            contracts.</p>
                     </div>
                 </div>
             </div>
@@ -937,28 +1003,32 @@
                     <div class="step-card">
                         <div class="step-number">1</div>
                         <h4>Product Registration</h4>
-                        <p>Manufacturers register drug details on the blockchain, creating an immutable entry with batch information, expiry date, and unique identifiers.</p>
+                        <p>Manufacturers register drug details on the blockchain, creating an immutable entry with batch
+                            information, expiry date, and unique identifiers.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="step-card">
                         <div class="step-number">2</div>
                         <h4>IoT Integration</h4>
-                        <p>IoT sensors attached to drug packages continuously monitor environmental conditions and feed data to the blockchain.</p>
+                        <p>IoT sensors attached to drug packages continuously monitor environmental conditions and feed
+                            data to the blockchain.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="step-card">
                         <div class="step-number">3</div>
                         <h4>Chain of Custody</h4>
-                        <p>Every ownership transfer is securely recorded through smart contracts, creating a complete chain of custody from manufacturer to patient.</p>
+                        <p>Every ownership transfer is securely recorded through smart contracts, creating a complete
+                            chain of custody from manufacturer to patient.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="step-card">
                         <div class="step-number">4</div>
                         <h4>Verification</h4>
-                        <p>Healthcare providers and patients can scan QR codes to instantly verify product authenticity and access complete history.</p>
+                        <p>Healthcare providers and patients can scan QR codes to instantly verify product authenticity
+                            and access complete history.</p>
                     </div>
                 </div>
             </div>
@@ -977,7 +1047,8 @@
                         </div>
                         <div>
                             <h4>Counterfeit Prevention</h4>
-                            <p>Eliminate fake drugs from the supply chain by ensuring every product can be traced to its authentic source.</p>
+                            <p>Eliminate fake drugs from the supply chain by ensuring every product can be traced to its
+                                authentic source.</p>
                         </div>
                     </div>
                     <div class="benefit-item">
@@ -986,7 +1057,8 @@
                         </div>
                         <div>
                             <h4>Enhanced Transparency</h4>
-                            <p>Complete visibility into the entire supply chain increases trust among all stakeholders.</p>
+                            <p>Complete visibility into the entire supply chain increases trust among all stakeholders.
+                            </p>
                         </div>
                     </div>
                     <div class="benefit-item">
@@ -995,7 +1067,8 @@
                         </div>
                         <div>
                             <h4>Improved Efficiency</h4>
-                            <p>Streamlined processes reduce paperwork and administrative overhead, saving time and resources.</p>
+                            <p>Streamlined processes reduce paperwork and administrative overhead, saving time and
+                                resources.</p>
                         </div>
                     </div>
                 </div>
@@ -1006,7 +1079,8 @@
                         </div>
                         <div>
                             <h4>Faster Recall Management</h4>
-                            <p>Instantly identify and locate affected products in case of recalls, minimizing health risks.</p>
+                            <p>Instantly identify and locate affected products in case of recalls, minimizing health
+                                risks.</p>
                         </div>
                     </div>
                     <div class="benefit-item">
@@ -1036,7 +1110,7 @@
     <section class="team" id="team">
         <div class="container">
             <h2 class="text-center section-title">The Minds Behind MediChain</h2>
-            
+
             <div class="team-container">
                 <!-- Team Member 1 -->
                 <div class="team-card">
@@ -1049,7 +1123,8 @@
                             <p class="team-role">Lead Full Stack Developer</p>
                         </div>
                         <div class="team-card-back">
-                            <p>Develops seamless, end-to-end user experiences while integrating blockchain logic into dynamic web interfaces.</p>
+                            <p>Develops seamless, end-to-end user experiences while integrating blockchain logic into
+                                dynamic web interfaces.</p>
                             <div class="team-social">
                                 <a href="https://github.com/ThisIs-Developer" target="_blank" class="team-social-link">
                                     <i class="fab fa-github"></i> GitHub
@@ -1058,7 +1133,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <!-- Team Member 2 -->
                 <div class="team-card">
                     <div class="team-card-inner">
@@ -1070,7 +1145,8 @@
                             <p class="team-role">Smart Contract Developer</p>
                         </div>
                         <div class="team-card-back">
-                            <p>Designs and implements secure smart contracts to automate trustless transactions and streamline blockchain operations.</p>
+                            <p>Designs and implements secure smart contracts to automate trustless transactions and
+                                streamline blockchain operations.</p>
                             <div class="team-social">
                                 <a href="https://github.com/Arpan550" target="_blank" class="team-social-link">
                                     <i class="fab fa-github"></i> GitHub
@@ -1079,7 +1155,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <!-- Team Member 3 -->
                 <div class="team-card">
                     <div class="team-card-inner">
@@ -1091,7 +1167,8 @@
                             <p class="team-role">Blockchain Developer</p>
                         </div>
                         <div class="team-card-back">
-                            <p>Specializes in distributed systems and core blockchain integration, with a focus on architecture and smart contract infrastructure.</p>
+                            <p>Specializes in distributed systems and core blockchain integration, with a focus on
+                                architecture and smart contract infrastructure.</p>
                             <div class="team-social">
                                 <a href="https://github.com/Ayan123C" target="_blank" class="team-social-link">
                                     <i class="fab fa-github"></i> GitHub
@@ -1100,7 +1177,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <!-- Team Member 4 -->
                 <div class="team-card">
                     <div class="team-card-inner">
@@ -1112,7 +1189,8 @@
                             <p class="team-role">System Analyst / Research Coordinator</p>
                         </div>
                         <div class="team-card-back">
-                            <p>Focuses on system planning, compliance mapping, and project documentation, ensuring technical alignment and research integrity.</p>
+                            <p>Focuses on system planning, compliance mapping, and project documentation, ensuring
+                                technical alignment and research integrity.</p>
                             <div class="team-social">
                                 <a href="https://github.com/bhishma620" target="_blank" class="team-social-link">
                                     <i class="fab fa-github"></i> GitHub
@@ -1123,7 +1201,7 @@
                 </div>
             </div>
         </div>
-    </section>    
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -1131,7 +1209,8 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h3 class="text-white mb-4">MediChain</h3>
-                    <p>Transforming pharmaceutical supply chains with blockchain technology for enhanced security, transparency, and efficiency.</p>
+                    <p>Transforming pharmaceutical supply chains with blockchain technology for enhanced security,
+                        transparency, and efficiency.</p>
                     <div class="social-links mt-3">
                         <a href="https://github.com/ThisIs-Developer/MediChain"><i class="fab fa-github"></i></a>
                     </div>
@@ -1156,7 +1235,7 @@
                             <li><a href="help-center.html#faq">FAQ</a></li>
                             <li><a href="privacy-policy.html">Privacy Policy</a></li>
                             <li><a href="terms-of-service.html">Terms & Conditions</a></li>
-                          </ul>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1170,16 +1249,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Web3.js (for future blockchain integration) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.1/web3.min.js"></script>
-    
+
     <script>
+        function checkSessionOrLogin() {
+            const email = localStorage.getItem("userEmail");
+            const password = localStorage.getItem("userPassword");
+            const loginTimestamp = localStorage.getItem("loginTimestamp");
+
+            const sessionDuration = 30 * 60 * 1000; // 30 minutes
+            const currentTime = Date.now();
+
+            if (email && password && loginTimestamp && currentTime - loginTimestamp <= sessionDuration) {
+                // Update timestamp and redirect to dashboard
+                localStorage.setItem("loginTimestamp", currentTime);
+                window.location.href = "user.html";
+            } else {
+                // Clear invalid session and go to login
+                localStorage.clear();
+                window.location.href = "auth.html";
+            }
+        }
+
+
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
+
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
@@ -1187,7 +1287,7 @@
                         behavior: 'smooth'
                     });
                 }
-                
+
                 // Close navbar collapse on mobile when link is clicked
                 const navbarCollapse = document.querySelector('.navbar-collapse');
                 if (navbarCollapse.classList.contains('show')) {
@@ -1195,9 +1295,9 @@
                 }
             });
         });
-        
+
         // Navbar background change on scroll
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
                 navbar.style.padding = '10px 0';
@@ -1207,36 +1307,37 @@
                 navbar.style.boxShadow = 'none';
             }
         });
-        
+
     </script>
 
     <script>
         // Medicine slideshow functionality with blinking effect
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const medicineItems = document.querySelectorAll('.medicine-item');
             let currentIndex = 0;
-            
+
             function showNextMedicine() {
                 // Start fade out of current medicine
                 medicineItems[currentIndex].style.opacity = '0';
-                
+
                 setTimeout(() => {
                     // Hide current medicine
                     medicineItems[currentIndex].classList.remove('active');
                     currentIndex = (currentIndex + 1) % medicineItems.length;
-                    
+
                     medicineItems[currentIndex].classList.add('active');
                     medicineItems[currentIndex].style.opacity = '0';
-                    
+
                     void medicineItems[currentIndex].offsetWidth;
-                    
+
                     medicineItems[currentIndex].style.opacity = '1';
                 }, 800); // Half of the transition time for a smooth crossfade
             }
-            
+
             // Set interval to change medicine every 2.5 seconds
             setInterval(showNextMedicine, 2500);
         });
     </script>
 </body>
+
 </html>

@@ -1,21 +1,21 @@
-// ================== Session and Access Control ==================
-// Prevent direct access to user.html if not logged in, except on logout.html
-if (!window.location.href.includes("logout.html")) {
-  const email = localStorage.getItem("userEmail");
-  const password = localStorage.getItem("userPassword");
-  const loginTimestamp = localStorage.getItem("loginTimestamp");
+// // ================== Session and Access Control ==================
+// // Prevent direct access to user.html if not logged in, except on logout.html
+// if (!window.location.href.includes("logout.html")) {
+//   const email = localStorage.getItem("userEmail");
+//   const password = localStorage.getItem("userPassword");
+//   const loginTimestamp = localStorage.getItem("loginTimestamp");
 
-  const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
-  const currentTime = Date.now();
+//   const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
+//   const currentTime = Date.now();
 
-  if (!email || !password || !loginTimestamp || currentTime - loginTimestamp > sessionDuration) {
-    localStorage.clear(); // Clear session if expired
-    window.location.href = "auth.html"; // Redirect to login page
-  } else {
-    // Update timestamp to extend session while active
-    localStorage.setItem("loginTimestamp", currentTime);
-  }
-}
+//   if (!email || !password || !loginTimestamp || currentTime - loginTimestamp > sessionDuration) {
+//     localStorage.clear(); // Clear session if expired
+//     window.location.href = "auth.html"; // Redirect to login page
+//   } else {
+//     // Update timestamp to extend session while active
+//     localStorage.setItem("loginTimestamp", currentTime);
+//   }
+// }
 
 
 // ================== Global Variables ==================
