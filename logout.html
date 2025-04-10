@@ -1,106 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logout</title>
-    <link rel="icon" href="assets/favicon.png" type="image/png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Logged Out - MediChain</title>
+    <link rel="icon" href="assets/favicon.png" type="image/png"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
     <style>
         :root {
             --primary-color: #2563eb;
-            --secondary-color: #1e40af;
+            --dark-color: #111827;
+            --text-muted: #6b7280;
+            --bg-gradient: linear-gradient(145deg, #f9fafb, #e5e7eb);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem 0;
+            padding: 2rem;
         }
 
         .form-container {
-            max-width: 450px;
-            margin: 0 auto;
-            padding: 2.5rem;
+            max-width: 440px;
+            width: 100%;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem 2rem;
             text-align: center;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 72px;
+            height: 72px;
             margin-bottom: 1rem;
         }
 
         .brand-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+        }
+
+        h4 {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.75rem;
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 0.8rem;
-            border-radius: 10px;
+            background-color: var(--dark-color);
+            border-color: var(--dark-color);
             font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.95rem;
+            border-radius: 10px;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-1px);
+            background-color: #333;
+            transform: translateY(-1.5px);
         }
 
         .info-text {
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .info-text {
-            color: #6b7280;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 1.5rem;
-            padding: 0.75rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 0.9rem 1rem;
             background: #f3f4f6;
-            border-radius: 8px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            text-align: left;
+        }
+
+        .info-text svg {
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
         @media (max-width: 576px) {
             .form-container {
+                padding: 2rem 1.25rem;
                 margin: 1rem;
-                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <div class="logo-container">
-            <img src="assets/favicon-bg.png" alt="Logo" class="logo" />
-            <div class="brand-name">MediChain</div>
-        </div>
+        <img src="assets/favicon-bg.png" alt="Logo" class="logo" />
+        <div class="brand-name">MediChain</div>
 
-        <h4 class="mb-3">You have been logged out</h4>
-        <p class="text-muted mb-4">Thank you for using MediChain. We hope to see you again soon!</p>
+        <h4>You have been logged out</h4>
+        <p>Thank you for using MediChain. We hope to see you again soon!</p>
 
         <a href="auth.html" class="btn btn-primary w-100">Back to Login</a>
 
-        <div class="info-text">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-2" style="vertical-align: -2px;">
-                <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                <rect x="7" y="4" width="2" height="5" fill="currentColor"/>
-                <circle cx="8" cy="11" r="1" fill="currentColor"/>
-            </svg>             
-            If you have any questions, feel free to contact support.
+        <div class="info-text mt-4 d-flex align-items-center">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="8" r="7" stroke="#6b7280" stroke-width="1.5" fill="none"/>
+                <rect x="7.25" y="4" width="1.5" height="5" fill="#6b7280"/>
+                <circle cx="8" cy="11.25" r="1" fill="#6b7280"/>
+            </svg>
+            <div>
+                If you encounter any issues, 
+                visit our <a href="help-center.html" style="color: #2563eb; text-decoration: underline;">Help Center</a> for FAQs and to contact our support team.
+            </div>
         </div>
+        
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
