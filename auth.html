@@ -1,355 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MediChain - Secure Healthcare Network</title>
-    <!-- SweetAlert2 loaded first -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="icon" href="assets/favicon.png" type="image/png" />
-    <style>
-      body {
-        background-color: #f5f5f5;
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
-        color: #1a1a1a;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediChain - Secure Healthcare Network</title>
+  <!-- SweetAlert2 loaded first -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+      color: #1a1a1a;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .brand-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-container {
+      max-width: 500px;
+      margin: 50px auto;
+    }
+
+    .nav-tabs {
+      border-bottom: 2px solid #e5e7eb;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-tabs .nav-link {
+      color: #6b7280;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-tabs .nav-link:hover {
+      color: #000;
+    }
+
+    .nav-tabs .nav-link.active {
+      color: #000;
+      border-bottom: 3px solid #000;
+      background: transparent;
+    }
+
+    .section-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 35px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 12px 15px;
+      border-color: #d1d5db;
+    }
+
+    .form-control:focus {
+      border-color: #000;
+      box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: #000;
+      border-color: #000;
+      border-radius: 8px;
+      padding: 12px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .tab-content {
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
       }
 
-      .logo-container {
-        text-align: center;
-        margin-bottom: 2rem;
+      to {
+        opacity: 1;
       }
+    }
 
-      .logo {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 1rem;
-      }
-
-      .brand-name {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-      }
-
+    @media (max-width: 768px) {
       .auth-container {
-        max-width: 500px;
-        margin: 50px auto;
-      }
-
-      .nav-tabs {
-        border-bottom: 2px solid #e5e7eb;
-        margin-bottom: 1.5rem;
+        margin: 20px;
+        padding: 15px;
       }
 
       .nav-tabs .nav-link {
-        color: #6b7280;
-        border: none;
-        padding: 1rem 1.5rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
+        padding: 0.75rem 1rem;
       }
+    }
+  </style>
+</head>
 
-      .nav-tabs .nav-link:hover {
-        color: #000;
-      }
+<body>
+  <div class="container">
+    <div class="auth-container">
+      <div class="logo-container">
+        <img src="assets/favicon-bg.png" alt="Logo" class="logo" />
+        <div class="brand-name">MediChain</div>
+        <p class="text-muted">Streamline your supply chain operations</p>
+      </div>
 
-      .nav-tabs .nav-link.active {
-        color: #000;
-        border-bottom: 3px solid #000;
-        background: transparent;
-      }
+      <ul class="nav nav-tabs justify-content-center" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="register-tab" data-bs-toggle="tab" data-bs-target="#register"
+            type="button">
+            Register
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button">
+            Login
+          </button>
+        </li>
+      </ul>
 
-      .section-container {
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 35px;
-        border: 1px solid #e5e7eb;
-      }
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="register" role="tabpanel">
+          <div class="section-container">
+            <form id="registrationForm" onsubmit="registerUser(event)">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" id="firstName" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" id="lastName" class="form-control" required />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" id="phone" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select id="role" class="form-control" required>
+                  <option value="">Select Your Role</option>
+                  <option value="Manufacturer">Manufacturer</option>
+                  <option value="Wholesaler">Wholesaler</option>
+                  <!-- <option value="Distributor">Distributor</option> -->
+                  <option value="Pharmacy">Pharmacy</option>
+                  <!-- <option value="Customer">Customer</option> -->
+                </select>
+              </div>
 
-      .form-control {
-        border-radius: 8px;
-        padding: 12px 15px;
-        border-color: #d1d5db;
-      }
-
-      .form-control:focus {
-        border-color: #000;
-        box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
-      }
-
-      .btn-primary {
-        background-color: #000;
-        border-color: #000;
-        border-radius: 8px;
-        padding: 12px 20px;
-        transition: all 0.3s ease;
-      }
-
-      .btn-primary:hover {
-        background-color: #333;
-        transform: translateY(-2px);
-      }
-
-      .form-label {
-        font-weight: 600;
-        color: #1a1a1a;
-      }
-
-      .tab-content {
-        animation: fadeIn 0.3s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .auth-container {
-          margin: 20px;
-          padding: 15px;
-        }
-
-        .nav-tabs .nav-link {
-          padding: 0.75rem 1rem;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="container">
-      <div class="auth-container">
-        <div class="logo-container">
-          <img src="assets/favicon-bg.png" alt="Logo" class="logo" />
-          <div class="brand-name">MediChain</div>
-          <p class="text-muted">Streamline your supply chain operations</p>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" required />
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" id="terms" class="form-check-input" required />
+                <label for="terms" class="form-check-label">
+                  By registering, I acknowledge that I have read, understood, and agree to the 
+                  <a href="terms-of-service.html" target="_blank">Terms and Conditions</a> and the 
+                  <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Register
+              </button>
+            </form>
+          </div>
         </div>
 
-        <ul class="nav nav-tabs justify-content-center" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link active"
-              id="register-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#register"
-              type="button"
-            >
-              Register
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="login-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#login"
-              type="button"
-            >
-              Login
-            </button>
-          </li>
-        </ul>
-
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="register" role="tabpanel">
-            <div class="section-container">
-              <form id="registrationForm" onsubmit="registerUser(event)">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      class="form-control"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      class="form-control"
-                      required
-                    />
-                  </div>
+        <div class="tab-pane fade" id="login" role="tabpanel">
+          <div class="section-container">
+            <form id="loginForm" onsubmit="loginUser(event)">
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label">Email</label>
+                <input type="email" id="loginEmail" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="loginPassword" class="form-label">Password</label>
+                <input type="password" id="loginPassword" class="form-control" required />
+                <!-- Forgot Password Link -->
+                <div class="form-text text-end">
+                  <a href="#" class="text-muted" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot
+                    Password?</a>
                 </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Phone</label>
-                  <input type="tel" id="phone" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                  <label for="role" class="form-label">Role</label>
-                  <select id="role" class="form-control" required>
-                    <option value="">Select Your Role</option>
-                    <option value="Manufacturer">Manufacturer</option>
-                    <option value="Wholesaler">Wholesaler</option>
-                    <!-- <option value="Distributor">Distributor</option> -->
-                    <option value="Pharmacy">Pharmacy</option>
-                    <!-- <option value="Customer">Customer</option> -->
-                  </select>
-                </div>
-
-                <!-- Address Section -->
-                <!-- <div class="mb-3">
-                                <label class="form-label">Address</label>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <input type="text" id="street" class="form-control" placeholder="Street Address" required>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <input type="text" id="city" class="form-control" placeholder="City" required>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <input type="text" id="state" class="form-control" placeholder="State" required>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <input type="text" id="zip" class="form-control" placeholder="Zip Code" required>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    id="terms"
-                    class="form-check-input"
-                    required
-                  />
-                  <label for="terms" class="form-check-label"
-                    >I accept the terms and conditions</label
-                  >
-                </div>
-                <button type="submit" class="btn btn-primary w-100">
-                  Register
-                </button>
-              </form>
-            </div>
-          </div>
-
-          <div class="tab-pane fade" id="login" role="tabpanel">
-            <div class="section-container">
-              <form id="loginForm" onsubmit="loginUser(event)">
-                <div class="mb-3">
-                  <label for="loginEmail" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    id="loginEmail"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="loginPassword" class="form-label">Password</label>
-                  <input
-                    type="password"
-                    id="loginPassword"
-                    class="form-control"
-                    required
-                  />
-                  <!-- Forgot Password Link -->
-                  <div class="form-text text-end">
-                    <a
-                      href="#"
-                      class="text-muted"
-                      data-bs-toggle="modal"
-                      data-bs-target="#forgotPasswordModal"
-                      >Forgot Password?</a
-                    >
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">
-                  Login
-                </button>
-              </form>
-            </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Login
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Forgot Password Modal -->
-<div
-class="modal fade"
-id="forgotPasswordModal"
-tabindex="-1"
-aria-labelledby="forgotPasswordModalLabel"
-aria-hidden="true"
->
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="forgotPasswordModalLabel">
-        Reset Password
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="modal-body">
-      <form id="forgotPasswordForm">
-        <div class="mb-3">
-          <label for="forgotPasswordEmail" class="form-label">
-            Enter Your email address
-          </label>
-          <input
-            type="email"
-            class="form-control"
-            id="forgotPasswordEmail"
-            placeholder="Enter your Email Id"
-            required
-          />
+  <!-- Forgot Password Modal -->
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="forgotPasswordModalLabel">
+            Reset Password
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <button type="submit" class="btn btn-primary">
-          Send Reset Link
-        </button>
-      </form>
+        <div class="modal-body">
+          <form id="forgotPasswordForm">
+            <div class="mb-3">
+              <label for="forgotPasswordEmail" class="form-label">
+                Enter Your email address
+              </label>
+              <input type="email" class="form-control" id="forgotPasswordEmail" placeholder="Enter your Email Id"
+                required />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Send Reset Link
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.10.0/web3.min.js"></script>
-    <script src="js/auth.js"></script>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.10.0/web3.min.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
 </html>
