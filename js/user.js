@@ -17,7 +17,6 @@
 //   }
 // }
 
-
 // ================== Global Variables ==================
 let web3;
 let account;
@@ -85,7 +84,6 @@ async function loadMedicineContract() {
   }
 }
 
-
 // Dashboard Cards
 window.addEventListener("load", async () => {
   try {
@@ -95,7 +93,9 @@ window.addEventListener("load", async () => {
     // Update total medicine count on dashboard
     const count = await addMedicineContract.methods.getMedicineCount().call();
     const totalMedicinesEl = document.querySelector(".stat-card h4.tot_med");
-    const medicines = await addMedicineContract.methods.getAllMedicines().call();
+    const medicines = await addMedicineContract.methods
+      .getAllMedicines()
+      .call();
     const exp = document.querySelector(".stat-card h4.tot_expired");
     const stock = document.querySelector(".stat-card h4.tot_stock");
     const soldEl = document.querySelector(".stat-card h4.tot_sold");
@@ -148,7 +148,9 @@ async function updateManufactureTable(userId) {
 
       // Fetch only relevant transactions where manufacturerId === userId
       for (let i = 0; i < count; i++) {
-        const entry = await addMedicineContract.methods.manufacturerHistory(i).call();
+        const entry = await addMedicineContract.methods
+          .manufacturerHistory(i)
+          .call();
 
         if (entry.manufacturerId === userId) {
           historyData.push(entry);
@@ -178,27 +180,33 @@ async function updateManufactureTable(userId) {
           </thead>
           <tbody>`;
 
-          for (const entry of historyData) {
-            const medicineData = await addMedicineContract.methods.getMedicine(entry.medicineId).call();
-            const rowColor = Number(medicineData[11]) === 3 ? 'style="color: red; background-color: antiquewhite;"' : '';
-          
-            tableHTML += `<tr>
+        for (const entry of historyData) {
+          const medicineData = await addMedicineContract.methods
+            .getMedicine(entry.medicineId)
+            .call();
+          const rowColor =
+            Number(medicineData[11]) === 3
+              ? 'style="color: red; background-color: antiquewhite;"'
+              : "";
+
+          tableHTML += `<tr>
               <td ${rowColor}>${entry.medicineId}</td>
               <td ${rowColor}>${entry.medicineName}</td>
               <td ${rowColor}>${entry.manufacturerId}</td>
               <td ${rowColor}>${entry.price}</td>
               <td ${rowColor}>${entry.quantity}</td>
-              <td ${rowColor}>${new Date(entry.timestamp * 1000).toLocaleString()}</td>
+              <td ${rowColor}>${new Date(
+            entry.timestamp * 1000
+          ).toLocaleString()}</td>
             </tr>`;
-          }
-          
+        }
 
         tableHTML += `</tbody></table>`;
       }
     }
 
     // Update the HTML with the filtered table or message
-    document.querySelector('.history-content').innerHTML = tableHTML;
+    document.querySelector(".history-content").innerHTML = tableHTML;
   } catch (error) {
     console.error("🚨 Error updating history table:", error);
     alert("Failed to load history. Check console for details.");
@@ -215,7 +223,9 @@ async function updateSaleTable(userRole, userId, currentAccount) {
     // Fetch sale history records using a while loop until no more values exist
     while (true) {
       try {
-        const entry = await addMedicineContract.methods.saleHistory(index).call();
+        const entry = await addMedicineContract.methods
+          .saleHistory(index)
+          .call();
         if (!entry || !entry.medicineId) break; // Exit loop if no more records
         historyData.push(entry);
         index++;
@@ -226,11 +236,13 @@ async function updateSaleTable(userRole, userId, currentAccount) {
     }
     console.log("Sale history fetched:", historyData);
 
-    const buyerTypeFilter = (userRole === "wholesaler") ? '1' : '2';
+    const buyerTypeFilter = userRole === "wholesaler" ? "1" : "2";
 
     // Filter the sale history data for the logged-in user
-    const userHistory = historyData.filter(entry => 
-      entry.buyerType.toString() === buyerTypeFilter && entry.buyerId === userId
+    const userHistory = historyData.filter(
+      (entry) =>
+        entry.buyerType.toString() === buyerTypeFilter &&
+        entry.buyerId === userId
     );
 
     let tableHTML;
@@ -246,7 +258,7 @@ async function updateSaleTable(userRole, userId, currentAccount) {
           <tr>
             <th>Medicine ID</th>
             <th>Manufacturer ID</th>
-            ${userRole === "pharmacy" ? '<th>Seller ID</th>' : ''}
+            ${userRole === "pharmacy" ? "<th>Seller ID</th>" : ""}
             <th>Quantity</th>
             <th>Price per unit (INR)</th>
             <th>Timestamp</th>
@@ -258,16 +270,21 @@ async function updateSaleTable(userRole, userId, currentAccount) {
         let manufacturerID = "Unknown"; // Default if fetch fails
 
         try {
-          const medDetails = await addMedicineContract.methods.getMedicine(entry.medicineId).call({ from: currentAccount });
+          const medDetails = await addMedicineContract.methods
+            .getMedicine(entry.medicineId)
+            .call({ from: currentAccount });
           manufacturerID = medDetails.manufacturerId || medDetails[0]; // Assuming manufacturer ID is the first element
         } catch (err) {
-          console.error(`Failed to fetch manufacturer ID for ${entry.medicineId}:`, err);
+          console.error(
+            `Failed to fetch manufacturer ID for ${entry.medicineId}:`,
+            err
+          );
         }
 
         tableHTML += `<tr>
           <td>${entry.medicineId}</td>
           <td>${manufacturerID}</td>
-          ${userRole === "pharmacy" ? `<td>${entry.sellerId}</td>` : ''}
+          ${userRole === "pharmacy" ? `<td>${entry.sellerId}</td>` : ""}
           <td>${entry.quantity}</td>
           <td>${entry.priceAtSale}</td>
           <td>${new Date(entry.timestamp * 1000).toLocaleString()}</td>
@@ -278,22 +295,20 @@ async function updateSaleTable(userRole, userId, currentAccount) {
     }
 
     // Update the HTML with the filtered table or message
-    document.querySelector('.history-content').innerHTML = tableHTML;
+    document.querySelector(".history-content").innerHTML = tableHTML;
   } catch (error) {
     console.error("🚨 Error updating sale history table:", error);
     alert("Failed to load sale history. Check console for details.");
   }
 }
 
-
-
 async function updateHistoryTable() {
   try {
     console.log("Fetching history data from contract...");
 
     // Retrieve current login details from localStorage
-    const email = localStorage.getItem('userEmail');
-    const password = localStorage.getItem('userPassword');
+    const email = localStorage.getItem("userEmail");
+    const password = localStorage.getItem("userPassword");
     const userId = localStorage.getItem(`userId_${email}`);
 
     const accounts = await web3.eth.getAccounts();
@@ -314,44 +329,40 @@ async function updateHistoryTable() {
     } else if (userRole === "wholesaler" || userRole === "pharmacy") {
       updateSaleTable(userRole, userId);
     } else {
-      document.querySelector('.history-content').innerHTML = "<p>No history available for your role.</p>";
+      document.querySelector(".history-content").innerHTML =
+        "<p>No history available for your role.</p>";
     }
 
     // Update the UI with the generated history table
-    document.querySelector('.history-content').innerHTML = tableHTML;
+    document.querySelector(".history-content").innerHTML = tableHTML;
   } catch (error) {
     console.error("🚨 Error updating history table:", error);
     alert("Failed to load history. Check console for details.");
   }
 }
 
-
 // History overlay handling
-document.addEventListener('DOMContentLoaded', () => {
-  const overlay = document.getElementById('history-overlay');
-  const closeBtn = document.getElementById('close-history');
-  const dashboardCards = document.querySelector('.row.g-4'); // Dashboard card container
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("history-overlay");
+  const closeBtn = document.getElementById("close-history");
+  const dashboardCards = document.querySelector(".row.g-4"); // Dashboard card container
 
   // Close overlay when the close button is clicked
-  closeBtn.addEventListener('click', () => {
-    overlay.style.display = 'none';
-    dashboardCards.style.display = 'flex'; // Show the dashboard cards
+  closeBtn.addEventListener("click", () => {
+    overlay.style.display = "none";
+    dashboardCards.style.display = "flex"; // Show the dashboard cards
   });
 
   // When any element with the class "hit" is clicked, display overlay and update history
-  const hitElements = document.querySelectorAll('.hit');
-  hitElements.forEach(elem => {
-    elem.addEventListener('click', async () => {
-      overlay.style.display = 'block';
-      dashboardCards.style.display = 'none'; // Hide the dashboard cards
+  const hitElements = document.querySelectorAll(".hit");
+  hitElements.forEach((elem) => {
+    elem.addEventListener("click", async () => {
+      overlay.style.display = "block";
+      dashboardCards.style.display = "none"; // Hide the dashboard cards
       await updateHistoryTable(); // Populate history content
     });
   });
 });
-
-
-
-
 
 async function fetchUserProfile(userEmail = null) {
   const email = userEmail || localStorage.getItem("userEmail");
@@ -385,11 +396,12 @@ async function fetchUserProfile(userEmail = null) {
       email: email,
       phone: result.phone,
       role: result.role,
-      address: result.addressDetails
+      address: result.addressDetails,
     };
 
     // Update UI elements
-    document.getElementById("fullNameDisplay").textContent = userDetails.fullName;
+    document.getElementById("fullNameDisplay").textContent =
+      userDetails.fullName;
     document.getElementById("fullName").value = userDetails.fullName;
     document.getElementById("email").value = userDetails.email;
     document.getElementById("phone").value = userDetails.phone;
@@ -402,7 +414,9 @@ async function fetchUserProfile(userEmail = null) {
     document.getElementById("zip").value = userDetails.address.zip;
 
     // Set the unique ID in the UI
-    document.getElementById("userId").textContent = `ID: ${userDetails.uniqueId}`;
+    document.getElementById(
+      "userId"
+    ).textContent = `ID: ${userDetails.uniqueId}`;
 
     return userDetails;
   } catch (error) {
@@ -412,7 +426,6 @@ async function fetchUserProfile(userEmail = null) {
   }
 }
 
-
 async function updateAddress(event) {
   event.preventDefault(); // Prevent default form submission
 
@@ -421,9 +434,9 @@ async function updateAddress(event) {
 
   if (!email || !password) {
     Swal.fire({
-      icon: 'error',
-      title: 'Missing Credentials',
-      text: 'User credentials not found. Please log in.'
+      icon: "error",
+      title: "Missing Credentials",
+      text: "User credentials not found. Please log in.",
     });
     return;
   }
@@ -446,7 +459,7 @@ async function updateAddress(event) {
       street: street,
       city: city,
       state: state,
-      zip: zip
+      zip: zip,
     };
 
     // Call the updateAddress method on the contract
@@ -455,28 +468,22 @@ async function updateAddress(event) {
       .send({ from: account });
 
     Swal.fire({
-      icon: 'success',
-      title: 'Address Updated',
-      text: 'Address updated successfully!'
+      icon: "success",
+      title: "Address Updated",
+      text: "Address updated successfully!",
     });
   } catch (error) {
     console.error("Error updating address:", error);
     Swal.fire({
-      icon: 'error',
-      title: 'Update Failed',
-      text: `Address update failed: ${error.message}`
+      icon: "error",
+      title: "Update Failed",
+      text: `Address update failed: ${error.message}`,
     });
   }
 }
 
-
 // Attach event listener to the update form (ensure the form selector matches your HTML)
 document.querySelector("form").addEventListener("submit", updateAddress);
-
-
-
-
-
 
 // =================================SECURITY===========================================
 
@@ -496,15 +503,17 @@ async function updatePassword(event) {
   event.preventDefault(); // Prevent the form from submitting normally
 
   // Get new password and confirmation from the form
-  const newPassword = document.getElementById('newPassword').value.trim();
-  const confirmPassword = document.getElementById('confirmPassword').value.trim();
+  const newPassword = document.getElementById("newPassword").value.trim();
+  const confirmPassword = document
+    .getElementById("confirmPassword")
+    .value.trim();
 
   // Validate that both password fields match
   if (newPassword !== confirmPassword) {
     Swal.fire({
-      icon: 'error',
-      title: 'Password Mismatch',
-      text: 'The new password and confirm password fields do not match.'
+      icon: "error",
+      title: "Password Mismatch",
+      text: "The new password and confirm password fields do not match.",
     });
     return;
   }
@@ -512,9 +521,9 @@ async function updatePassword(event) {
   // Validate password strength
   if (!validatePassword(newPassword)) {
     Swal.fire({
-      icon: 'error',
-      title: 'Weak Password',
-      text: 'Password must be at least 8 characters long, include both uppercase and lowercase letters, at least one number, and one special character.'
+      icon: "error",
+      title: "Weak Password",
+      text: "Password must be at least 8 characters long, include both uppercase and lowercase letters, at least one number, and one special character.",
     });
     return;
   }
@@ -524,9 +533,9 @@ async function updatePassword(event) {
   const oldPassword = localStorage.getItem("userPassword"); // Current password
   if (!email || !oldPassword) {
     Swal.fire({
-      icon: 'error',
-      title: 'Missing Credentials',
-      text: 'User credentials not found. Please log in again.'
+      icon: "error",
+      title: "Missing Credentials",
+      text: "User credentials not found. Please log in again.",
     });
     return;
   }
@@ -544,27 +553,28 @@ async function updatePassword(event) {
       .send({ from: account });
 
     // Update the stored password in localStorage to the new password
-    localStorage.setItem('userPassword', newPassword);
+    localStorage.setItem("userPassword", newPassword);
 
     Swal.fire({
-      icon: 'success',
-      title: 'Password Updated',
-      text: 'Your password has been updated successfully.'
+      icon: "success",
+      title: "Password Updated",
+      text: "Your password has been updated successfully.",
     });
   } catch (error) {
     console.error("Error updating password:", error);
     Swal.fire({
-      icon: 'error',
-      title: 'Update Failed',
-      text: `Password update failed: ${error.message}`
+      icon: "error",
+      title: "Update Failed",
+      text: `Password update failed: ${error.message}`,
     });
   }
 }
 // Cancel Button for Track Medicine Section
 
 // Attach event listener to the password form
-document.getElementById('passwordForm').addEventListener('submit', updatePassword);
-
+document
+  .getElementById("passwordForm")
+  .addEventListener("submit", updatePassword);
 
 // Function to deactivate the account
 async function deactivateAccount(event) {
@@ -576,21 +586,21 @@ async function deactivateAccount(event) {
 
   if (!email || !password) {
     Swal.fire({
-      icon: 'error',
-      title: 'Missing Credentials',
-      text: 'User credentials not found. Please log in.'
+      icon: "error",
+      title: "Missing Credentials",
+      text: "User credentials not found. Please log in.",
     });
     return;
   }
 
   // Confirm user wants to deactivate account
   const confirmResult = await Swal.fire({
-    icon: 'warning',
-    title: 'Deactivate Account',
-    text: 'Are you sure you want to deactivate your account? You will be able to reactivate it after 30 days.',
+    icon: "warning",
+    title: "Deactivate Account",
+    text: "Are you sure you want to deactivate your account? You will be able to reactivate it after 30 days.",
     showCancelButton: true,
-    confirmButtonText: 'Yes, deactivate',
-    cancelButtonText: 'Cancel'
+    confirmButtonText: "Yes, deactivate",
+    cancelButtonText: "Cancel",
   });
 
   if (!confirmResult.isConfirmed) return;
@@ -602,27 +612,28 @@ async function deactivateAccount(event) {
       account = accounts[0];
     }
 
-    await registrationContract.methods.deactivateAccount(email, password)
+    await registrationContract.methods
+      .deactivateAccount(email, password)
       .send({ from: account });
 
     Swal.fire({
-      icon: 'success',
-      title: 'Account Deactivated',
-      text: 'Your account has been deactivated. You can reactivate it after 30 days.',
-      confirmButtonText: 'OK'
+      icon: "success",
+      title: "Account Deactivated",
+      text: "Your account has been deactivated. You can reactivate it after 30 days.",
+      confirmButtonText: "OK",
     }).then(() => {
       // Clear credentials and redirect to the authentication page
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('userPassword');
-      localStorage.removeItem('userWalletAddress');
-      window.location.href = 'auth.html';
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("userPassword");
+      localStorage.removeItem("userWalletAddress");
+      window.location.href = "auth.html";
     });
   } catch (error) {
     console.error("Error deactivating account:", error);
     Swal.fire({
-      icon: 'error',
-      title: 'Deactivation Failed',
-      text: error.message
+      icon: "error",
+      title: "Deactivation Failed",
+      text: error.message,
     });
   }
 }
@@ -634,12 +645,12 @@ async function deleteAccount(event) {
 
   // Ask for confirmation before deleting the account
   const result = await Swal.fire({
-    icon: 'warning',
-    title: 'Confirm Account Deletion',
-    text: 'This action cannot be undone. Are you sure you want to delete your account?',
+    icon: "warning",
+    title: "Confirm Account Deletion",
+    text: "This action cannot be undone. Are you sure you want to delete your account?",
     showCancelButton: true,
-    confirmButtonText: 'Delete',
-    cancelButtonText: 'Cancel'
+    confirmButtonText: "Delete",
+    cancelButtonText: "Cancel",
   });
 
   if (!result.isConfirmed) return; // User canceled deletion
@@ -649,9 +660,9 @@ async function deleteAccount(event) {
 
   if (!email || !password) {
     Swal.fire({
-      icon: 'error',
-      title: 'Missing Credentials',
-      text: 'User credentials not found. Please log in.'
+      icon: "error",
+      title: "Missing Credentials",
+      text: "User credentials not found. Please log in.",
     });
     return;
   }
@@ -663,38 +674,39 @@ async function deleteAccount(event) {
       account = accounts[0];
     }
 
-    await registrationContract.methods.deleteAccount(email, password)
+    await registrationContract.methods
+      .deleteAccount(email, password)
       .send({ from: account });
 
     Swal.fire({
-      icon: 'success',
-      title: 'Account Deleted',
-      text: 'Your account has been deleted successfully.',
-      confirmButtonText: 'OK'
+      icon: "success",
+      title: "Account Deleted",
+      text: "Your account has been deleted successfully.",
+      confirmButtonText: "OK",
     }).then(() => {
       // Clear all stored credentials and redirect to the authentication page
       localStorage.clear();
-      window.location.href = 'auth.html';
+      window.location.href = "auth.html";
     });
   } catch (error) {
     console.error("Error deleting account:", error);
     Swal.fire({
-      icon: 'error',
-      title: 'Deletion Failed',
-      text: error.message
+      icon: "error",
+      title: "Deletion Failed",
+      text: error.message,
     });
   }
 }
 
 // Attach event listeners after DOM loads
-document.addEventListener('DOMContentLoaded', () => {
-  const deactivateBtn = document.getElementById('deactivateButton');
-  const deleteBtn = document.getElementById('deleteButton');
+document.addEventListener("DOMContentLoaded", () => {
+  const deactivateBtn = document.getElementById("deactivateButton");
+  const deleteBtn = document.getElementById("deleteButton");
   if (deactivateBtn) {
-    deactivateBtn.addEventListener('click', deactivateAccount);
+    deactivateBtn.addEventListener("click", deactivateAccount);
   }
   if (deleteBtn) {
-    deleteBtn.addEventListener('click', deleteAccount);
+    deleteBtn.addEventListener("click", deleteAccount);
   }
 
   const cancelButton = document.getElementById("cancelButton");
@@ -709,13 +721,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-
-
-
-
-
-
 
 // ================== Manual Wallet Connection (for Changing Wallet) ==================
 async function connectWallet() {
@@ -826,10 +831,11 @@ window.addEventListener("load", async () => {
     }
   } catch (error) {
     console.error("Error during initialization:", error);
-    alert("Failed to initialize the application. Please refresh and try again.");
+    alert(
+      "Failed to initialize the application. Please refresh and try again."
+    );
   }
 });
-
 
 // ================== DOMContentLoaded Event for UI Interactions ==================
 document.addEventListener("DOMContentLoaded", function () {
@@ -893,197 +899,571 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-// ================================================== Track Medicine Button Click Handler ==========================================
-document.getElementById("track-med").addEventListener("click", async function (e) {
-  e.preventDefault();
+  // ================================================== Track Medicine Button Click Handler ==========================================
+  document
+    .getElementById("track-med")
+    .addEventListener("click", async function (e) {
+      e.preventDefault();
 
-  // Function to retrieve Medicine ID either from a QR code file or text input
-  async function getMedicineId() {
-    const qrInput = document.getElementById("qr-code");
-    if (qrInput && qrInput.files && qrInput.files.length > 0) {
-      const file = qrInput.files[0];
-      const dataURL = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (err) => reject(err);
-        reader.readAsDataURL(file);
-      });
-      const img = new Image();
-      img.src = dataURL;
-      await new Promise((resolve) => { img.onload = resolve; });
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const code = jsQR(imageData.data, canvas.width, canvas.height);
-      if (code && code.data) {
-        try {
-          // If QR code data is JSON and contains a medicineId property:
-          const data = JSON.parse(code.data);
-          return data.medicineId;
-        } catch (e) {
-          // Otherwise, assume the QR code data is the medicineId directly.
-          return code.data;
+      // Function to retrieve Medicine ID either from a QR code file or text input
+      async function getMedicineId() {
+        const qrInput = document.getElementById("qr-code");
+        if (qrInput && qrInput.files && qrInput.files.length > 0) {
+          const file = qrInput.files[0];
+          const dataURL = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (err) => reject(err);
+            reader.readAsDataURL(file);
+          });
+          const img = new Image();
+          img.src = dataURL;
+          await new Promise((resolve) => {
+            img.onload = resolve;
+          });
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const code = jsQR(imageData.data, canvas.width, canvas.height);
+          if (code && code.data) {
+            try {
+              // If QR code data is JSON and contains a medicineId property:
+              const data = JSON.parse(code.data);
+              return data.medicineId;
+            } catch (e) {
+              // Otherwise, assume the QR code data is the medicineId directly.
+              return code.data;
+            }
+          } else {
+            // Fallback to the input field if QR decoding fails.
+            return document.getElementById("track-medicine-id").value.trim();
+          }
+        } else {
+          // No QR file uploaded; use the text input.
+          return document.getElementById("track-medicine-id").value.trim();
         }
-      } else {
-        // Fallback to the input field if QR decoding fails.
-        return document.getElementById("track-medicine-id").value.trim();
       }
-    } else {
-      // No QR file uploaded; use the text input.
-      return document.getElementById("track-medicine-id").value.trim();
-    }
-  }
 
-  const medicineId = await getMedicineId();
-  if (!medicineId) {
-    Swal.fire({
-      title: "Missing Medicine ID",
-      text: "Please enter a valid Medicine ID.",
-      icon: "warning",
-      confirmButtonText: "OK",
-    });
-    return;
-  }
+      const medicineId = await getMedicineId();
+      if (!medicineId) {
+        Swal.fire({
+          title: "Missing Medicine ID",
+          text: "Please enter a valid Medicine ID.",
+          icon: "warning",
+          confirmButtonText: "OK",
+        });
+        return;
+      }
 
-  try {
-    // Request user's Ethereum accounts
-    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-    const currentAccount = accounts[0]; // currentAccount is defined here
-    console.log("Current Account:", currentAccount);
-    // Fetch medicine details from the blockchain using the smart contract.
-    const medicineData = await addMedicineContract.methods.getMedicine(medicineId).call();
-
-    // Check if medicine exists by verifying manufacturerId (index 0)
-    if (!medicineData[0] || medicineData[0] === "") {
-      Swal.fire({
-        title: "Not Found",
-        text: "Medicine not found in the blockchain.",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
-    // Create a medicine object for easier reference.
-    const medicine = {
-      manufacturerId: medicineData[0],
-      medicineName: medicineData[1],
-      medicineId: medicineData[2],
-      medicineType: medicineData[3],
-      strength: medicineData[4],
-      batchNumber: medicineData[5],
-      storageConditions: medicineData[6],
-      manufactureDate: medicineData[7] ? new Date(medicineData[7] * 1000).toLocaleDateString() : "N/A",
-      expiryDate: medicineData[8] ? new Date(medicineData[8] * 1000).toLocaleDateString() : "N/A",
-      price: medicineData[9],
-      quantity: medicineData[10],
-      state: parseInt(medicineData[11]),
-    };
-
-    // Medicine state mapping and icons.
-    const medicineStates = ["Manufactured", "InStock", "Sold", "Expired"];
-    const medicineIcons = ["🏭", "📦", "🛒", "☠"];
-
-    console.log("Fetched Medicine Data:", medicineData);
-
-    // --- Step 2: Check & Update Expired Medicine State ---
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    const isExpired = (medicine.expiryTimestamp < currentTimestamp);
-    if (isExpired && medicine.state !== 3) { // 3 represents "Expired"
-      console.log(`Medicine ${medicine.medicineName} (${medicine.medicineId}) is expired. Updating state...`);
       try {
-        await addMedicineContract.methods
-          .updateMedicineState(medicine.medicineId, 3, medicine.manufacturerId)
-          .send({ from: currentAccount });
-        console.log(`State updated to Expired for ${medicine.medicineId}`);
-        // Re-fetch updated medicine details
-        medicineData = await addMedicineContract.methods.getMedicine(medicineId).call();
-        medicine.state = parseInt(medicineData[11]);
-      } catch (updateError) {
-        console.error(`Error updating state for ${medicine.medicineId}:`, updateError);
-      }
-    }
+        // Request user's Ethereum accounts
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        const currentAccount = accounts[0]; // currentAccount is defined here
+        console.log("Current Account:", currentAccount);
+        // Fetch medicine details from the blockchain using the smart contract.
+        const medicineData = await addMedicineContract.methods
+          .getMedicine(medicineId)
+          .call();
 
-    Swal.close();
+        // Check if medicine exists by verifying manufacturerId (index 0)
+        if (!medicineData[0] || medicineData[0] === "") {
+          Swal.fire({
+            title: "Not Found",
+            text: "Medicine not found in the blockchain.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+          return;
+        }
 
-    // Display the medicine details in a styled div.
-    document.getElementById("medicine-details").innerHTML = `
-      <div style="max-width: 600px; margin: 20px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0,0,0,0.1);">
-        <h2 style="text-align: center; color: #333;">${medicine.medicineName} <span style="color: #777;">(${medicine.medicineId})</span></h2>
-        <p style="text-align: center; font-size: 14px; color: #555;">Manufacturer: <strong>${medicine.manufacturerId}</strong></p>
-        <hr style="margin: 10px 0;">
-        <p><strong>💊 Medicine Type:</strong> ${medicine.medicineType}</p>
-        <p><strong>⚡ Strength:</strong> ${medicine.strength}</p>
-        <p><strong>🔢 Batch Number:</strong> ${medicine.batchNumber}</p>
-        <p><strong>❄ Storage Conditions:</strong> ${medicine.storageConditions}</p>
-        <p><strong>📅 Manufacture Date:</strong> ${medicine.manufactureDate}</p>
-        <p><strong>⏳ Expiry Date:</strong> ${medicine.expiryDate}</p>
-        <p><strong>💰 Price:</strong> ${medicine.price} tokens</p>
-        <p><strong>📦 Quantity:</strong> ${medicine.quantity}</p>
-        <p><strong>🚀 Current State:</strong> <span style="color: ${medicine.state === 3 ? "red" : "#4CAF50"}; font-weight: bold;">${medicineStates[medicine.state]}</span></p>
-        <div class="progress-container" style="display: flex; align-items: center; justify-content: space-between; position: relative; margin-top: 20px;">
-          <div class="progress-line" style="position: absolute; top: 50%; left: 8%; width: 84%; height: 6px; background: #ddd; border-radius: 5px; transform: translateY(-50%); z-index: -1;"></div>
-          ${medicineStates.map((state, index) => `
-            <div class="progress-step" style="
-              width: 40px; height: 40px; border-radius: 50%;
-              font-size: 18px; font-weight: bold;
-              display: flex; justify-content: center; align-items: center;
-              background: ${index <= medicine.state ? "#4CAF50" : "#ddd"};
-              color: ${index <= medicine.state ? "white" : "black"};
-              border: 3px solid ${index <= medicine.state ? "#4CAF50" : "#bbb"};
-              box-shadow: ${index === medicine.state ? "0px 0px 10px rgba(0, 255, 0, 0.8)" : "none"};
-              transition: all 0.3s ease-in-out;
-              position: relative;
-            ">
-              ${medicineIcons[index]}
-              <span style="
-                position: absolute; top: 50px; white-space: nowrap;
-                font-size: 12px; color: ${index <= medicine.state ? "#4CAF50" : "#777"};
-              ">${state}</span>
-            </div>
-          `).join("")}
+        // Create a medicine object for easier reference.
+        const medicine = {
+          manufacturerId: medicineData[0],
+          medicineName: medicineData[1],
+          medicineId: medicineData[2],
+          medicineType: medicineData[3],
+          strength: medicineData[4],
+          batchNumber: medicineData[5],
+          storageConditions: medicineData[6],
+          manufactureDate: medicineData[7]
+            ? new Date(medicineData[7] * 1000).toLocaleDateString()
+            : "N/A",
+          expiryDate: medicineData[8]
+            ? new Date(medicineData[8] * 1000).toLocaleDateString()
+            : "N/A",
+          price: medicineData[9],
+          quantity: medicineData[10],
+          state: parseInt(medicineData[11]),
+        };
+
+        // Medicine state mapping and icons.
+        const medicineStates = ["Manufactured", "InStock", "Sold", "Expired"];
+        const medicineIcons = ["🏭", "📦", "🛒", "☠"];
+
+        console.log("Fetched Medicine Data:", medicineData);
+
+        // --- Step 2: Check & Update Expired Medicine State ---
+        const currentTimestamp = Math.floor(Date.now() / 1000);
+        const isExpired = medicine.expiryTimestamp < currentTimestamp;
+        if (isExpired && medicine.state !== 3) {
+          // 3 represents "Expired"
+          console.log(
+            `Medicine ${medicine.medicineName} (${medicine.medicineId}) is expired. Updating state...`
+          );
+          try {
+            await addMedicineContract.methods
+              .updateMedicineState(
+                medicine.medicineId,
+                3,
+                medicine.manufacturerId
+              )
+              .send({ from: currentAccount });
+            console.log(`State updated to Expired for ${medicine.medicineId}`);
+            // Re-fetch updated medicine details
+            medicineData = await addMedicineContract.methods
+              .getMedicine(medicineId)
+              .call();
+            medicine.state = parseInt(medicineData[11]);
+          } catch (updateError) {
+            console.error(
+              `Error updating state for ${medicine.medicineId}:`,
+              updateError
+            );
+          }
+        }
+
+        Swal.close();
+
+        document.getElementById(
+          "med-name"
+        ).innerHTML = `${medicine.medicineName} <span class="text-white-50">(${medicine.medicineId})</span>`;
+        document.getElementById(
+          "med-manufacturer"
+        ).textContent = `Manufacturer: ${medicine.manufacturerId}`;
+
+        // Set medicine details
+        document.getElementById("med-type").textContent = medicine.medicineType;
+        document.getElementById("med-strength").textContent = medicine.strength;
+        document.getElementById("med-batch").textContent = medicine.batchNumber;
+        document.getElementById("med-storage").textContent =
+          medicine.storageConditions;
+        document.getElementById("med-mfg-date").textContent =
+          medicine.manufactureDate;
+        document.getElementById("med-exp-date").textContent =
+          medicine.expiryDate;
+        document.getElementById(
+          "med-price"
+        ).textContent = `${medicine.price} tokens`;
+        document.getElementById("med-quantity").textContent = medicine.quantity;
+
+        // Set current state
+        const stateElement = document.getElementById("med-state");
+        stateElement.textContent = medicineStates[medicine.state];
+
+        // Apply appropriate badge class based on current state
+        const badgeClasses = [
+          "badge-manufacturing",
+          "badge-distribution",
+          "badge-retail",
+          "badge-disposed",
+        ];
+        stateElement.className =
+          "status-badge px-4 py-2 rounded-pill fs-6 fw-bold " +
+          badgeClasses[medicine.state];
+
+        // Create progress steps with Font Awesome icons
+        const stateIcons = [
+          '<i class="fa-solid fa-industry fa-icon"></i>', // Manufacturing
+          '<i class="fa-solid fa-truck-fast fa-icon"></i>', // Distribution
+          '<i class="fa-solid fa-store fa-icon"></i>', // Retail
+          '<i class="fa-solid fa-trash-can fa-icon"></i>', // Disposed
+        ];
+
+        const stateSteps = medicineStates
+          .map((state, index) => {
+            return `
+    <div class="progress-step ${index <= medicine.state ? "active" : ""}">
+      ${stateIcons[index]}
+      <span class="progress-step-label">${state}</span>
+    </div>
+  `;
+          })
+          .join("");
+
+        document.getElementById("state-steps").innerHTML = stateSteps;
+
+        // Show the result div by removing the d-none class
+        document.getElementById("result-div").classList.remove("d-none");
+
+        // Event listeners for action buttons
+        document
+          .getElementById("print-details")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const medicineName = document.getElementById("med-name").innerText;
+            const medicineId = medicineName.match(/\((.*?)\)/)?.[1] || "";
+            const manufacturer =
+              document.getElementById("med-manufacturer").innerText;
+            const type = document.getElementById("med-type").innerText;
+            const strength = document.getElementById("med-strength").innerText;
+            const batch = document.getElementById("med-batch").innerText;
+            const storage = document.getElementById("med-storage").innerText;
+            const mfgDate = document.getElementById("med-mfg-date").innerText;
+            const expDate = document.getElementById("med-exp-date").innerText;
+            const price = document.getElementById("med-price").innerText;
+            const quantity = document.getElementById("med-quantity").innerText;
+            const state = document.getElementById("med-state").innerText;
+
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            const formattedTime = today.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+            const fileName = `${medicineName
+              .replace(/\(.*?\)/, "")
+              .trim()
+              .replace(/\s+/g, "_")}_${medicineId}.pdf`;
+
+            const printWindow = window.open(
+              "",
+              "_blank",
+              "height=842,width=595"
+            ); // A4 size
+
+            const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>${fileName}</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+          font-family: 'Inter', sans-serif;
+          color: #333;
+          background: #fff;
+          padding: 20px;
+          margin: 0;
+        }
+        .container {
+          width: 100%;
+          max-width: 750px;
+          margin: 0 auto;
+          padding: 20px;
+          position: relative;
+          min-height: 100%;
+        }
+        .report-header {
+          text-align: center;
+          margin-bottom: 20px;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 10px;
+        }
+        .logo {
+          font-size: 24px;
+          font-weight: 700;
+        }
+        .report-title {
+          font-size: 16px;
+          color: #666;
+        }
+        .report-date {
+          font-size: 13px;
+          color: #888;
+          margin-top: 5px;
+        }
+        .medicine-header {
+          background: #000;
+          color: #fff;
+          padding: 20px;
+          border-radius: 10px 10px 0 0;
+          text-align: center;
+          margin-bottom: 25px;
+        }
+        .medicine-name {
+          font-size: 22px;
+          font-weight: 700;
+        }
+        .medicine-id {
+          font-size: 13px;
+          color: #ccc;
+        }
+        .manufacturer {
+          font-size: 15px;
+          color: #aaa;
+          margin-top: 5px;
+        }
+        .details-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          margin-bottom: 30px;
+        }
+        .detail-item {
+          background: #f9f9f9;
+          padding: 12px 16px;
+          border-radius: 6px;
+        }
+        .detail-label {
+          font-size: 11px;
+          text-transform: uppercase;
+          color: #888;
+          margin-bottom: 4px;
+        }
+        .detail-value {
+          font-size: 16px;
+          font-weight: 500;
+        }
+        .state-section {
+          text-align: center;
+          margin: 30px 0 20px;
+        }
+        .state-label {
+          font-size: 12px;
+          text-transform: uppercase;
+          color: #888;
+        }
+        .state-value {
+          display: inline-block;
+          padding: 6px 20px;
+          font-size: 14px;
+          font-weight: 600;
+          margin-top: 8px;
+          border: 2px solid #000;
+          border-radius: 30px;
+        }
+        .state-disposed {
+          background-color: #000;
+          color: #fff;
+          border: none;
+        }
+        .progress-track {
+          margin: 30px 0 80px;
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .progress-line {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: #ddd;
+          z-index: 0;
+        }
+        .progress-step {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #fff;
+          border: 2px solid #ddd;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          z-index: 1;
+          font-size: 16px;
+        }
+        .progress-step.active {
+          background: #000;
+          color: #fff;
+          border-color: #000;
+        }
+        .progress-step-label {
+          position: absolute;
+          bottom: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 11px;
+          color: #888;
+        }
+        .progress-step.active .progress-step-label {
+          color: #000;
+        }
+        .footer {
+          position: relative;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+          font-size: 12px;
+          color: #888;
+          padding-top: 10px;
+          margin-top: 40px;
+          border-top: 1px solid #eee;
+        }
+        @media print {
+          html, body {
+            width: 210mm;
+            height: 297mm;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+          .container {
+            padding: 10mm;
+            box-sizing: border-box;
+          }
+          .no-print {
+            display: none;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <!-- ... All your HTML content here (same as before) ... -->
+        <div class="report-header">
+          <div class="logo">MediChain</div>
+          <div class="report-title">Medicine Verification Report</div>
+          <div class="report-date">Generated on ${formattedDate} at ${formattedTime}</div>
+        </div>
+
+        <div class="medicine-header">
+          <div class="medicine-name">${medicineName.replace(
+            /\(.*?\)/,
+            ""
+          )}</div>
+          <div class="medicine-id">ID: ${medicineId}</div>
+          <div class="manufacturer">${manufacturer}</div>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item"><div class="detail-label">Type</div><div class="detail-value">${type}</div></div>
+          <div class="detail-item"><div class="detail-label">Strength</div><div class="detail-value">${strength}</div></div>
+          <div class="detail-item"><div class="detail-label">Batch</div><div class="detail-value">${batch}</div></div>
+          <div class="detail-item"><div class="detail-label">Storage</div><div class="detail-value">${storage}</div></div>
+          <div class="detail-item"><div class="detail-label">Mfg Date</div><div class="detail-value">${mfgDate}</div></div>
+          <div class="detail-item"><div class="detail-label">Exp Date</div><div class="detail-value">${expDate}</div></div>
+          <div class="detail-item"><div class="detail-label">Price</div><div class="detail-value">${price}</div></div>
+          <div class="detail-item"><div class="detail-label">Quantity</div><div class="detail-value">${quantity}</div></div>
+        </div>
+
+        <div class="state-section">
+          <div class="state-label">Current State</div>
+          <div class="state-value ${
+            state.toLowerCase() === "disposed" ? "state-disposed" : ""
+          }">${state}</div>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-line"></div>
+          ${getMedicineStateProgress(state)}
+        </div>
+
+        <div class="footer">
+          &copy; 2025 MediChain. All rights reserved. — Generated on ${formattedDate} at ${formattedTime}
         </div>
       </div>
+
+      <script>
+        window.onload = function() {
+          setTimeout(function() {
+            window.print();
+          }, 300);
+        };
+      </script>
+    </body>
+    </html>
+  `;
+
+            printWindow.document.open();
+            printWindow.document.write(htmlContent);
+            printWindow.document.close();
+          });
+
+        // Reuse these helpers as-is
+        function getMedicineStateProgress(currentState) {
+          const states = [
+            "Manufacturing",
+            "Distribution",
+            "Retail",
+            "Disposed",
+          ];
+          const icons = [
+            '<i class="fas fa-industry"></i>',
+            '<i class="fas fa-truck-fast"></i>',
+            '<i class="fas fa-store"></i>',
+            '<i class="fas fa-trash-can"></i>',
+          ];
+          const currentIndex = states.findIndex(
+            (state) => state.toLowerCase() === currentState.toLowerCase()
+          );
+          return states
+            .map((state, index) => {
+              const isActive = index <= currentIndex;
+              return `
+      <div class="progress-step ${isActive ? "active" : ""}">
+        ${icons[index]}
+        <span class="progress-step-label">${state}</span>
+      </div>
     `;
+            })
+            .join("");
+        }
 
-    // Show a loading indicator while processing (using SweetAlert2)
-    Swal.fire({
-      title: 'Fetching Medicine Details...',
-      allowOutsideClick: false,
-      didOpen: () => { Swal.showLoading(); }
+        document
+          .getElementById("new-search")
+          ?.addEventListener("click", function () {
+            document.getElementById("result-div").classList.add("d-none");
+            document.getElementById("track-form").reset();
+          });
+
+        // Show a loading indicator while processing (using SweetAlert2)
+        Swal.fire({
+          title: "Fetching Medicine Details...",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        setTimeout(() => {
+          Swal.close();
+          document.getElementById("result-div").style.display = "block";
+        }, 1000);
+      } catch (error) {
+        console.error("❌ Error fetching medicine:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Medicine not found or error occurred.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
     });
-    setTimeout(() => {
-      Swal.close();
-      document.getElementById("result-div").style.display = "block";
-    }, 1000);
 
-  } catch (error) {
-    console.error("❌ Error fetching medicine:", error);
-    Swal.fire({
-      title: "Error!",
-      text: "Medicine not found or error occurred.",
-      icon: "error",
-      confirmButtonText: "OK"
+  // --- Cancel Button Handler for Track Medicine Section ---
+  document
+    .getElementById("cancel-button")
+    .addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("result-div").style.display = "none";
+      // Clear the QR file input (if any)
+      const qrInput = document.getElementById("qr-code");
+      if (qrInput) {
+        qrInput.value = "";
+      }
+      // Clear the text input for Medicine ID
+      document.getElementById("track-medicine-id").value = "";
     });
-  }
 });
-
-// --- Cancel Button Handler for Track Medicine Section ---
-document.getElementById("cancel-button").addEventListener("click", function (e) {
-  e.preventDefault();
-  document.getElementById("result-div").style.display = "none";
-  // Clear the QR file input (if any)
-  const qrInput = document.getElementById("qr-code");
-  if (qrInput) { qrInput.value = ""; }
-  // Clear the text input for Medicine ID
-  document.getElementById("track-medicine-id").value = "";
-});
-
-});
-
 
 // =============================================================== ADD MEDICINE  ==================================================
 window.addEventListener("load", async () => {
@@ -1095,19 +1475,19 @@ window.addEventListener("load", async () => {
     } catch (error) {
       console.error("❌ User denied account access");
       Swal.fire({
-        title: 'Error!',
-        text: 'User denied account access',
-        icon: 'error',
-        confirmButtonText: 'OK'
+        title: "Error!",
+        text: "User denied account access",
+        icon: "error",
+        confirmButtonText: "OK",
       });
       return;
     }
   } else {
     Swal.fire({
-      title: 'MetaMask Not Detected!',
-      text: 'Please install MetaMask!',
-      icon: 'warning',
-      confirmButtonText: 'OK'
+      title: "MetaMask Not Detected!",
+      text: "Please install MetaMask!",
+      icon: "warning",
+      confirmButtonText: "OK",
     });
     return;
   }
@@ -1125,10 +1505,10 @@ window.addEventListener("load", async () => {
   } catch (error) {
     console.error("❌ Error loading ABI:", error);
     Swal.fire({
-      title: 'Error!',
-      text: 'Failed to load contract ABI. Please check your network or ABI file.',
-      icon: 'error',
-      confirmButtonText: 'OK'
+      title: "Error!",
+      text: "Failed to load contract ABI. Please check your network or ABI file.",
+      icon: "error",
+      confirmButtonText: "OK",
     });
     return;
   }
@@ -1143,10 +1523,10 @@ window.addEventListener("load", async () => {
   if (!manufacturerId) {
     console.error("❌ Manufacturer ID not found for the logged-in user.");
     Swal.fire({
-      title: 'Error!',
-      text: 'Unable to retrieve your Manufacturer ID. Please log in again.',
-      icon: 'error',
-      confirmButtonText: 'OK'
+      title: "Error!",
+      text: "Unable to retrieve your Manufacturer ID. Please log in again.",
+      icon: "error",
+      confirmButtonText: "OK",
     });
     return;
   }
@@ -1154,12 +1534,16 @@ window.addEventListener("load", async () => {
   document.getElementById("manufacturerId").value = manufacturerId;
 
   // Event Listener: Medicine Added Event.
-  addMedicineContract.events.MedicineAdded({ fromBlock: "latest" })
+  addMedicineContract.events
+    .MedicineAdded({ fromBlock: "latest" })
     .on("data", function (event) {
       console.log("✅ Medicine Added Event Detected!", event);
       console.log("Medicine ID:", event.returnValues.medicineId);
       console.log("Medicine Name:", event.returnValues.medicineName);
-      console.log("Timestamp:", new Date(event.returnValues.timestamp * 1000).toLocaleString());
+      console.log(
+        "Timestamp:",
+        new Date(event.returnValues.timestamp * 1000).toLocaleString()
+      );
     })
     .on("error", function (error) {
       console.error("❌ Error in event listener:", error);
@@ -1213,20 +1597,30 @@ window.addEventListener("load", async () => {
         const medicineType = document.getElementById("medicineType").value;
         const strength = document.getElementById("strength").value;
         const batchNumber = document.getElementById("batchNumber").value;
-        const storageConditions = document.getElementById("storageConditions").value;
-        const manufactureDateStr = document.getElementById("manufactureDate").value;
+        const storageConditions =
+          document.getElementById("storageConditions").value;
+        const manufactureDateStr =
+          document.getElementById("manufactureDate").value;
         const expiryDateStr = document.getElementById("expiryDate").value;
         const price = document.getElementById("price").value;
         const quantity = document.getElementById("quantity").value;
 
         // Validate required fields.
-        if (!medicineName || !medicineId || !medicineType || !strength || !batchNumber ||
-          !storageConditions || !price || !quantity) {
+        if (
+          !medicineName ||
+          !medicineId ||
+          !medicineType ||
+          !strength ||
+          !batchNumber ||
+          !storageConditions ||
+          !price ||
+          !quantity
+        ) {
           Swal.fire({
-            title: 'Missing Fields',
-            text: 'Please fill in all required fields.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
+            title: "Missing Fields",
+            text: "Please fill in all required fields.",
+            icon: "warning",
+            confirmButtonText: "OK",
           });
           return;
         }
@@ -1234,21 +1628,23 @@ window.addEventListener("load", async () => {
         // Validate Dates.
         if (!manufactureDateStr || !expiryDateStr) {
           Swal.fire({
-            title: 'Invalid Dates',
-            text: 'Please enter valid manufacture and expiry dates.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
+            title: "Invalid Dates",
+            text: "Please enter valid manufacture and expiry dates.",
+            icon: "warning",
+            confirmButtonText: "OK",
           });
           return;
         }
-        const manufactureDate = Math.floor(new Date(manufactureDateStr).getTime() / 1000);
+        const manufactureDate = Math.floor(
+          new Date(manufactureDateStr).getTime() / 1000
+        );
         const expiryDate = Math.floor(new Date(expiryDateStr).getTime() / 1000);
         if (manufactureDate >= expiryDate) {
           Swal.fire({
-            title: 'Date Error',
-            text: 'Manufacture date must be before expiry date.',
-            icon: 'error',
-            confirmButtonText: 'OK'
+            title: "Date Error",
+            text: "Manufacture date must be before expiry date.",
+            icon: "error",
+            confirmButtonText: "OK",
           });
           return;
         }
@@ -1278,8 +1674,8 @@ window.addEventListener("load", async () => {
           storageConditions: storageConditions,
           manufactureDate: manufactureDate,
           expiryDate: expiryDate,
-          price: price,         // Base price (before tax)
-          quantity: quantity
+          price: price, // Base price (before tax)
+          quantity: quantity,
         };
 
         // Send the transaction to addMedicine.
@@ -1288,10 +1684,10 @@ window.addEventListener("load", async () => {
           .send({ from: accounts[0] });
         console.log("✅ Transaction Receipt:", receipt);
         Swal.fire({
-          title: 'Success!',
-          text: 'Medicine added successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK'
+          title: "Success!",
+          text: "Medicine added successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
         });
 
         // Generate and download the QR Code with medicine details.
@@ -1302,16 +1698,15 @@ window.addEventListener("load", async () => {
       } catch (error) {
         console.error("❌ Error adding medicine:", error);
         Swal.fire({
-          title: 'Error!',
-          text: 'Error adding medicine: ' + error.message,
-          icon: 'error',
-          confirmButtonText: 'OK'
+          title: "Error!",
+          text: "Error adding medicine: " + error.message,
+          icon: "error",
+          confirmButtonText: "OK",
         });
       }
     });
   }
 });
-
 
 //===============================================================BUY===============================================================
 
@@ -1326,7 +1721,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         title: "Error!",
         text: "User denied account access",
         icon: "error",
-        confirmButtonText: "OK"
+        confirmButtonText: "OK",
       });
       return;
     }
@@ -1335,7 +1730,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       title: "MetaMask Missing",
       text: "MetaMask is not installed!",
       icon: "warning",
-      confirmButtonText: "OK"
+      confirmButtonText: "OK",
     });
     return;
   }
@@ -1355,11 +1750,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       title: "Error!",
       text: "Failed to load contract ABI. Please check your network or ABI file.",
       icon: "error",
-      confirmButtonText: "OK"
+      confirmButtonText: "OK",
     });
     return;
   }
-  const addMedicineContract = new web3.eth.Contract(contractABI, contractAddress);
+  const addMedicineContract = new web3.eth.Contract(
+    contractABI,
+    contractAddress
+  );
   console.log("Contract Loaded:", addMedicineContract);
 
   // ================== Auto-Fill Manufacturer ID ==================
@@ -1370,7 +1768,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       title: "Error!",
       text: "Unable to retrieve your Manufacturer ID. Please log in again.",
       icon: "error",
-      confirmButtonText: "OK"
+      confirmButtonText: "OK",
     });
     return;
   }
@@ -1378,12 +1776,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("manufacturerId").value = manufacturerId;
 
   // ================== Event Listener: Medicine Added ==================
-  addMedicineContract.events.MedicineAdded({ fromBlock: "latest" })
+  addMedicineContract.events
+    .MedicineAdded({ fromBlock: "latest" })
     .on("data", function (event) {
       console.log("✅ Medicine Added Event Detected!", event);
       console.log("Medicine ID:", event.returnValues.medicineId);
       console.log("Medicine Name:", event.returnValues.medicineName);
-      console.log("Timestamp:", new Date(event.returnValues.timestamp * 1000).toLocaleString());
+      console.log(
+        "Timestamp:",
+        new Date(event.returnValues.timestamp * 1000).toLocaleString()
+      );
     })
     .on("error", function (error) {
       console.error("❌ Error in event listener:", error);
@@ -1403,7 +1805,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           title: "Error!",
           text: "User credentials not found.",
           icon: "error",
-          confirmButtonText: "OK"
+          confirmButtonText: "OK",
         });
         return;
       }
@@ -1431,7 +1833,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             strength: med[4],
             batchNumber: med[5],
             storageConditions: med[6],
-            manufactureDate: new Date(Number(med[7]) * 1000).toLocaleDateString(),
+            manufactureDate: new Date(
+              Number(med[7]) * 1000
+            ).toLocaleDateString(),
             expiryDate: new Date(expiryTs * 1000).toLocaleDateString(),
             price: med[9],
             quantity: med[10],
@@ -1441,14 +1845,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           // Automatically update state to Expired if needed
           if (isExpired && medicine.state !== 3) {
-            console.log(`Updating expired medicine: ${medicine.medicineName} (ID: ${medicine.medicineId})`);
+            console.log(
+              `Updating expired medicine: ${medicine.medicineName} (ID: ${medicine.medicineId})`
+            );
             try {
               await addMedicineContract.methods
-                .updateMedicineState(medicine.medicineId, 3, medicine.manufacturerId)
+                .updateMedicineState(
+                  medicine.medicineId,
+                  3,
+                  medicine.manufacturerId
+                )
                 .send({ from: currentAccount });
-              console.log(`✅ State updated to Expired for: ${medicine.medicineId}`);
+              console.log(
+                `✅ State updated to Expired for: ${medicine.medicineId}`
+              );
             } catch (updateError) {
-              console.error(`❌ Error updating state for ${medicine.medicineId}:`, updateError);
+              console.error(
+                `❌ Error updating state for ${medicine.medicineId}:`,
+                updateError
+              );
             }
           }
           return medicine;
@@ -1490,10 +1905,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             <p class="card-text">ID: ${medicine.medicineId}</p>
             <p class="card-text">Price: ${medicine.price} INR</p>
             <p class="card-text">Expiry Date: ${medicine.expiryDate}</p>
-            ${medicine.isExpired
-          ? '<button class="btn btn-danger w-100 text-white fw-bold" disabled>Expired</button>'
-          : `<button class="btn btn-primary w-100" onclick='buyShowDetails(${JSON.stringify(medicine)})'>Buy Now</button>`
-        }
+            ${
+              medicine.isExpired
+                ? '<button class="btn btn-danger w-100 text-white fw-bold" disabled>Expired</button>'
+                : `<button class="btn btn-primary w-100" onclick='buyShowDetails(${JSON.stringify(
+                    medicine
+                  )})'>Buy Now</button>`
+            }
           </div>
         </div>
       `;
@@ -1516,11 +1934,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         strength: medData[4],
         batchNumber: medData[5],
         storageConditions: medData[6],
-        manufactureDate: new Date(Number(medData[7]) * 1000).toLocaleDateString(),
+        manufactureDate: new Date(
+          Number(medData[7]) * 1000
+        ).toLocaleDateString(),
         expiryDate: new Date(Number(medData[8]) * 1000).toLocaleDateString(),
-        price: medData[9],  // converting from Wei to Ether for display
+        price: medData[9], // converting from Wei to Ether for display
         quantity: medData[10],
-        state: parseInt(medData[11])
+        state: parseInt(medData[11]),
       };
 
       console.log("Fetched Buy Medicine Data:", selectedBuyMedicine);
@@ -1531,13 +1951,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (expiryTimestamp < currentTimestamp) {
         try {
           await addMedicineContract.methods
-            .updateMedicineState(selectedBuyMedicine.medicineId, 3, selectedBuyMedicine.manufacturerId)
+            .updateMedicineState(
+              selectedBuyMedicine.medicineId,
+              3,
+              selectedBuyMedicine.manufacturerId
+            )
             .send({ from: currentAccount });
           Swal.fire({
             title: "Expired!",
             text: "This medicine has expired. Its state has been updated to Expired.",
             icon: "warning",
-            confirmButtonText: "OK"
+            confirmButtonText: "OK",
           });
         } catch (updateError) {
           console.error("Error updating expired medicine state:", updateError);
@@ -1568,23 +1992,33 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // ----------------- Populate Payment Details -----------------
       const container = paymentDetails;
-      container.querySelector("#manufacturer-id").textContent = selectedBuyMedicine.manufacturerId;
+      container.querySelector("#manufacturer-id").textContent =
+        selectedBuyMedicine.manufacturerId;
       if (manufacturerUser) {
-        container.querySelector("#manufacturer-name").textContent = manufacturerUser.firstName + " " + manufacturerUser.lastName;
-        container.querySelector("#manufacturer-contact").textContent = manufacturerUser.phone;
+        container.querySelector("#manufacturer-name").textContent =
+          manufacturerUser.firstName + " " + manufacturerUser.lastName;
+        container.querySelector("#manufacturer-contact").textContent =
+          manufacturerUser.phone;
       } else {
         container.querySelector("#manufacturer-name").textContent = "N/A";
         container.querySelector("#manufacturer-contact").textContent = "N/A";
       }
-      container.querySelector("#medicine-name").textContent = selectedBuyMedicine.medicineName;
-      container.querySelector("#medicine-id").textContent = selectedBuyMedicine.medicineId;
-      container.querySelector("#batch-number").textContent = selectedBuyMedicine.batchNumber;
-      container.querySelector("#storage-conditions").textContent = selectedBuyMedicine.storageConditions;
+      container.querySelector("#medicine-name").textContent =
+        selectedBuyMedicine.medicineName;
+      container.querySelector("#medicine-id").textContent =
+        selectedBuyMedicine.medicineId;
+      container.querySelector("#batch-number").textContent =
+        selectedBuyMedicine.batchNumber;
+      container.querySelector("#storage-conditions").textContent =
+        selectedBuyMedicine.storageConditions;
       container.querySelector("#currency").textContent = "INR";
       container.querySelector("#price").textContent = selectedBuyMedicine.price;
-      container.querySelector("#quantity").textContent = selectedBuyMedicine.quantity;
-      container.querySelector("#manufacture-date").textContent = selectedBuyMedicine.manufactureDate;
-      container.querySelector("#expiry-date").textContent = selectedBuyMedicine.expiryDate;
+      container.querySelector("#quantity").textContent =
+        selectedBuyMedicine.quantity;
+      container.querySelector("#manufacture-date").textContent =
+        selectedBuyMedicine.manufactureDate;
+      container.querySelector("#expiry-date").textContent =
+        selectedBuyMedicine.expiryDate;
       paymentDetails.classList.remove("d-none");
     } catch (error) {
       console.error("Error fetching buy medicine details:", error);
@@ -1592,111 +2026,117 @@ document.addEventListener("DOMContentLoaded", async () => {
         title: "Error!",
         text: "Medicine not found or an error occurred.",
         icon: "error",
-        confirmButtonText: "OK"
+        confirmButtonText: "OK",
       });
     }
   };
 
-
   // ================== Confirm Purchase Handler ==================
-  document.getElementById("confirm-payment").addEventListener("click", async () => {
-    if (!selectedBuyMedicine) {
-      Swal.fire({
-        title: "Error!",
-        text: "No medicine selected!",
-        icon: "error",
-        confirmButtonText: "OK"
-      });
-      return;
-    }
-    try {
-      // Use the medicine's available quantity as the purchase quantity.
-      const purchaseQuantity = parseInt(selectedBuyMedicine.quantity);
-      if (isNaN(purchaseQuantity) || purchaseQuantity <= 0) {
-        Swal.fire({
-          title: "Invalid Quantity",
-          text: "The available quantity is invalid.",
-          icon: "warning",
-          confirmButtonText: "OK"
-        });
-        return;
-      }
-
-      // Fetch user details from registration contract to get role.
-      const email = localStorage.getItem("userEmail");
-      const password = localStorage.getItem("userPassword");
-      if (!email || !password) {
+  document
+    .getElementById("confirm-payment")
+    .addEventListener("click", async () => {
+      if (!selectedBuyMedicine) {
         Swal.fire({
           title: "Error!",
-          text: "User credentials not found.",
+          text: "No medicine selected!",
           icon: "error",
-          confirmButtonText: "OK"
+          confirmButtonText: "OK",
         });
         return;
       }
+      try {
+        // Use the medicine's available quantity as the purchase quantity.
+        const purchaseQuantity = parseInt(selectedBuyMedicine.quantity);
+        if (isNaN(purchaseQuantity) || purchaseQuantity <= 0) {
+          Swal.fire({
+            title: "Invalid Quantity",
+            text: "The available quantity is invalid.",
+            icon: "warning",
+            confirmButtonText: "OK",
+          });
+          return;
+        }
 
-      const userResult = await registrationContract.methods
-        .getUserDetails(email, password)
-        .call({ from: currentAccount });
-      const currentRole = userResult[5];
-      console.log("User Role:", currentRole);
+        // Fetch user details from registration contract to get role.
+        const email = localStorage.getItem("userEmail");
+        const password = localStorage.getItem("userPassword");
+        if (!email || !password) {
+          Swal.fire({
+            title: "Error!",
+            text: "User credentials not found.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+          return;
+        }
 
-      // Retrieve buyerId using the key with email.
-      let buyerId = "";
-      if (currentRole === "Wholesaler") {
-        buyerId = localStorage.getItem(`userId_${email}`) || "WHOLE001";
-      } else if (currentRole === "Pharmacy") {
-        buyerId = localStorage.getItem(`userId_${email}`) || "PHARM001";
-      } else {
+        const userResult = await registrationContract.methods
+          .getUserDetails(email, password)
+          .call({ from: currentAccount });
+        const currentRole = userResult[5];
+        console.log("User Role:", currentRole);
+
+        // Retrieve buyerId using the key with email.
+        let buyerId = "";
+        if (currentRole === "Wholesaler") {
+          buyerId = localStorage.getItem(`userId_${email}`) || "WHOLE001";
+        } else if (currentRole === "Pharmacy") {
+          buyerId = localStorage.getItem(`userId_${email}`) || "PHARM001";
+        } else {
+          Swal.fire({
+            title: "Not Authorized",
+            text: "Your role is not authorized for this action!",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+          return;
+        }
+
+        // Calculate total value using BN arithmetic.
+        // Convert the displayed price (assumed in Ether as a string) back to Wei.
+        // Calculate total value using BN arithmetic.
+        const unitPriceBN = web3.utils.toBN(selectedBuyMedicine.price);
+        const quantityBN = web3.utils.toBN(selectedBuyMedicine.quantity);
+        const totalValue = unitPriceBN.mul(quantityBN);
+
+        // Set buyerType based on role.
+        let buyerType;
+        if (currentRole === "Wholesaler") {
+          buyerType = 1;
+        } else if (currentRole === "Pharmacy") {
+          buyerType = 2;
+        }
+
+        await addMedicineContract.methods
+          .purchaseMedicine(
+            selectedBuyMedicine.medicineId,
+            purchaseQuantity,
+            buyerType,
+            buyerId
+          )
+          .send({ from: currentAccount, value: totalValue.toString() });
+
         Swal.fire({
-          title: "Not Authorized",
-          text: "Your role is not authorized for this action!",
-          icon: "error",
-          confirmButtonText: "OK"
+          title: "Purchase Successful!",
+          text: "Your purchase was successful.",
+          icon: "success",
+          confirmButtonText: "OK",
         });
-        return;
+
+        // After successful purchase, hide payment details and refresh the UI.
+        paymentDetails.classList.add("d-none");
+        buyMedicineCardsContainer.style.display = "flex";
+        fetchBuyMedicines();
+      } catch (error) {
+        console.error("Error during purchase:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Purchase failed!",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
-
-      // Calculate total value using BN arithmetic.
-      // Convert the displayed price (assumed in Ether as a string) back to Wei.
-      // Calculate total value using BN arithmetic.
-      const unitPriceBN = web3.utils.toBN(selectedBuyMedicine.price);
-      const quantityBN = web3.utils.toBN(selectedBuyMedicine.quantity);
-      const totalValue = unitPriceBN.mul(quantityBN);
-
-      // Set buyerType based on role.
-      let buyerType;
-      if (currentRole === "Wholesaler") {
-        buyerType = 1;
-      } else if (currentRole === "Pharmacy") {
-        buyerType = 2;
-      }
-
-      await addMedicineContract.methods
-        .purchaseMedicine(selectedBuyMedicine.medicineId, purchaseQuantity, buyerType, buyerId)
-        .send({ from: currentAccount, value: totalValue.toString() });
-
-      Swal.fire({
-        title: "Purchase Successful!",
-        text: "Your purchase was successful.",
-        icon: "success",
-        confirmButtonText: "OK"
-      });
-
-      // After successful purchase, hide payment details and refresh the UI.
-      paymentDetails.classList.add("d-none");
-      buyMedicineCardsContainer.style.display = "flex";
-      fetchBuyMedicines();
-    } catch (error) {
-      console.error("Error during purchase:", error);
-      Swal.fire({
-        title: "Error!",
-        text: "Purchase failed!",
-        icon: "error",
-        confirmButtonText: "OK"
-      });
-    }
-  });
+    });
 
   document.getElementById("cancel-payment").addEventListener("click", () => {
     paymentDetails.classList.add("d-none");
@@ -1705,5 +2145,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Initial fetch call for Buy Medicine Section.
   fetchBuyMedicines();
-
 });

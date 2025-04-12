@@ -1,665 +1,994 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <!-- SweetAlert2 loaded first -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/user.css" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <style>
+      /* Card Hover Effect */
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
-  <!-- SweetAlert2 loaded first -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="css/user.css" />
-  <link rel="icon" href="assets/favicon.png" type="image/png" />
-  <style>
-    /* Card Hover Effect */
-    .card-hover {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
 
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
+      /* Optional: Enhance the card appearance */
+      .card {
+        border-radius: 0.5rem;
+      }
 
-    /* Optional: Enhance the card appearance */
-    .card {
-      border-radius: 0.5rem;
-    }
-
-    /* Full-width button is handled by Bootstrap's w-100 class,
+      /* Full-width button is handled by Bootstrap's w-100 class,
      but if you need a custom rule, you can use this: */
-    .w-100 {
-      width: 100% !important;
-    }
-  </style>
-</head>
+      .w-100 {
+        width: 100% !important;
+      }
+    </style>
+  </head>
 
-<body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="brand">
-      <div class="brand-icon">
-        <img src="assets/favicon-bg.png" alt="Logo" height="40px" />
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <img src="assets/favicon-bg.png" alt="Logo" height="40px" />
+        </div>
+        MediChain
       </div>
-      MediChain
-    </div>
-    <ul class="nav flex-column mt-4">
-      <li class="nav-item">
-        <a class="nav-link active" href="#" data-section="dashboard">
-          <i class="bi bi-grid-1x2"></i>
-          Dashboard
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-section="profile">
-          <i class="bi bi-person-circle"></i>
-          Profile
-        </a>
-        <div class="sub-nav">
-          <a class="nav-link" href="#" data-section="security"> Security </a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-section="add-medicine">
-          <i class="bi bi-plus-circle"></i>
-          Add Medicine
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-section="track-medicine">
-          <i class="bi bi-geo-alt"></i>
-          Track Medicine
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-section="buy-medicine">
-          <i class="bi bi-bag"></i>
-          Buy Medicine
-        </a>
-      </li>
-    </ul>
-    <div class="logout-link">
-      <a class="nav-link" href="logout.html" id="logout">
-        <i class="bi bi-box-arrow-right"></i>
-        Logout
-      </a>
-    </div>
-  </div>
-
-  <!-- Mobile Navigation -->
-  <div class="mobile-nav">
-    <button class="btn" id="sidebar-toggle">
-      <i class="bi bi-list fs-4"></i>
-    </button>
-  </div>
-
-  <!-- Main Content -->
-  <div class="main-content">
-    <!-- Dashboard Section -->
-    <div id="dashboard" class="content-section active">
-      <h2 class="mb-4">Dashboard Overview</h2>
-      <div class="row g-4">
-        <div class="col-md-3">
-          <div class="stat-card">
-            <h3 class="fs-5 mb-3">Total Varieties</h3>
-            <h4 class="fs-2 fw-bold tot_med"></h4>
-            <p class="text-success mb-0">
-              <i class="bi bi-arrow-up"></i> In Inventory
-            </p>
+      <ul class="nav flex-column mt-4">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-section="dashboard">
+            <i class="bi bi-grid-1x2"></i>
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-section="profile">
+            <i class="bi bi-person-circle"></i>
+            Profile
+          </a>
+          <div class="sub-nav">
+            <a class="nav-link" href="#" data-section="security"> Security </a>
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card">
-            <h3 class="fs-5 mb-3">In Stock</h3>
-            <h4 class="fs-2 fw-bold tot_stock"></h4>
-            <p class="text-success mb-0">
-              <i class="bi bi-arrow-up"></i> Active
-            </p>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card">
-            <h3 class="fs-5 mb-3">Sold Items</h3>
-            <h4 class="fs-2 fw-bold tot_sold"></h4>
-            <p class="text-primary mb-0">
-              <i class="bi bi-geo"></i> In Transit
-            </p>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card">
-            <h3 class="fs-5 mb-3">Expired</h3>
-            <h4 class="fs-2 fw-bold tot_expired"></h4>
-            <p class="text-warning mb-0">
-              <i class="bi bi-exclamation-triangle"></i> Alert
-            </p>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card hit">
-            <h3 class="fs-5 mb-3">History</h3>
-            <h4 class="fs-2 fw-bold tot_history">:-(</h4>
-            <p class="text-info mb-0">
-              <i class="bi bi-clock-history"></i> Recent Activity
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div id="history-overlay" class="history-overlay">
-        <!-- Close Button -->
-        <button id="close-history" class="history-close">&times;</button>
-        <!-- History content placeholder -->
-        <div class="history-content">
-          <h2>History</h2>
-          <p>This area will display history details.</p>
-        </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-section="add-medicine">
+            <i class="bi bi-plus-circle"></i>
+            Add Medicine
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-section="track-medicine">
+            <i class="bi bi-geo-alt"></i>
+            Track Medicine
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-section="buy-medicine">
+            <i class="bi bi-bag"></i>
+            Buy Medicine
+          </a>
+        </li>
+      </ul>
+      <div class="logout-link">
+        <a class="nav-link" href="logout.html" id="logout">
+          <i class="bi bi-box-arrow-right"></i>
+          Logout
+        </a>
       </div>
     </div>
 
-    <!-- Profile Sections -->
-    <div id="profile" class="content-section">
-      <h2 class="mb-4">Profile Overview</h2>
-      <div class="row g-4">
-        <div class="col-lg-4">
-          <div class="profile-card p-4 text-center">
-            <div class="profile-picture-container mb-3 position-relative">
-              <img src="assets/favicon.png" alt="Profile Picture" class="profile-picture" width="150"
-                id="profileImage" />
-              <div class="upload-overlay" id="uploadOverlay">
-                <label for="uploadInput" class="upload-label">
-                  <i class="bi bi-camera-fill"></i>
-                </label>
-                <input type="file" id="uploadInput" class="d-none" accept="image/*" />
-              </div>
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <button class="btn" id="sidebar-toggle">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Dashboard Section -->
+      <div id="dashboard" class="content-section active">
+        <h2 class="mb-4">Dashboard Overview</h2>
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3 class="fs-5 mb-3">Total Varieties</h3>
+              <h4 class="fs-2 fw-bold tot_med"></h4>
+              <p class="text-success mb-0">
+                <i class="bi bi-arrow-up"></i> In Inventory
+              </p>
             </div>
-            <h4 class="mb-1" id="fullNameDisplay"></h4>
-            <p class="text-muted mb-1" id="userId">ID: Generating...</p>
-            <div class="d-flex align-items-center justify-content-center mb-3">
-              <span class="status-badge bg-danger text-white" id="profileVerificationStatus">
-                <i class="bi bi-x-circle"></i>Unauthorized
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3 class="fs-5 mb-3">In Stock</h3>
+              <h4 class="fs-2 fw-bold tot_stock"></h4>
+              <p class="text-success mb-0">
+                <i class="bi bi-arrow-up"></i> Active
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3 class="fs-5 mb-3">Sold Items</h3>
+              <h4 class="fs-2 fw-bold tot_sold"></h4>
+              <p class="text-primary mb-0">
+                <i class="bi bi-geo"></i> In Transit
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3 class="fs-5 mb-3">Expired</h3>
+              <h4 class="fs-2 fw-bold tot_expired"></h4>
+              <p class="text-warning mb-0">
+                <i class="bi bi-exclamation-triangle"></i> Alert
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card hit">
+              <h3 class="fs-5 mb-3">History</h3>
+              <h4 class="fs-2 fw-bold tot_history">:-(</h4>
+              <p class="text-info mb-0">
+                <i class="bi bi-clock-history"></i> Recent Activity
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="history-overlay" class="history-overlay">
+          <!-- Close Button -->
+          <button id="close-history" class="history-close">&times;</button>
+          <!-- History content placeholder -->
+          <div class="history-content">
+            <h2>History</h2>
+            <p>This area will display history details.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Sections -->
+      <div id="profile" class="content-section">
+        <h2 class="mb-4">Profile Overview</h2>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="profile-card p-4 text-center">
+              <div class="profile-picture-container mb-3 position-relative">
+                <img
+                  src="assets/favicon.png"
+                  alt="Profile Picture"
+                  class="profile-picture"
+                  width="150"
+                  id="profileImage"
+                />
+                <div class="upload-overlay" id="uploadOverlay">
+                  <label for="uploadInput" class="upload-label">
+                    <i class="bi bi-camera-fill"></i>
+                  </label>
+                  <input
+                    type="file"
+                    id="uploadInput"
+                    class="d-none"
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+              <h4 class="mb-1" id="fullNameDisplay"></h4>
+              <p class="text-muted mb-1" id="userId">ID: Generating...</p>
+              <div
+                class="d-flex align-items-center justify-content-center mb-3"
+              >
+                <span
+                  class="status-badge bg-danger text-white"
+                  id="profileVerificationStatus"
+                >
+                  <i class="bi bi-x-circle"></i>Unauthorized
+                </span>
+              </div>
+              <p class="text-muted mb-3" id="userId"></p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="profile-card p-4">
+              <h3 class="section-title mb-4">Profile Details</h3>
+              <form>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="fullName"
+                        placeholder="Full Name"
+                        disabled
+                      />
+                      <label for="fullName">Full Name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select class="form-select" id="role" disabled>
+                        <option value="Manufacturer">Manufacturer</option>
+                        <option value="Wholesaler">Wholesaler</option>
+                        <option value="Distributor">Distributor</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Customer">Customer</option>
+                      </select>
+                      <label for="role">Role</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        placeholder="Email Address"
+                        disabled
+                      />
+                      <label for="email">Email Address</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        placeholder="Phone Number"
+                        disabled
+                      />
+                      <label for="phone">Phone Number</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <h5 class="mb-3">Address</h5>
+                    <div class="row g-3">
+                      <div class="col-12">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="streetAddress"
+                            placeholder="Street Address"
+                          />
+                          <label for="streetAddress">Street Address</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="city"
+                            placeholder="City"
+                          />
+                          <label for="city">City</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="state"
+                            placeholder="State"
+                          />
+                          <label for="state">State</label>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="zip"
+                            placeholder="ZIP"
+                          />
+                          <label for="zip">ZIP</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-grid mt-4">
+                  <button type="submit" class="btn btn-dark">
+                    Update Profile
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security Section -->
+      <div id="security" class="content-section mt-4">
+        <h2 class="mb-4">Security Settings</h2>
+        <div class="profile-card p-4">
+          <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <strong class="text-muted">Verification:</strong>
+              <span
+                class="status-badge bg-danger text-white"
+                id="securityVerificationStatus"
+              >
+                <i class="bi bi-x-circle mr-2"></i> Unauthorized
               </span>
             </div>
-            <p class="text-muted mb-3" id="userId"></p>
+            <div
+              class="alert alert-info alert-dismissible fade show d-flex align-items-center"
+              role="alert"
+            >
+              <i class="bi bi-info-circle me-2"></i>
+              <p class="mb-0">
+                To get authorized and start purchasing, you need to add your
+                wallet address.
+              </p>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="input-group wallet-input-group">
+              <input
+                type="text"
+                class="form-control"
+                id="walletAddress"
+                placeholder="Click 'Add Wallet'"
+              />
+              <button
+                class="btn btn-primary wallet-add-button"
+                id="addWalletButton"
+              >
+                <i class="bi bi-plus-circle me-2"></i> Add Wallet
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-8">
-          <div class="profile-card p-4">
-            <h3 class="section-title mb-4">Profile Details</h3>
-            <form>
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="fullName" placeholder="Full Name" disabled/>
-                    <label for="fullName">Full Name</label>
+          <!-- Password Update Section -->
+          <h3 class="section-title mb-4">Update Password</h3>
+          <div class="row">
+            <div class="col-lg-6">
+              <form id="passwordForm">
+                <div class="mb-3">
+                  <div class="input-group">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="newPassword"
+                      placeholder="New Password"
+                      required
+                    />
+                    <button
+                      class="btn btn-dark"
+                      type="button"
+                      id="toggleNewPassword"
+                    >
+                      <i class="bi bi-eye-slash"></i>
+                    </button>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <select class="form-select" id="role" disabled>
-                      <option value="Manufacturer">Manufacturer</option>
-                      <option value="Wholesaler">Wholesaler</option>
-                      <option value="Distributor">Distributor</option>
-                      <option value="Pharmacy">Pharmacy</option>
-                      <option value="Customer">Customer</option>
-                    </select>
-                    <label for="role">Role</label>
+                <div class="mb-3">
+                  <div class="input-group">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      placeholder="Confirm Password"
+                      required
+                    />
+                    <button
+                      class="btn btn-dark"
+                      type="button"
+                      id="toggleConfirmPassword"
+                    >
+                      <i class="bi bi-eye-slash"></i>
+                    </button>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="email" class="form-control" id="email" placeholder="Email Address" disabled/>
-                    <label for="email">Email Address</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="tel" class="form-control" id="phone" placeholder="Phone Number" disabled/>
-                    <label for="phone">Phone Number</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <h5 class="mb-3">Address</h5>
-                  <div class="row g-3">
-                    <div class="col-12">
-                      <div class="form-floating">
-                        <input type="text" class="form-control" id="streetAddress" placeholder="Street Address" />
-                        <label for="streetAddress">Street Address</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input type="text" class="form-control" id="city" placeholder="City" />
-                        <label for="city">City</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-floating">
-                        <input type="text" class="form-control" id="state" placeholder="State" />
-                        <label for="state">State</label>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-floating">
-                        <input type="text" class="form-control" id="zip" placeholder="ZIP" />
-                        <label for="zip">ZIP</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-dark">
-                  Update Profile
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Security Section -->
-    <div id="security" class="content-section mt-4">
-      <h2 class="mb-4">Security Settings</h2>
-      <div class="profile-card p-4">
-        <div class="mb-4">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <strong class="text-muted">Verification:</strong>
-            <span class="status-badge bg-danger text-white" id="securityVerificationStatus">
-              <i class="bi bi-x-circle mr-2"></i> Unauthorized
-            </span>
-          </div>
-          <div class="alert alert-info alert-dismissible fade show d-flex align-items-center" role="alert">
-            <i class="bi bi-info-circle me-2"></i>
-            <p class="mb-0">
-              To get authorized and start purchasing, you need to add your
-              wallet address.
-            </p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          <div class="input-group wallet-input-group">
-            <input type="text" class="form-control" id="walletAddress" placeholder="Click 'Add Wallet'" />
-            <button class="btn btn-primary wallet-add-button" id="addWalletButton">
-              <i class="bi bi-plus-circle me-2"></i> Add Wallet
-            </button>
-          </div>
-        </div>
-
-        <!-- Password Update Section -->
-        <h3 class="section-title mb-4">Update Password</h3>
-        <div class="row">
-          <div class="col-lg-6">
-            <form id="passwordForm">
-              <div class="mb-3">
-                <div class="input-group">
-                  <input type="password" class="form-control" id="newPassword" placeholder="New Password" required />
-                  <button class="btn btn-dark" type="button" id="toggleNewPassword">
-                    <i class="bi bi-eye-slash"></i>
+                <div class="d-flex justify-content mt-4">
+                  <button type="submit" class="btn btn-dark">Update</button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary ms-2"
+                    id="cancelButton"
+                  >
+                    Cancel
                   </button>
                 </div>
+              </form>
+            </div>
+            <div class="col-lg-6 instruction">
+              <h5>Password Requirements</h5>
+              <ul>
+                <li>At least 8 characters long</li>
+                <li>Includes both upper and lower case letters</li>
+                <li>Contains at least one number</li>
+                <li>Has at least one special character</li>
+                <li>Do not use the same password across multiple accounts</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="danger-zone p-4 rounded mt-4">
+            <h5 class="text-danger mb-4">Danger Zone</h5>
+            <div class="d-flex justify-content-between mb-3">
+              <div>
+                <h6 class="mb-1">Deactivate Account</h6>
+                <p class="text-muted mb-0 small">
+                  Temporarily disable your account
+                </p>
               </div>
-              <div class="mb-3">
-                <div class="input-group">
-                  <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"
-                    required />
-                  <button class="btn btn-dark" type="button" id="toggleConfirmPassword">
-                    <i class="bi bi-eye-slash"></i>
-                  </button>
+              <button
+                class="btn btn-warning action-button"
+                id="deactivateButton"
+              >
+                <i class="bi bi-power me-2"></i>Deactivate
+              </button>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div>
+                <h6 class="mb-1">Delete Account</h6>
+                <p class="text-muted mb-0 small">
+                  This action cannot be undone
+                </p>
+              </div>
+              <button class="btn btn-danger action-button" id="deleteButton">
+                <i class="bi bi-x-octagon me-2"></i>Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Medicine Section -->
+      <div id="add-medicine" class="content-section">
+        <h2 class="mb-4">Add New Medicine</h2>
+        <div class="stat-card">
+          <form class="needs-validation" novalidate>
+            <!-- Manufacturer Details -->
+            <h4>Manufacturer Details</h4>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="manufacturerId"
+                  placeholder="Manufacturer ID"
+                  disabled
+                />
+                <label for="manufacturerId">Manufacturer ID</label>
+              </div>
+            </div>
+
+            <!-- Medicine Information -->
+            <h4>Medicine Information</h4>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="medicineName"
+                  placeholder="Medicine Name"
+                  required
+                />
+                <label for="medicineName">Medicine Name</label>
+                <div class="invalid-feedback">
+                  Please enter the medicine name.
                 </div>
               </div>
-              <div class="d-flex justify-content mt-4">
-                <button type="submit" class="btn btn-dark">Update</button>
-                <button type="button" class="btn btn-secondary ms-2" id="cancelButton">
-                  Cancel
-                </button>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="medicineId"
+                  placeholder="Medicine ID"
+                  required
+                />
+                <label for="medicineId">Medicine ID</label>
+                <div class="invalid-feedback">
+                  Please enter the medicine ID.
+                </div>
               </div>
-            </form>
-          </div>
-          <div class="col-lg-6 instruction">
-            <h5>Password Requirements</h5>
-            <ul>
-              <li>At least 8 characters long</li>
-              <li>Includes both upper and lower case letters</li>
-              <li>Contains at least one number</li>
-              <li>Has at least one special character</li>
-              <li>Do not use the same password across multiple accounts</li>
-            </ul>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating">
+                <select class="form-select" id="medicineType" required>
+                  <option value="">Select Type</option>
+                  <option value="tablet">Tablet</option>
+                  <option value="capsule">Capsule</option>
+                  <option value="syrup">Syrup</option>
+                  <option value="injection">Injection</option>
+                </select>
+                <label for="medicineType">Medicine Type</label>
+                <div class="invalid-feedback">
+                  Please select a medicine type.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="strength"
+                  placeholder="Strength"
+                  required
+                />
+                <label for="strength">Strength</label>
+                <div class="invalid-feedback">Please enter the strength.</div>
+              </div>
+            </div>
+
+            <!-- Regulatory Information -->
+            <h4>Regulatory Information</h4>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="batchNumber"
+                  placeholder="Batch Number"
+                  required
+                />
+                <label for="batchNumber">Batch Number</label>
+                <div class="invalid-feedback">
+                  Please enter the batch number.
+                </div>
+              </div>
+            </div>
+
+            <!-- Storage and Pricing -->
+            <h4>Storage & Pricing</h4>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="storageConditions"
+                  placeholder="Storage Conditions"
+                  required
+                />
+                <label for="storageConditions">Storage Conditions</label>
+                <div class="invalid-feedback">
+                  Please enter the storage conditions.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating">
+                <select class="form-select" id="currency" required>
+                  <option value="">Select Currency</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="INR">INR</option>
+                </select>
+                <label for="currency">Currency</label>
+                <div class="invalid-feedback">Please select a currency.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  placeholder="Price"
+                  required
+                />
+                <label for="price">Price</label>
+                <div class="invalid-feedback">Please enter the price.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quantity"
+                  placeholder="Quantity"
+                  required
+                />
+                <label for="quantity">Quantity</label>
+                <div class="invalid-feedback">Please enter the quantity.</div>
+              </div>
+            </div>
+
+            <!-- Dates -->
+            <h4>Dates</h4>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="date"
+                  class="form-control"
+                  id="manufactureDate"
+                  required
+                />
+                <label for="manufactureDate">Manufacture Date</label>
+                <div class="invalid-feedback">
+                  Please enter the manufacture date.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating">
+                <input
+                  type="date"
+                  class="form-control"
+                  id="expiryDate"
+                  required
+                />
+                <label for="expiryDate">Expiry Date</label>
+                <div class="invalid-feedback">
+                  Please enter the expiry date.
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit and Reset Buttons -->
+            <div class="d-flex justify-content mt-4">
+              <button type="submit" class="btn btn-dark">Add Medicine</button>
+              <button type="reset" class="btn btn-secondary ms-2">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Track Medicine Section -->
+      <div id="track-medicine" class="content-section">
+        <h2 class="mb-4">Track Medicine</h2>
+        <div class="stat-card">
+          <form id="track-form" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Medicine ID</label>
+              <input
+                type="text"
+                class="form-control"
+                id="track-medicine-id"
+                placeholder="Enter Medicine ID"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Upload QR Code</label>
+              <input
+                type="file"
+                class="form-control"
+                id="qr-code"
+                accept="image/*"
+              />
+            </div>
+            <div class="info-text">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="me-1"
+                style="vertical-align: -2px"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                />
+                <rect x="7" y="4" width="2" height="5" fill="currentColor" />
+                <circle cx="8" cy="11" r="1" fill="currentColor" />
+              </svg>
+              Please provide either a Medicine ID or upload a QR code, but not
+              both.
+            </div>
+            <div class="col-md-12 mt-3">
+              <button type="submit" class="btn btn-dark" id="track-med">
+                Track Medicine
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary ms-2"
+                id="cancel-button"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+
+          <!-- Medicine Details Result -->
+          <div id="result-div" class="mt-5 d-none">
+            <!-- Medicine Card -->
+            <div
+              id="medicine-details"
+              class="bg-white shadow-lg rounded-4 overflow-hidden"
+            >
+              <!-- Header Section -->
+              <div class="p-4 p-md-5 bg-black text-white">
+                <h2 id="med-name" class="fw-bold text-center mb-2"></h2>
+                <p
+                  id="med-manufacturer"
+                  class="text-center text-white-50 mb-0"
+                ></p>
+              </div>
+
+              <!-- Details Section -->
+              <div class="p-4 p-md-5">
+                <div class="row g-4">
+                  <!-- Left Column -->
+                  <div class="col-md-6">
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Medicine Type</span
+                      >
+                      <p id="med-type" class="fs-5 mb-0"></p>
+                    </div>
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Strength</span
+                      >
+                      <p id="med-strength" class="fs-5 mb-0"></p>
+                    </div>
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Batch Number</span
+                      >
+                      <p id="med-batch" class="fs-5 mb-0"></p>
+                    </div>
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Storage Conditions</span
+                      >
+                      <p id="med-storage" class="fs-5 mb-0"></p>
+                    </div>
+                  </div>
+
+                  <!-- Right Column -->
+                  <div class="col-md-6">
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Manufacture Date</span
+                      >
+                      <p id="med-mfg-date" class="fs-5 mb-0"></p>
+                    </div>
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Expiry Date</span
+                      >
+                      <p id="med-exp-date" class="fs-5 mb-0"></p>
+                    </div>
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Price</span
+                      >
+                      <p id="med-price" class="fs-5 mb-0"></p>
+                    </div>
+                    <div class="details-card mb-4">
+                      <span
+                        class="text-uppercase text-black-50 small fw-bold mb-2 d-block"
+                        >Quantity</span
+                      >
+                      <p id="med-quantity" class="fs-5 mb-0"></p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Status Section -->
+                <div class="text-center mt-4 pt-4 border-top">
+                  <p class="text-uppercase text-black-50 small fw-bold mb-3">
+                    Current State
+                  </p>
+                  <div class="d-inline-block">
+                    <span
+                      id="med-state"
+                      class="status-badge px-4 py-2 rounded-pill fs-6 fw-bold"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Progress Tracking -->
+              <div class="p-4 p-md-5 bg-light">
+                <div class="progress-container position-relative py-4">
+                  <div
+                    class="progress-line position-absolute top-50 start-0 end-0"
+                  ></div>
+                  <div
+                    id="state-steps"
+                    class="d-flex justify-content-between"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-center mt-4">
+              <button
+                class="btn btn-outline-dark rounded-pill px-4 me-3"
+                id="print-details"
+              >
+                <i class="fa-solid fa-print me-2"></i>Print Details
+              </button>
+              <button class="btn btn-dark rounded-pill px-4" id="new-search">
+                <i class="fa-solid fa-magnifying-glass me-2"></i>New Search
+              </button>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Danger Zone -->
-        <div class="danger-zone p-4 rounded mt-4">
-          <h5 class="text-danger mb-4">Danger Zone</h5>
-          <div class="d-flex justify-content-between mb-3">
-            <div>
-              <h6 class="mb-1">Deactivate Account</h6>
-              <p class="text-muted mb-0 small">
-                Temporarily disable your account
+      <!-- Buy Medicine Section -->
+      <div id="buy-medicine" class="content-section">
+        <h2 class="mb-4">Buy Medicine</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="medicine-cards">
+          <!-- Medicine Cards will be populated here -->
+        </div>
+        <div id="payment-details" class="d-none stat-card p-4">
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Manufacturer Details</h3>
+              <p>
+                <strong>Manufacturer ID:</strong>
+                <span id="manufacturer-id"></span>
+              </p>
+              <p>
+                <strong>Manufacturer Name:</strong>
+                <span id="manufacturer-name"></span>
+              </p>
+              <p>
+                <strong>Contact Information:</strong>
+                <span id="manufacturer-contact"></span>
               </p>
             </div>
-            <button class="btn btn-warning action-button" id="deactivateButton">
-              <i class="bi bi-power me-2"></i>Deactivate
-            </button>
-          </div>
-          <div class="d-flex justify-content-between">
-            <div>
-              <h6 class="mb-1">Delete Account</h6>
-              <p class="text-muted mb-0 small">
-                This action cannot be undone
+            <div class="col-md-6">
+              <h3>Medicine Information</h3>
+              <p>
+                <strong>Medicine Name:</strong> <span id="medicine-name"></span>
+              </p>
+              <p>
+                <strong>Medicine ID:</strong> <span id="medicine-id"></span>
               </p>
             </div>
-            <button class="btn btn-danger action-button" id="deleteButton">
-              <i class="bi bi-x-octagon me-2"></i>Delete
-            </button>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add Medicine Section -->
-    <div id="add-medicine" class="content-section">
-      <h2 class="mb-4">Add New Medicine</h2>
-      <div class="stat-card">
-        <form class="needs-validation" novalidate>
-          <!-- Manufacturer Details -->
-          <h4>Manufacturer Details</h4>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="manufacturerId" placeholder="Manufacturer ID" disabled />
-              <label for="manufacturerId">Manufacturer ID</label>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <h3>Regulatory Information</h3>
+              <p>
+                <strong>Batch Number:</strong> <span id="batch-number"></span>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h3>Storage & Pricing</h3>
+              <p>
+                <strong>Storage Conditions:</strong>
+                <span id="storage-conditions"></span>
+              </p>
+              <p><strong>Currency:</strong> <span id="currency">ETH</span></p>
+              <p><strong>Price:</strong> <span id="price"></span></p>
+              <p>
+                <strong>Available Quantity:</strong> <span id="quantity"></span>
+              </p>
             </div>
           </div>
-
-          <!-- Medicine Information -->
-          <h4>Medicine Information</h4>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="medicineName" placeholder="Medicine Name" required />
-              <label for="medicineName">Medicine Name</label>
-              <div class="invalid-feedback">
-                Please enter the medicine name.
-              </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <h3>Dates</h3>
+              <p>
+                <strong>Manufacture Date:</strong>
+                <span id="manufacture-date">dd-mm-yyyy</span>
+              </p>
+              <p>
+                <strong>Expiry Date:</strong>
+                <span id="expiry-date">dd-mm-yyyy</span>
+              </p>
             </div>
           </div>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="medicineId" placeholder="Medicine ID" required />
-              <label for="medicineId">Medicine ID</label>
-              <div class="invalid-feedback">
-                Please enter the medicine ID.
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="form-floating">
-              <select class="form-select" id="medicineType" required>
-                <option value="">Select Type</option>
-                <option value="tablet">Tablet</option>
-                <option value="capsule">Capsule</option>
-                <option value="syrup">Syrup</option>
-                <option value="injection">Injection</option>
-              </select>
-              <label for="medicineType">Medicine Type</label>
-              <div class="invalid-feedback">
-                Please select a medicine type.
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="strength" placeholder="Strength" required />
-              <label for="strength">Strength</label>
-              <div class="invalid-feedback">Please enter the strength.</div>
-            </div>
-          </div>
-
-          <!-- Regulatory Information -->
-          <h4>Regulatory Information</h4>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="batchNumber" placeholder="Batch Number" required />
-              <label for="batchNumber">Batch Number</label>
-              <div class="invalid-feedback">
-                Please enter the batch number.
-              </div>
-            </div>
-          </div>
-
-          <!-- Storage and Pricing -->
-          <h4>Storage & Pricing</h4>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="storageConditions" placeholder="Storage Conditions"
-                required />
-              <label for="storageConditions">Storage Conditions</label>
-              <div class="invalid-feedback">
-                Please enter the storage conditions.
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="form-floating">
-              <select class="form-select" id="currency" required>
-                <option value="">Select Currency</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="INR">INR</option>
-              </select>
-              <label for="currency">Currency</label>
-              <div class="invalid-feedback">Please select a currency.</div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="number" class="form-control" id="price" placeholder="Price" required />
-              <label for="price">Price</label>
-              <div class="invalid-feedback">Please enter the price.</div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="number" class="form-control" id="quantity" placeholder="Quantity" required />
-              <label for="quantity">Quantity</label>
-              <div class="invalid-feedback">Please enter the quantity.</div>
-            </div>
-          </div>
-
-          <!-- Dates -->
-          <h4>Dates</h4>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="date" class="form-control" id="manufactureDate" required />
-              <label for="manufactureDate">Manufacture Date</label>
-              <div class="invalid-feedback">
-                Please enter the manufacture date.
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="date" class="form-control" id="expiryDate" required />
-              <label for="expiryDate">Expiry Date</label>
-              <div class="invalid-feedback">
-                Please enter the expiry date.
-              </div>
-            </div>
-          </div>
-
-          <!-- Submit and Reset Buttons -->
-          <div class="d-flex justify-content mt-4">
-            <button type="submit" class="btn btn-dark">Add Medicine</button>
-            <button type="reset" class="btn btn-secondary ms-2">
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Track Medicine Section -->
-    <div id="track-medicine" class="content-section">
-      <h2 class="mb-4">Track Medicine</h2>
-      <div class="stat-card">
-        <form id="track-form" class="row g-3">
-          <div class="col-md-6">
-            <label class="form-label">Medicine ID</label>
-            <input type="text" class="form-control" id="track-medicine-id" placeholder="Enter Medicine ID" />
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Upload QR Code</label>
-            <input type="file" class="form-control" id="qr-code" accept="image/*" />
-          </div>
-          <div class="info-text">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="me-1"
-              style="vertical-align: -2px">
-              <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none" />
-              <rect x="7" y="4" width="2" height="5" fill="currentColor" />
-              <circle cx="8" cy="11" r="1" fill="currentColor" />
-            </svg>
-            Please provide either a Medicine ID or upload a QR code, but not
-            both.
-          </div>
-          <div class="col-md-12 mt-3">
-            <button type="submit" class="btn btn-dark" id="track-med">
-              Track Medicine
-            </button>
-            <button type="button" class="btn btn-secondary ms-2" id="cancel-button">
-              Cancel
-            </button>
-          </div>
-        </form>
-
-        <div id="result-div" class="mt-4" style="display: none">
-          <div id="medicine-details"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Buy Medicine Section -->
-    <div id="buy-medicine" class="content-section">
-      <h2 class="mb-4">Buy Medicine</h2>
-      <div class="row row-cols-1 row-cols-md-3 g-4" id="medicine-cards">
-        <!-- Medicine Cards will be populated here -->
-      </div>
-      <div id="payment-details" class="d-none stat-card p-4">
-        <div class="row">
-          <div class="col-md-6">
-            <h3>Manufacturer Details</h3>
-            <p>
-              <strong>Manufacturer ID:</strong>
-              <span id="manufacturer-id"></span>
-            </p>
-            <p>
-              <strong>Manufacturer Name:</strong>
-              <span id="manufacturer-name"></span>
-            </p>
-            <p>
-              <strong>Contact Information:</strong>
-              <span id="manufacturer-contact"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <h3>Medicine Information</h3>
-            <p>
-              <strong>Medicine Name:</strong> <span id="medicine-name"></span>
-            </p>
-            <p>
-              <strong>Medicine ID:</strong> <span id="medicine-id"></span>
-            </p>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <h3>Regulatory Information</h3>
-            <p>
-              <strong>Batch Number:</strong> <span id="batch-number"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <h3>Storage & Pricing</h3>
-            <p>
-              <strong>Storage Conditions:</strong>
-              <span id="storage-conditions"></span>
-            </p>
-            <p><strong>Currency:</strong> <span id="currency">ETH</span></p>
-            <p><strong>Price:</strong> <span id="price"></span></p>
-            <p>
-              <strong>Available Quantity:</strong> <span id="quantity"></span>
-            </p>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <h3>Dates</h3>
-            <p>
-              <strong>Manufacture Date:</strong>
-              <span id="manufacture-date">dd-mm-yyyy</span>
-            </p>
-            <p>
-              <strong>Expiry Date:</strong>
-              <span id="expiry-date">dd-mm-yyyy</span>
-            </p>
-          </div>
-        </div>
-        <!-- New Purchase Quantity Input Field
+          <!-- New Purchase Quantity Input Field
         <div class="mt-4">
           <label for="buy-purchase-quantity" class="form-label">Purchase Quantity:</label>
           <input type="number" id="buy-purchase-quantity" class="form-control" min="1" value="1" />
         </div> -->
-        <div class="d-flex mt-3">
-          <button id="confirm-payment" class="btn btn-dark me-2">
-            Pay now
+          <div class="d-flex mt-3">
+            <button id="confirm-payment" class="btn btn-dark me-2">
+              Pay now
+            </button>
+            <button id="cancel-payment" class="btn btn-secondary">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Overlay -->
+      <div id="success-overlay" class="overlay">
+        <div class="overlay-content">
+          <svg class="success-checkmark" viewBox="0 0 100 100">
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              fill="none"
+              stroke="var(--success-checkmark-color)"
+              stroke-width="5"
+            />
+            <path
+              d="M30 50 L45 65 L70 35"
+              fill="none"
+              stroke="#fff"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <h3 id="success-title"></h3>
+          <p id="success-message"></p>
+          <button id="close-overlay" class="btn btn-secondary mt-3">
+            Close
           </button>
-          <button id="cancel-payment" class="btn btn-secondary">
-            Cancel
-          </button>
+        </div>
+      </div>
+
+      <!-- Confirmation Overlay -->
+      <div id="confirmation-overlay" class="overlay">
+        <div class="overlay-content">
+          <h3 class="text-danger" id="confirmation-title"></h3>
+          <p id="confirmation-message"></p>
+          <div class="d-flex justify-content-center mt-4">
+            <button id="confirmAction" class="btn btn-danger">Confirm</button>
+            <button id="cancelAction" class="btn btn-secondary ms-4">
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Success Overlay -->
-    <div id="success-overlay" class="overlay">
-      <div class="overlay-content">
-        <svg class="success-checkmark" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="var(--success-checkmark-color)" stroke-width="5" />
-          <path d="M30 50 L45 65 L70 35" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-        <h3 id="success-title"></h3>
-        <p id="success-message"></p>
-        <button id="close-overlay" class="btn btn-secondary mt-3">
-          Close
-        </button>
-      </div>
-    </div>
-
-    <!-- Confirmation Overlay -->
-    <div id="confirmation-overlay" class="overlay">
-      <div class="overlay-content">
-        <h3 class="text-danger" id="confirmation-title"></h3>
-        <p id="confirmation-message"></p>
-        <div class="d-flex justify-content-center mt-4">
-          <button id="confirmAction" class="btn btn-danger">Confirm</button>
-          <button id="cancelAction" class="btn btn-secondary ms-4">
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="js/user.js"></script>
-</body>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/user.js"></script>
+  </body>
 </html>
