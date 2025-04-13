@@ -790,3 +790,7 @@ body {
     padding: 0.75rem;
   }
 }
+
+.d-none {
+  display: none !important;
+}

@@ -1889,35 +1889,48 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function populateBuyMedicineCards(medicines) {
-    buyMedicineCardsContainer.innerHTML = "";
-    if (medicines.length === 0) {
-      buyMedicineCardsContainer.innerHTML =
-        "<p class='text-center'>No medicines available.</p>";
+    const template = document.querySelector(".medicine-card-template");
+  
+    if (!template) {
+      console.error("❌ Template card not found in HTML.");
       return;
     }
+  
+    // Remove previous cards but keep the template
+    const allExisting = buyMedicineCardsContainer.querySelectorAll(
+      ".col:not(.medicine-card-template)"
+    );
+    allExisting.forEach((el) => el.remove());
+  
+    if (medicines.length === 0) {
+      buyMedicineCardsContainer.innerHTML += `<p class='text-center'>No medicines available.</p>`;
+      return;
+    }
+  
     medicines.forEach((medicine) => {
-      const card = document.createElement("div");
-      card.className = "col";
-      card.innerHTML = `
-        <div class="card h-100 shadow-sm card-hover">
-          <div class="card-body">
-            <h5 class="card-title">${medicine.medicineName}</h5>
-            <p class="card-text">ID: ${medicine.medicineId}</p>
-            <p class="card-text">Price: ${medicine.price} INR</p>
-            <p class="card-text">Expiry Date: ${medicine.expiryDate}</p>
-            ${
-              medicine.isExpired
-                ? '<button class="btn btn-danger w-100 text-white fw-bold" disabled>Expired</button>'
-                : `<button class="btn btn-primary w-100" onclick='buyShowDetails(${JSON.stringify(
-                    medicine
-                  )})'>Buy Now</button>`
-            }
-          </div>
-        </div>
-      `;
-      buyMedicineCardsContainer.appendChild(card);
+      const clone = template.cloneNode(true);
+      clone.classList.remove("d-none", "medicine-card-template");
+  
+      clone.querySelector(".medicine-name").textContent = medicine.medicineName;
+      clone.querySelector(".medicine-id").textContent = medicine.medicineId;
+      clone.querySelector(".medicine-price").textContent = medicine.price;
+      clone.querySelector(".medicine-expiry").textContent = medicine.expiryDate;
+  
+      const button = clone.querySelector(".buy-button");
+  
+      if (medicine.isExpired) {
+        button.textContent = "Expired";
+        button.classList.remove("btn-primary");
+        button.classList.add("btn-danger", "text-white", "fw-bold");
+        button.disabled = true;
+      } else {
+        button.addEventListener("click", () => buyShowDetails(medicine));
+      }
+  
+      buyMedicineCardsContainer.appendChild(clone);
     });
   }
+  
 
   window.buyShowDetails = async (medicine) => {
     try {
