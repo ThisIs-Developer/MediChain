@@ -319,10 +319,41 @@ async function updateHistoryTable() {
     const userRole = userResult[5].toLowerCase();
     // const userRole = localStorage.getItem('userRole')?.toLowerCase();
 
-    let tableHTML = `<div class="history-content">
-          <h2>History</h2>
-          <p>This area will display history details.</p>
-        </div>`;
+    let tableHTML = `
+      <div class="history-content">
+        <h2>History</h2>
+        <p><i class="fas fa-spinner fa-spin"></i> Please be patient while we fetch the details.</p>
+      </div>
+      <style>
+        .history-content {
+          background-color: #fff;
+          color: #333;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+          padding: 40px;
+          max-width: 600px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .history-content h2 {
+          font-size: 2rem;
+          font-weight: 600;
+          margin-bottom: 20px;
+          color: #222;
+        }
+
+        .history-content p {
+          font-size: 1.1rem;
+          color: #666;
+          margin-top: 10px;
+        }
+
+        .history-content i {
+          margin-right: 8px;
+          color: #000;
+        }
+      </style>
+    `;
 
     if (userRole === "manufacturer") {
       updateManufactureTable(userId);
