@@ -85,6 +85,7 @@ async function loadMedicineContract() {
 }
 
 // Dashboard Cards
+// Dashboard Cards
 window.addEventListener("load", async () => {
   try {
     // Ensure the contract is loaded before calling functions
@@ -93,38 +94,88 @@ window.addEventListener("load", async () => {
     // Update total medicine count on dashboard
     const count = await addMedicineContract.methods.getMedicineCount().call();
     const totalMedicinesEl = document.querySelector(".stat-card h4.tot_med");
-    const medicines = await addMedicineContract.methods
-      .getAllMedicines()
-      .call();
+    const medicines = await addMedicineContract.methods.getAllMedicines().call();
     const exp = document.querySelector(".stat-card h4.tot_expired");
     const stock = document.querySelector(".stat-card h4.tot_stock");
     const soldEl = document.querySelector(".stat-card h4.tot_sold");
 
-    if (totalMedicinesEl) {
-      totalMedicinesEl.innerText = count.toString();
-    }
+    if (totalMedicinesEl) totalMedicinesEl.innerText = count.toString();
 
     let expiredCount = 0;
     let stockCount = 0;
     medicines.forEach((med) => {
       const state = parseInt(med.state);
-      if (state === 3) {
-        expiredCount++;
-      } else if (state === 1) {
-        stockCount++;
-      }
+      if (state === 3) expiredCount++;
+      else if (state === 1) stockCount++;
     });
 
     if (exp) exp.innerText = expiredCount.toString();
     if (stock) stock.innerText = stockCount.toString();
 
-    // Fetch the total sold count from the contract's soldCounter variable
+    // Fetch the total sold count
     const soldCounter = await addMedicineContract.methods.soldCounter().call();
     if (soldEl) soldEl.innerText = soldCounter.toString();
+
+    // =================== Order History Count ===================
+    const email = localStorage.getItem("userEmail");
+    const password = localStorage.getItem("userPassword");
+    const userId = localStorage.getItem(`userId_${email}`);
+    const accounts = await web3.eth.getAccounts();
+    const currentAccount = accounts[0];
+    const userResult = await registrationContract.methods
+      .getUserDetails(email, password)
+      .call({ from: currentAccount });
+    const userRole = userResult[5].toLowerCase();
+
+    const historyEl = document.querySelector(".stat-card h4.tot_history");
+
+    if (userRole === "wholesaler" || userRole === "pharmacy") {
+      let historyData = [];
+      let index = 0;
+
+      while (true) {
+        try {
+          const entry = await addMedicineContract.methods.saleHistory(index).call();
+          if (!entry || !entry.medicineId) break;
+          historyData.push(entry);
+          index++;
+        } catch (err) {
+          break;
+        }
+      }
+
+      const buyerTypeFilter = userRole === "wholesaler" ? "1" : "2";
+      const userHistory = historyData.filter(
+        (entry) =>
+          entry.buyerType.toString() === buyerTypeFilter &&
+          entry.buyerId === userId
+      );
+
+      if (historyEl) {
+        historyEl.innerText = userHistory.length.toString();
+      }
+    } else if (userRole === "manufacturer") {
+      const medCount = await addMedicineContract.methods.getMedicineCount().call();
+      let historyData = [];
+
+      for (let i = 0; i < medCount; i++) {
+        const entry = await addMedicineContract.methods.manufacturerHistory(i).call();
+        if (entry.manufacturerId === userId) {
+          historyData.push(entry);
+        }
+      }
+
+      if (historyEl) {
+        historyEl.innerText = historyData.length.toString();
+      }
+    }
+
   } catch (error) {
-    console.error("❌ Error fetching medicine data:", error);
+    console.error("❌ Error loading dashboard data:", error);
   }
 });
+
+
 
 //================================History=============================================
 
