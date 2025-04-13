@@ -321,36 +321,50 @@ async function updateHistoryTable() {
 
     let tableHTML = `
       <div class="history-content">
-        <h2>History</h2>
-        <p><i class="fas fa-spinner fa-spin"></i> Please be patient while we fetch the details.</p>
+        <h2>Order History</h2>
+        <p><i class="loader"></i> Please wait while we fetch your data</p>
       </div>
       <style>
         .history-content {
-          background-color: #fff;
+          background-color: white;
           color: #333;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+          font-family: "Inter", sans-serif;
           padding: 40px;
-          max-width: 600px;
+          max-width: 500px;
           margin: 0 auto;
           text-align: center;
         }
 
         .history-content h2 {
-          font-size: 2rem;
-          font-weight: 600;
+          font-size: 28px;
+          font-weight: 700;
           margin-bottom: 20px;
-          color: #222;
+          color: #333;
+          letter-spacing: -0.5px;
         }
 
         .history-content p {
-          font-size: 1.1rem;
-          color: #666;
-          margin-top: 10px;
+          font-size: 16px;
+          color: #6c757d;
+          margin-top: 15px;
+          font-weight: 400;
         }
 
-        .history-content i {
-          margin-right: 8px;
-          color: #000;
+        .loader {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          border: 3px solid rgba(59, 130, 246, 0.3);
+          border-radius: 50%;
+          border-top-color: #3b82f6;
+          animation: spin 1s linear infinite;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
       </style>
     `;
