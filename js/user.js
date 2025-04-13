@@ -372,7 +372,7 @@ async function updateHistoryTable() {
 
     let tableHTML = `
       <div class="history-content">
-        <h2>Order History</h2>
+        <h2>History</h2>
         <p><i class="loader"></i> Please wait while we fetch your data</p>
       </div>
       <style>
