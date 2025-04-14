@@ -136,6 +136,26 @@ async function registerUser(event) {
  
   try {
     await contract.methods.register(userInput).send({ from: account });
+
+    await fetch("https://emailsenderservice-springboot-production.up.railway.app/sendWelcomeEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        name: `${firstName} ${lastName}`,
+        role: role,
+        userId: id
+      }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to send welcome email");
+      }
+      return response.text();
+    })
+    .then(data => console.log("Welcome email response:", data))
+    .catch(error => console.error("Email send error:", error));
+    
     Swal.fire({
       icon: "success",
       title: "Registration Successful!",
