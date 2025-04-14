@@ -2015,6 +2015,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const button = clone.querySelector(".buy-button");
   
       if (medicine.isExpired) {
+        clone.querySelector(".product-badge").remove();
         button.textContent = "Expired";
         button.classList.remove("btn-primary");
         button.classList.add("btn-danger", "text-white", "fw-bold");
@@ -2254,4 +2255,70 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Initial fetch call for Buy Medicine Section.
   fetchBuyMedicines();
+});
+
+// This script adds necessary UI interactions without modifying core functionality
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Add event listeners for tabs in payment modal
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      button.classList.add('active');
+      
+      // Show corresponding content
+      const tabId = button.getAttribute('data-tab');
+      document.getElementById(tabId + '-tab').classList.add('active');
+    });
+  });
+  
+  // Filter chips interaction
+  const filterChips = document.querySelectorAll('.filter-chip');
+  
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      // Note: actual filtering would be implemented in the main JS logic
+    });
+  });
+  
+  // Maintain original functionality - just add animation when modal opens/closes
+  const originalBuyShowDetails = window.buyShowDetails;
+  
+  if (typeof originalBuyShowDetails === 'function') {
+    window.buyShowDetails = function(medicine) {
+      // Call the original function
+      originalBuyShowDetails(medicine);
+      
+      // Add animation class
+      const modal = document.getElementById('payment-details');
+      modal.style.display = 'flex';
+      
+      // Ensure first tab is active
+      document.querySelectorAll('.tab-btn')[0].click();
+    };
+  }
+  
+  document.getElementById('cancel-payment').addEventListener('click', () => {
+    const modal = document.getElementById('payment-details');
+    modal.classList.add('fade-out');
+    
+    setTimeout(() => {
+      modal.classList.remove('fade-out');
+      modal.classList.add('d-none');
+      document.getElementById('medicine-cards').style.display = 'flex';
+    }, 300);
+  });
 });

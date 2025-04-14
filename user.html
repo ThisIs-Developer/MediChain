@@ -105,7 +105,7 @@
         <div class="col-md-3">
           <div class="stat-card">
             <h3 class="fs-5 mb-3">Total Varieties</h3>
-            <h4 class="fs-2 fw-bold tot_med"></h4>
+            <h4 class="fs-2 fw-bold tot_med"><i class="loader"></i></h4>
             <p class="text-success mb-0">
               <i class="bi bi-arrow-up"></i> In Inventory
             </p>
@@ -114,7 +114,7 @@
         <div class="col-md-3">
           <div class="stat-card">
             <h3 class="fs-5 mb-3">In Stock</h3>
-            <h4 class="fs-2 fw-bold tot_stock"></h4>
+            <h4 class="fs-2 fw-bold tot_stock"><i class="loader"></i></h4>
             <p class="text-success mb-0">
               <i class="bi bi-arrow-up"></i> Active
             </p>
@@ -123,7 +123,7 @@
         <div class="col-md-3">
           <div class="stat-card">
             <h3 class="fs-5 mb-3">Sold Items</h3>
-            <h4 class="fs-2 fw-bold tot_sold"></h4>
+            <h4 class="fs-2 fw-bold tot_sold"><i class="loader"></i></h4>
             <p class="text-primary mb-0">
               <i class="bi bi-geo"></i> In Transit
             </p>
@@ -132,7 +132,7 @@
         <div class="col-md-3">
           <div class="stat-card">
             <h3 class="fs-5 mb-3">Expired</h3>
-            <h4 class="fs-2 fw-bold tot_expired"></h4>
+            <h4 class="fs-2 fw-bold tot_expired"><i class="loader"></i></h4>
             <p class="text-warning mb-0">
               <i class="bi bi-exclamation-triangle"></i> Alert
             </p>
@@ -264,7 +264,7 @@
     </div>
 
     <!-- Security Section -->
-    <div id="security" class="content-section mt-4">
+    <div id="security" class="content-section">
       <h2 class="mb-4">Security Settings</h2>
       <div class="profile-card p-4">
         <div class="mb-4">
@@ -621,99 +621,243 @@
       </div>
     </div>
 
-    <!-- Buy Medicine Section -->
-    <div id="buy-medicine" class="content-section">
-      <h2 class="mb-4">Buy Medicine</h2>
-      <div class="row row-cols-1 row-cols-md-3 g-4" id="medicine-cards">
-        <!-- Template Card (hidden & ready to clone) -->
-        <div class="col d-none medicine-card-template">
-          <div class="card h-100 shadow-sm card-hover">
-            <div class="card-body">
-              <h5 class="card-title medicine-name"></h5>
-              <p class="card-text">ID: <span class="medicine-id"></span></p>
-              <p class="card-text">Price: <span class="medicine-price"></span> INR</p>
-              <p class="card-text">Expiry Date: <span class="medicine-expiry"></span></p>
-              <button class="btn btn-primary w-100 buy-button">Buy Now</button>
-            </div>
+<!-- Buy Medicine Section -->
+<div id="buy-medicine" class="content-section">
+  <h2 class="mb-4">Buy Medicine</h2>
+  <!-- Header Section -->
+  <!-- <div class="medicine-header">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h2 class="display-5 fw-bold text-gradient">Pharmaceutical Marketplace</h2>
+          <p class="lead text-muted">Browse and purchase quality-verified medications securely on the blockchain</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <div class="search-wrapper">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" class="form-control search-input" placeholder="Search medicines...">
           </div>
         </div>
       </div>
-      
-      <div id="payment-details" class="d-none stat-card p-4">
-        <div class="row">
-          <div class="col-md-6">
-            <h3>Manufacturer Details</h3>
-            <p>
-              <strong>Manufacturer ID:</strong>
-              <span id="manufacturer-id"></span>
-            </p>
-            <p>
-              <strong>Manufacturer Name:</strong>
-              <span id="manufacturer-name"></span>
-            </p>
-            <p>
-              <strong>Contact Information:</strong>
-              <span id="manufacturer-contact"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <h3>Medicine Information</h3>
-            <p>
-              <strong>Medicine Name:</strong> <span id="medicine-name"></span>
-            </p>
-            <p>
-              <strong>Medicine ID:</strong> <span id="medicine-id"></span>
-            </p>
+    </div>
+  </div> -->
+
+  <!-- Filters Section -->
+  <!-- <div class="filter-section">
+    <div class="container-fluid">
+      <div class="filters-wrapper">
+        <div class="filter-chip active">
+          <i class="bi bi-grid"></i>
+          <span>All</span>
+        </div>
+        <div class="filter-chip">
+          <i class="bi bi-prescription2"></i>
+          <span>Tablet</span>
+        </div>
+        <div class="filter-chip">
+          <i class="bi bi-capsule"></i>
+          <span>Capsule</span>
+        </div>
+        <div class="filter-chip">
+          <i class="bi bi-droplet"></i>
+          <span>Syrup</span>
+        </div>
+        <div class="filter-chip">
+          <i class="bi bi-heart-pulse"></i>
+          <span>Injection</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Medicine Cards -->
+  <div class="container-fluid">
+    <div class="row g-4" id="medicine-cards">
+      <!-- Template Card (hidden & ready to clone) -->
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-4 d-none medicine-card-template">
+        <div class="product-card">
+          <div class="product-badge">In Stock</div>
+          <div class="product-body">
+            <div class="product-category">Pharmaceutical</div>
+            <h3 class="product-title medicine-name"></h3>
+            <div class="product-meta">
+              <div class="product-meta-item">
+                <i class="bi bi-upc-scan"></i>
+                <span class="medicine-id"></span>
+              </div>
+              <div class="product-meta-item">
+                <i class="bi bi-calendar2-check"></i>
+                <span class="medicine-expiry"></span>
+              </div>
+            </div>
+            <div class="product-price">
+              <i class="bi bi-currency-rupee"></i>
+              <span class="medicine-price"></span>
+            </div>
+            <button class="btn-buy buy-button">
+              <span>Purchase</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
           </div>
         </div>
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <h3>Regulatory Information</h3>
-            <p>
-              <strong>Batch Number:</strong> <span id="batch-number"></span>
-            </p>
+      </div>
+    </div>
+  </div>
+  <!-- Payment Modal -->
+  <div id="payment-details" class="payment-modal d-none">
+    <div class="payment-overlay"></div>
+    <div class="payment-content">
+      <div class="payment-header">
+        <h3>Purchase Medicine</h3>
+        <button id="cancel-payment" class="btn-close-modal">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="payment-body">
+        <!-- Purchase Summary -->
+        <div class="purchase-summary">
+          <div class="medicine-banner">
+            <h4 id="medicine-name"></h4>
+            <div class="medicine-tag">
+              <i class="bi bi-shield-check"></i>
+              <span>Verified</span>
+            </div>
           </div>
-          <div class="col-md-6">
-            <h3>Storage & Pricing</h3>
-            <p>
-              <strong>Storage Conditions:</strong>
-              <span id="storage-conditions"></span>
-            </p>
-            <p><strong>Currency:</strong> <span id="currency">ETH</span></p>
-            <p><strong>Price:</strong> <span id="price"></span></p>
-            <p>
-              <strong>Available Quantity:</strong> <span id="quantity"></span>
-            </p>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <h3>Dates</h3>
-            <p>
-              <strong>Manufacture Date:</strong>
-              <span id="manufacture-date">dd-mm-yyyy</span>
-            </p>
-            <p>
-              <strong>Expiry Date:</strong>
-              <span id="expiry-date">dd-mm-yyyy</span>
-            </p>
+          <div class="summary-item">
+            <div class="item-label">Medicine ID</div>
+            <div class="item-value" id="medicine-id"></div>
           </div>
         </div>
-        <!-- New Purchase Quantity Input Field
-        <div class="mt-4">
-          <label for="buy-purchase-quantity" class="form-label">Purchase Quantity:</label>
-          <input type="number" id="buy-purchase-quantity" class="form-control" min="1" value="1" />
-        </div> -->
-        <div class="d-flex mt-3">
-          <button id="confirm-payment" class="btn btn-dark me-2">
-            Pay now
-          </button>
-          <button id="cancel-payment" class="btn btn-secondary">
-            Cancel
+
+        <!-- Details Tabs -->
+        <div class="details-tabs">
+          <div class="tab-menu">
+            <button class="tab-btn active" data-tab="manufacturer">Manufacturer</button>
+            <button class="tab-btn" data-tab="specifications">Specifications</button>
+            <button class="tab-btn" data-tab="logistics">Logistics</button>
+          </div>
+
+          <!-- Manufacturer Tab -->
+          <div class="tab-content active" id="manufacturer-tab">
+            <div class="tab-grid">
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-building"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Manufacturer ID</div>
+                  <div class="info-value" id="manufacturer-id"></div>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-person-badge"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Manufacturer Name</div>
+                  <div class="info-value" id="manufacturer-name"></div>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-telephone"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Contact</div>
+                  <div class="info-value" id="manufacturer-contact"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Specifications Tab -->
+          <div class="tab-content" id="specifications-tab">
+            <div class="tab-grid">
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-thermometer-half"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Storage</div>
+                  <div class="info-value" id="storage-conditions"></div>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-upc"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Batch Number</div>
+                  <div class="info-value" id="batch-number"></div>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-box-seam"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Available Quantity</div>
+                  <div class="info-value" id="quantity"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logistics Tab -->
+          <div class="tab-content" id="logistics-tab">
+            <div class="tab-grid">
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-calendar-date"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Manufacture Date</div>
+                  <div class="info-value" id="manufacture-date"></div>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-calendar-x"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Expiry Date</div>
+                  <div class="info-value" id="expiry-date"></div>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="bi bi-currency-exchange"></i>
+                </div>
+                <div class="info-details">
+                  <div class="info-label">Currency</div>
+                  <div class="info-value" id="currency">INR</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="price-summary">
+          <div class="price-label">Total Price</div>
+          <div class="price-amount">
+            <i class="bi bi-currency-rupee"></i>
+            <span id="price"></span>
+          </div>
+        </div>
+
+        <!-- Payment Action -->
+        <div class="payment-action">
+          <button id="confirm-payment" class="btn-payment-confirm">
+            <i class="bi bi-lock"></i>
+            <span>Confirm Secure Purchase</span>
           </button>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
     <!-- Success Overlay -->
     <div id="success-overlay" class="overlay">

@@ -810,3 +810,563 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Buy Medicine Ultra Modern Styles */
+
+/* Core Layout */
+#buy-medicine {
+  background-color: #f8fafc;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.container-fluid {
+  max-width: 1400px;
+  padding: 0 24px;
+}
+
+/* Header Section */
+.medicine-header {
+  padding: 40px 0 20px;
+  position: relative;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #000000, #333333);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Search Bar */
+.search-wrapper {
+  position: relative;
+  max-width: 400px;
+  margin-left: auto;
+}
+
+.search-input {
+  padding: 14px 20px 14px 50px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 20px;
+}
+
+/* Filter Section */
+.filter-section {
+  padding: 10px 0 30px;
+}
+
+.filters-wrapper {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scrollbar-width: none; /* Firefox */
+}
+
+.filters-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.filter-chip:hover {
+  border-color: #cbd5e1;
+  color: #334155;
+  transform: translateY(-1px);
+}
+
+.filter-chip.active {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.filter-chip i {
+  font-size: 16px;
+}
+
+/* Product Cards */
+.product-card {
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  transform: translateY(-5px);
+}
+
+.product-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.product-body {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-category {
+  font-size: 13px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.product-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.product-meta {
+  margin-bottom: 20px;
+}
+
+.product-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.product-meta-item i {
+  font-size: 16px;
+}
+
+.product-price {
+  margin-top: auto;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-buy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  background-color: #0f172a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.btn-buy:hover {
+  background-color: #111;
+  transform: translateY(-2px);
+}
+
+.btn-buy i {
+  transition: transform 0.2s ease;
+}
+
+.btn-buy:hover i {
+  transform: translateX(4px);
+}
+
+/* Payment Modal */
+.payment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(5px);
+}
+
+.payment-content {
+  background-color: #fff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 30px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.payment-header h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-close-modal:hover {
+  color: #000;
+}
+
+.payment-body {
+  padding: 30px;
+}
+
+/* Purchase Summary */
+.purchase-summary {
+  background-color: #f8fafc;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.medicine-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.medicine-banner h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+.medicine-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: #ecfdf5;
+  color: #047857;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.item-label {
+  color: #64748b;
+  font-size: 15px;
+}
+
+.item-value {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Details Tabs */
+.details-tabs {
+  margin-bottom: 30px;
+}
+
+.tab-menu {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tab-btn {
+  padding: 14px 20px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #000;
+}
+
+.tab-btn.active {
+  color: #000;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Info Cards */
+.info-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.info-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+  border-radius: 10px;
+  color: #000;
+  font-size: 18px;
+}
+
+.info-details {
+  flex: 1;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Price Summary */
+.price-summary {
+  background-color: #f8fafc;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.price-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.price-amount {
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Payment Action */
+.payment-action {
+  text-align: right;
+}
+
+.btn-payment-confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 250px;
+}
+
+.btn-payment-confirm:hover {
+  background-color: #111;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .medicine-header {
+    padding: 30px 0 15px;
+  }
+  
+  .search-wrapper {
+    margin-top: 20px;
+    max-width: 100%;
+  }
+  
+  .payment-content {
+    width: 95%;
+    max-height: 85vh;
+  }
+  
+  .tab-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .payment-header {
+    padding: 20px;
+  }
+  
+  .payment-body {
+    padding: 20px;
+  }
+  
+  .btn-payment-confirm {
+    width: 100%;
+  }
+}
