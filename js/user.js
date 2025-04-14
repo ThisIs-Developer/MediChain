@@ -1237,248 +1237,247 @@ document.addEventListener("DOMContentLoaded", function () {
               "_blank",
               "height=842,width=595"
             ); // A4 size
-
             const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>${fileName}</title>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-          font-family: 'Inter', sans-serif;
-          color: #333;
-          background: #fff;
-          padding: 20px;
-          margin: 0;
-        }
-        .container {
-          width: 100%;
-          max-width: 750px;
-          margin: 0 auto;
-          padding: 20px;
-          position: relative;
-          min-height: 100%;
-        }
-        .report-header {
-          text-align: center;
-          margin-bottom: 20px;
-          border-bottom: 1px solid #eee;
-          padding-bottom: 10px;
-        }
-        .logo {
-          font-size: 24px;
-          font-weight: 700;
-        }
-        .report-title {
-          font-size: 16px;
-          color: #666;
-        }
-        .report-date {
-          font-size: 13px;
-          color: #888;
-          margin-top: 5px;
-        }
-        .medicine-header {
-          background: #000;
-          color: #fff;
-          padding: 20px;
-          border-radius: 10px 10px 0 0;
-          text-align: center;
-          margin-bottom: 25px;
-        }
-        .medicine-name {
-          font-size: 22px;
-          font-weight: 700;
-        }
-        .medicine-id {
-          font-size: 13px;
-          color: #ccc;
-        }
-        .manufacturer {
-          font-size: 15px;
-          color: #aaa;
-          margin-top: 5px;
-        }
-        .details-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-          margin-bottom: 30px;
-        }
-        .detail-item {
-          background: #f9f9f9;
-          padding: 12px 16px;
-          border-radius: 6px;
-        }
-        .detail-label {
-          font-size: 11px;
-          text-transform: uppercase;
-          color: #888;
-          margin-bottom: 4px;
-        }
-        .detail-value {
-          font-size: 16px;
-          font-weight: 500;
-        }
-        .state-section {
-          text-align: center;
-          margin: 30px 0 20px;
-        }
-        .state-label {
-          font-size: 12px;
-          text-transform: uppercase;
-          color: #888;
-        }
-        .state-value {
-          display: inline-block;
-          padding: 6px 20px;
-          font-size: 14px;
-          font-weight: 600;
-          margin-top: 8px;
-          border: 2px solid #000;
-          border-radius: 30px;
-        }
-        .state-disposed {
-          background-color: #000;
-          color: #fff;
-          border: none;
-        }
-        .progress-track {
-          margin: 30px 0 80px;
-          position: relative;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .progress-line {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: #ddd;
-          z-index: 0;
-        }
-        .progress-step {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background: #fff;
-          border: 2px solid #ddd;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          z-index: 1;
-          font-size: 16px;
-        }
-        .progress-step.active {
-          background: #000;
-          color: #fff;
-          border-color: #000;
-        }
-        .progress-step-label {
-          position: absolute;
-          bottom: -20px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: 11px;
-          color: #888;
-        }
-        .progress-step.active .progress-step-label {
-          color: #000;
-        }
-        .footer {
-          position: relative;
-          bottom: 0;
-          width: 100%;
-          text-align: center;
-          font-size: 12px;
-          color: #888;
-          padding-top: 10px;
-          margin-top: 40px;
-          border-top: 1px solid #eee;
-        }
-        @media print {
-          html, body {
-            width: 210mm;
-            height: 297mm;
-            margin: 0;
-            padding: 0;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-          .container {
-            padding: 10mm;
-            box-sizing: border-box;
-          }
-          .no-print {
-            display: none;
-          }
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <!-- ... All your HTML content here (same as before) ... -->
-        <div class="report-header">
-          <div class="logo">MediChain</div>
-          <div class="report-title">Medicine Verification Report</div>
-          <div class="report-date">Generated on ${formattedDate} at ${formattedTime}</div>
-        </div>
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <title>${fileName}</title>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+                <style>
+                  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+                  * { margin: 0; padding: 0; box-sizing: border-box; }
+                  body {
+                    font-family: 'Inter', sans-serif;
+                    color: #333;
+                    background: #fff;
+                    padding: 20px;
+                    margin: 0;
+                  }
+                  .container {
+                    width: 100%;
+                    max-width: 750px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    position: relative;
+                    min-height: 100%;
+                  }
+                  .report-header {
+                    text-align: center;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid #eee;
+                    padding-bottom: 10px;
+                  }
+                  .logo {
+                    font-size: 24px;
+                    font-weight: 700;
+                  }
+                  .report-title {
+                    font-size: 16px;
+                    color: #666;
+                  }
+                  .report-date {
+                    font-size: 13px;
+                    color: #888;
+                    margin-top: 5px;
+                  }
+                  .medicine-header {
+                    background: #000;
+                    color: #fff;
+                    padding: 20px;
+                    border-radius: 10px 10px 0 0;
+                    text-align: center;
+                    margin-bottom: 25px;
+                  }
+                  .medicine-name {
+                    font-size: 22px;
+                    font-weight: 700;
+                  }
+                  .medicine-id {
+                    font-size: 13px;
+                    color: #ccc;
+                  }
+                  .manufacturer {
+                    font-size: 15px;
+                    color: #aaa;
+                    margin-top: 5px;
+                  }
+                  .details-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    margin-bottom: 30px;
+                  }
+                  .detail-item {
+                    background: #f9f9f9;
+                    padding: 12px 16px;
+                    border-radius: 6px;
+                  }
+                  .detail-label {
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    color: #888;
+                    margin-bottom: 4px;
+                  }
+                  .detail-value {
+                    font-size: 16px;
+                    font-weight: 500;
+                  }
+                  .state-section {
+                    text-align: center;
+                    margin: 30px 0 20px;
+                  }
+                  .state-label {
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    color: #888;
+                  }
+                  .state-value {
+                    display: inline-block;
+                    padding: 6px 20px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-top: 8px;
+                    border: 2px solid #000;
+                    border-radius: 30px;
+                  }
+                  .state-disposed {
+                    background-color: #000;
+                    color: #fff;
+                    border: none;
+                  }
+                  .progress-track {
+                    margin: 30px 0 80px;
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  }
+                  .progress-line {
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    right: 0;
+                    height: 2px;
+                    background: #ddd;
+                    z-index: 0;
+                  }
+                  .progress-step {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: #fff;
+                    border: 2px solid #ddd;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    z-index: 1;
+                    font-size: 16px;
+                  }
+                  .progress-step.active {
+                    background: #000;
+                    color: #fff;
+                    border-color: #000;
+                  }
+                  .progress-step-label {
+                    position: absolute;
+                    bottom: -20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 11px;
+                    color: #888;
+                  }
+                  .progress-step.active .progress-step-label {
+                    color: #000;
+                  }
+                  .footer {
+                    position: relative;
+                    bottom: 0;
+                    width: 100%;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #888;
+                    padding-top: 10px;
+                    margin-top: 40px;
+                    border-top: 1px solid #eee;
+                  }
+                  @media print {
+                    html, body {
+                      width: 210mm;
+                      height: 297mm;
+                      margin: 0;
+                      padding: 0;
+                      -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact;
+                    }
+                    .container {
+                      padding: 10mm;
+                      box-sizing: border-box;
+                    }
+                    .no-print {
+                      display: none;
+                    }
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="container">
+                  <!-- ... All your HTML content here (same as before) ... -->
+                  <div class="report-header">
+                    <div class="logo">MediChain</div>
+                    <div class="report-title">Medicine Verification Report</div>
+                    <div class="report-date">Generated on ${formattedDate} at ${formattedTime}</div>
+                  </div>
 
-        <div class="medicine-header">
-          <div class="medicine-name">${medicineName.replace(
-            /\(.*?\)/,
-            ""
-          )}</div>
-          <div class="medicine-id">ID: ${medicineId}</div>
-          <div class="manufacturer">${manufacturer}</div>
-        </div>
+                  <div class="medicine-header">
+                    <div class="medicine-name">${medicineName.replace(
+                      /\(.*?\)/,
+                      ""
+                    )}</div>
+                    <div class="medicine-id">ID: ${medicineId}</div>
+                    <div class="manufacturer">${manufacturer}</div>
+                  </div>
 
-        <div class="details-grid">
-          <div class="detail-item"><div class="detail-label">Type</div><div class="detail-value">${type}</div></div>
-          <div class="detail-item"><div class="detail-label">Strength</div><div class="detail-value">${strength}</div></div>
-          <div class="detail-item"><div class="detail-label">Batch</div><div class="detail-value">${batch}</div></div>
-          <div class="detail-item"><div class="detail-label">Storage</div><div class="detail-value">${storage}</div></div>
-          <div class="detail-item"><div class="detail-label">Mfg Date</div><div class="detail-value">${mfgDate}</div></div>
-          <div class="detail-item"><div class="detail-label">Exp Date</div><div class="detail-value">${expDate}</div></div>
-          <div class="detail-item"><div class="detail-label">Price</div><div class="detail-value">${price}</div></div>
-          <div class="detail-item"><div class="detail-label">Quantity</div><div class="detail-value">${quantity}</div></div>
-        </div>
+                  <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">Type</div><div class="detail-value">${type}</div></div>
+                    <div class="detail-item"><div class="detail-label">Strength</div><div class="detail-value">${strength}</div></div>
+                    <div class="detail-item"><div class="detail-label">Batch</div><div class="detail-value">${batch}</div></div>
+                    <div class="detail-item"><div class="detail-label">Storage</div><div class="detail-value">${storage}</div></div>
+                    <div class="detail-item"><div class="detail-label">Mfg Date</div><div class="detail-value">${mfgDate}</div></div>
+                    <div class="detail-item"><div class="detail-label">Exp Date</div><div class="detail-value">${expDate}</div></div>
+                    <div class="detail-item"><div class="detail-label">Price</div><div class="detail-value">${price}</div></div>
+                    <div class="detail-item"><div class="detail-label">Quantity</div><div class="detail-value">${quantity}</div></div>
+                  </div>
 
-        <div class="state-section">
-          <div class="state-label">Current State</div>
-          <div class="state-value ${
-            state.toLowerCase() === "disposed" ? "state-disposed" : ""
-          }">${state}</div>
-        </div>
+                  <div class="state-section">
+                    <div class="state-label">Current State</div>
+                    <div class="state-value ${
+                      state.toLowerCase() === "disposed" ? "state-disposed" : ""
+                    }">${state}</div>
+                  </div>
 
-        <div class="progress-track">
-          <div class="progress-line"></div>
-          ${getMedicineStateProgress(state)}
-        </div>
+                  <div class="progress-track">
+                    <div class="progress-line"></div>
+                    ${getMedicineStateProgress(state)}
+                  </div>
 
-        <div class="footer">
-          &copy; 2025 MediChain. All rights reserved. — Generated on ${formattedDate} at ${formattedTime}
-        </div>
-      </div>
+                  <div class="footer">
+                    &copy; 2025 MediChain. All rights reserved. — Generated on ${formattedDate} at ${formattedTime}
+                  </div>
+                </div>
 
-      <script>
-        window.onload = function() {
-          setTimeout(function() {
-            window.print();
-          }, 300);
-        };
-      </script>
-    </body>
-    </html>
-  `;
+                <script>
+                  window.onload = function() {
+                    setTimeout(function() {
+                      window.print();
+                    }, 300);
+                  };
+                </script>
+              </body>
+              </html>
+            `;
 
             printWindow.document.open();
             printWindow.document.write(htmlContent);
@@ -1891,6 +1890,42 @@ document.addEventListener("DOMContentLoaded", async () => {
   const buyMedicineCardsContainer = document.getElementById("medicine-cards");
   const paymentDetails = document.getElementById("payment-details");
   let selectedBuyMedicine = null;
+
+  const email = localStorage.getItem("userEmail");
+  const password = localStorage.getItem("userPassword");
+
+  async function updateBadgesBasedOnRole() {
+    try {
+      const userResult = await registrationContract.methods
+        .getUserDetails(email, password)
+        .call({ from: currentAccount });
+
+      const currentRole = userResult[5];
+
+      const mfgBadges = document.querySelectorAll(".product-badge-mfg");
+      const whlBadges = document.querySelectorAll(".product-badge-whl");
+
+      if (currentRole === "Wholesaler") {
+        mfgBadges.forEach((badge) => {
+          badge.style.display = "inline-block";
+        });
+        whlBadges.forEach((badge) => {
+          badge.style.display = "none";
+        });
+      } else {
+        mfgBadges.forEach((badge) => {
+          badge.style.display = "none";
+        });
+        whlBadges.forEach((badge) => {
+          badge.style.display = "inline-block";
+        });
+      }
+    } catch (error) {
+      console.error("Failed to fetch user role or update badges:", error);
+    }
+  }
+
+  updateBadgesBasedOnRole();
 
   async function fetchBuyMedicines() {
     try {
