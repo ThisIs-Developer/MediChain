@@ -1370,3 +1370,7 @@ body {
     width: 100%;
   }
 }
+
+.no-hover-transform:hover {
+  transform: none !important;
+}
