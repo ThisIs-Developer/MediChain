@@ -149,13 +149,30 @@
         </div>        
       </div>
 
-      <div id="history-overlay" class="history-overlay">
-        <!-- Close Button -->
+      <!-- <div id="history-overlay" class="history-overlay">
         <button id="close-history" class="history-close">&times;</button>
-        <!-- History content placeholder -->
         <div class="history-content">
-          <!-- <h2>History</h2>
-          <p>This area will display history details.</p> -->
+          <h2><i class="fas fa-history"></i> Order History</h2>
+          <div class="history-details">
+          </div>
+        </div>
+      </div> -->
+
+      <div id="history-overlay" class="history-overlay">
+        <!-- Content Container with white background -->
+        <div class="history-content-container">
+          <!-- Enhanced History Header -->
+          <div class="history-header">
+            <h2><i class="fas fa-history"></i> Order History</h2>
+            <button id="close-history" class="history-close" aria-label="Close history overlay">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          
+          <!-- History content placeholder with enhanced styling -->
+          <div class="history-content">
+            <!-- Content will be populated by JavaScript -->
+          </div>
         </div>
       </div>
     </div>
