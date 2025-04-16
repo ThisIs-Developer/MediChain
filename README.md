@@ -1,10 +1,10 @@
-# MediChain: Blockchain-Based Pharmaceutical Supply Chain Management  
+# MediChain: Blockchain-Based Pharmaceutical Supply Chain Management
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-red.svg)](https://opensource.org/licenses/Apache-2.0)  
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/medchain)  
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/yourusername/medchain/releases)  
-[![Ethereum](https://img.shields.io/badge/Ethereum-Powered-3C3C3D?logo=ethereum)](https://ethereum.org/)  
-[![Solidity](https://img.shields.io/badge/Solidity-%5E0.8.0-363636)](https://soliditylang.org/)  
+[![License](https://img.shields.io/badge/License-Apache%202.0-red.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/medchain)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/yourusername/medchain/releases)
+[![Ethereum](https://img.shields.io/badge/Ethereum-Powered-3C3C3D?logo=ethereum)](https://ethereum.org/)
+[![Solidity](https://img.shields.io/badge/Solidity-%5E0.8.0-363636)](https://soliditylang.org/)
 
 ---
 
