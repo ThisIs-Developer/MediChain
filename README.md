@@ -102,16 +102,15 @@ Smart contracts written in Solidity handle:
 ## Screenshots
 
 > 🧾 Dashboard Overview  
-> ![Dashboard](screenshots/dashboard.png)
-
-> 📦 Add Medicine  
-> ![Add Medicine](screenshots/add_medicine.png)
+> ![Dashboard](https://github.com/user-attachments/assets/f17bda53-9a86-46d3-bac4-358c5ffb6653)
+> ![Dashboard](https://github.com/user-attachments/assets/dd6f7ae8-4223-427e-941e-b524eec850e8)
 
 > 🔍 Track Medicine  
-> ![Track Medicine](screenshots/track_medicine.png)
+> ![Track Medicine](https://github.com/user-attachments/assets/084df5ed-6356-40f8-beaa-e985def44016)
 
 > 🛒 Buy Medicines  
-> ![Buy Medicine](screenshots/buy_medicine.png)
+> ![Buy Medicine](https://github.com/user-attachments/assets/03738613-ee51-46de-bd5e-664038ffd14c)
+> ![Buy Medicine](https://github.com/user-attachments/assets/8dc7550c-219b-4ecd-a9a7-32f0426af0c2)
 
 ---
 
