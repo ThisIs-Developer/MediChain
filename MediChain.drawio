@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.13" pages="2">
   <diagram name="Page-1" id="d1OhfMfelL_8_7eM4aV_">
-    <mxGraphModel dx="1028" dy="507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1249" dy="616" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -162,8 +162,8 @@
         <mxCell id="VtjTc6Uw84x1GZ8MY8mi-12" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="80" y="97" width="210" height="373" as="geometry" />
         </mxCell>
-        <mxCell id="VtjTc6Uw84x1GZ8MY8mi-13" value="&lt;b&gt;Vehicle-mounted Smart loT System&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="124" y="107" width="130" height="30" as="geometry" />
+        <mxCell id="VtjTc6Uw84x1GZ8MY8mi-13" value="&lt;b&gt;Smart Vehicle with Integrated IoT Sensors&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="124" y="107" width="136" height="30" as="geometry" />
         </mxCell>
         <mxCell id="VtjTc6Uw84x1GZ8MY8mi-15" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#000000;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.iot_thing_vibration_sensor;strokeWidth=0;opacity=80;" parent="1" vertex="1">
           <mxGeometry x="113" y="390" width="48" height="48" as="geometry" />
@@ -274,7 +274,7 @@
           <mxGeometry x="313" y="317.62" width="110" height="30" as="geometry" />
         </mxCell>
         <mxCell id="a9K2L0C2lWpB5_ZsFi7y-49" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="74" y="90.5" width="659" height="385" as="geometry" />
+          <mxGeometry x="74" y="91" width="659" height="385" as="geometry" />
         </mxCell>
         <mxCell id="xYLTjRTlymlfZ0dV_rCT-1" value="&lt;b&gt;Bloakchain&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="553.5" y="302" width="60" height="30" as="geometry" />
