@@ -239,8 +239,8 @@ async function loginUser(event) {
     Swal.fire({
       icon: "error",
       title: "Login Failed",
-      text: error.message,
-    });
+      text: "We couldn’t log you in. Please check your credentials and try again.",
+    });    
   }
 }
  

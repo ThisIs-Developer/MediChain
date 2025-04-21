@@ -1618,8 +1618,8 @@ window.addEventListener("load", async () => {
   if (!manufacturerId) {
     console.error("❌ Manufacturer ID not found for the logged-in user.");
     Swal.fire({
-      title: "Error!",
-      text: "Unable to retrieve your Manufacturer ID. Please log in again.",
+      title: "Access Denied",
+      text: "You must be logged in to proceed. Please log in and try again.",
       icon: "error",
       confirmButtonText: "OK",
     });
