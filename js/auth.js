@@ -44,7 +44,12 @@ async function loadContract() {
     }
   } else {
     hideLoader(); // Hide loader if MetaMask is not detected
-    alert("MetaMask not detected. Please install it!");
+    Swal.fire({
+      icon: "warning",
+      title: "MetaMask Not Detected",
+      text: "Please install MetaMask to continue.",
+      confirmButtonText: "Got it",
+    });    
   }
 }
  
