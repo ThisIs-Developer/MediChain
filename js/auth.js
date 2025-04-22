@@ -1,8 +1,19 @@
 let contract;
 let account;
 let web3;
+
+// Loading overlay functions
+function showLoader() {
+  document.getElementById("loadingOverlay").style.display = "flex";
+}
+
+function hideLoader() {
+  document.getElementById("loadingOverlay").style.display = "none";
+}
  
 async function loadContract() {
+  showLoader(); // Show loader when starting to load contract
+  
   if (typeof window.ethereum !== "undefined") {
     try {
       const accounts = await ethereum.request({
@@ -18,10 +29,21 @@ async function loadContract() {
       const abi = await response.json();
       contract = new web3.eth.Contract(abi, contractAddress);
       console.log("Contract Loaded:", contract);
+      
+      hideLoader(); // Hide loader after contract is loaded
     } catch (error) {
       console.error("Error connecting to MetaMask or contract:", error);
+      hideLoader(); // Hide loader if there's an error
+      
+      // Show error message
+      Swal.fire({
+        icon: "error",
+        title: "Connection Error",
+        text: "Failed to connect to Ethereum network. Please make sure MetaMask is installed and unlocked.",
+      });
     }
   } else {
+    hideLoader(); // Hide loader if MetaMask is not detected
     alert("MetaMask not detected. Please install it!");
   }
 }
@@ -86,6 +108,7 @@ function validatePassword(password) {
  
 async function registerUser(event) {
   event.preventDefault();
+  showLoader(); // Show loader when registration starts
  
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
@@ -96,6 +119,7 @@ async function registerUser(event) {
   const terms = document.getElementById("terms").checked;
  
   if (!validatePassword(password)) {
+    hideLoader(); // Hide loader if validation fails
     Swal.fire({
       icon: "error",
       title: "Password Requirements",
@@ -106,6 +130,7 @@ async function registerUser(event) {
  
   const existingPassword = localStorage.getItem("userPassword");
   if (existingPassword && existingPassword === password) {
+    hideLoader(); // Hide loader if validation fails
     Swal.fire({
       icon: "error",
       title: "Password Reuse Detected",
@@ -156,6 +181,7 @@ async function registerUser(event) {
     .then(data => console.log("Welcome email response:", data))
     .catch(error => console.error("Email send error:", error));
     
+    hideLoader(); // Hide loader on success
     Swal.fire({
       icon: "success",
       title: "Registration Successful!",
@@ -170,16 +196,18 @@ async function registerUser(event) {
     });
   } catch (error) {
     console.error("Registration Error:", error);
+    hideLoader(); // Hide loader on error
     Swal.fire({
       icon: "error",
-      title: "Registration Failed",
-      text: error.message,
-    });
+      title: "Oops!",
+      text: "Something went wrong. Please try registering again.",
+    });    
   }
 }
  
 async function loginUser(event) {
   event.preventDefault();
+  showLoader(); // Show loader when login starts
  
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value;
@@ -198,6 +226,7 @@ async function loginUser(event) {
  
     if (parseInt(deactivatedAt) > 0) {
       if (currentTime < parseInt(deactivatedAt) + THIRTY_DAYS) {
+        hideLoader(); // Hide loader for deactivated account
         Swal.fire({
           icon: "error",
           title: "Account Deactivated",
@@ -208,11 +237,13 @@ async function loginUser(event) {
         await contract.methods
           .reactivateAccount(email, password)
           .send({ from: account });
+        hideLoader(); // Hide loader after reactivation
         Swal.fire({
           icon: "info",
           title: "Account Reactivated",
           text: "Your account has been reactivated. Logging you in...",
         });
+        showLoader(); // Show loader again as we continue with login
       }
     }
  
@@ -222,6 +253,7 @@ async function loginUser(event) {
       .call();
     localStorage.setItem(`userId_${email}`, userDetails.id);
  
+    hideLoader(); // Hide loader on success
     Swal.fire({
       icon: "success",
       title: "Login Successful!",
@@ -236,10 +268,11 @@ async function loginUser(event) {
     });
   } catch (error) {
     console.error("Login Error:", error);
+    hideLoader(); // Hide loader on error
     Swal.fire({
       icon: "error",
       title: "Login Failed",
-      text: "We couldn’t log you in. Please check your credentials and try again.",
+      text: "We couldn't log you in. Please check your credentials and try again.",
     });    
   }
 }
@@ -248,11 +281,13 @@ document
   .getElementById("forgotPasswordForm")
   .addEventListener("submit", async (event) => {
     event.preventDefault();
+    showLoader(); // Show loader when password reset starts
     const email = document.getElementById("forgotPasswordEmail").value;
  
     try {
       // Check that the Ethereum provider is available.
       if (!window.ethereum) {
+        hideLoader(); // Hide loader if Ethereum is not available
         throw new Error(
           "Ethereum wallet is not available. Please install MetaMask."
         );
@@ -284,10 +319,12 @@ document
         }
       );
       if (!response.ok) {
+        hideLoader(); // Hide loader if email sending fails
         throw new Error(
           "Failed to send reset email. Status: " + response.status
         );
       }
+      hideLoader(); // Hide loader on success
       Swal.fire("Success!", "Reset link sent to your email.", "success");
  
       // --- Step 3: Update Modal with Reset Password Form ---
@@ -321,6 +358,7 @@ document
         .getElementById("resetPasswordForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
+          showLoader(); // Show loader when password reset form is submitted
           const resetEmail = document.getElementById("resetEmail").value;
           const resetToken = document.getElementById("resetToken").value;
           const newPassword = document.getElementById("newPassword").value;
@@ -328,6 +366,7 @@ document
             document.getElementById("confirmPassword").value;
  
           if (newPassword !== confirmPassword) {
+            hideLoader(); // Hide loader if passwords don't match
             Swal.fire("Error", "Passwords do not match.", "error");
             return;
           }
@@ -338,6 +377,7 @@ document
               .resetPassword(resetEmail, newPassword, resetToken)
               .send({ from: userAddress });
             console.log("Reset receipt:", resetReceipt);
+            hideLoader(); // Hide loader on success
             Swal.fire("Success", "Your password has been reset.", "success");
  
             // Optionally, close the modal after successful reset.
@@ -346,6 +386,7 @@ document
             modalInstance.hide();
           } catch (resetError) {
             console.error("Error during password reset:", resetError);
+            hideLoader(); // Hide loader on error
             Swal.fire(
               "Error",
               "Failed to reset password on blockchain.",
@@ -355,6 +396,7 @@ document
         });
     } catch (error) {
       console.error("Error during password reset:", error);
+      hideLoader(); // Hide loader on error
       Swal.fire(
         "Error",
         error.message || "An error occurred during password reset.",
@@ -364,5 +406,3 @@ document
   });
  
 window.onload = loadContract;
- 
- 

@@ -219,10 +219,66 @@
       width: 0;
       margin: 0;
     }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.4);
+      display: none; /* Hidden by default */
+      transition: opacity 0.3s ease;
+    }
+    .loading-box {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+      animation: fadeInUp 0.6s ease-in-out;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #ddd;
+      border-top: 5px solid #000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: auto;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Loading Overlay (hidden by default) -->
+  <div id="loadingOverlay" class="loading-overlay justify-content-center align-items-center">
+    <div class="loading-box text-center">
+      <div class="spinner"></div>
+      <p class="mt-3 text-center text-lg font-medium">Loading... Please wait</p>
+    </div>
+  </div>
+
   <div class="container">
     <!-- Login View -->
     <div class="auth-container" id="loginView">
