@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.3" pages="3">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.3" pages="4">
   <diagram name="Page-1" id="d1OhfMfelL_8_7eM4aV_">
     <mxGraphModel dx="1249" dy="616" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -401,6 +401,29 @@
         </mxCell>
         <mxCell id="eMVxAz4_9Wpc4_QHukkR-41" value="Transporter" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="490" y="205" width="79" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="dzmvInoUgiyhkqg168e8" name="Page-4">
+    <mxGraphModel dx="793" dy="392" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="X5GRrIhYqOY84MQKmGPD-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="700" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="X5GRrIhYqOY84MQKmGPD-3" value="Manufacturer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="X5GRrIhYqOY84MQKmGPD-4" value="Pharmacy" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="X5GRrIhYqOY84MQKmGPD-5" value="Wholesaler" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="X5GRrIhYqOY84MQKmGPD-9" value="&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#1f2328&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Blockchain-Based Pharmaceutical Supply Chain Management&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="400" y="277.5" width="130" height="105" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
