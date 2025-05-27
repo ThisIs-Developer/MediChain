@@ -167,7 +167,7 @@ async function registerUser(event) {
   try {
     await contract.methods.register(userInput).send({ from: account });
 
-    await fetch("https://emailsenderservice-springboot-production.up.railway.app/sendWelcomeEmail", {
+    await fetch("https://emailsenderservice-springboot-production-1efe.up.railway.app/sendWelcomeEmail", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -316,7 +316,7 @@ document
  
       // --- Step 2: Send token and email to your backend ---
       const response = await fetch(
-        "https://emailsenderservice-springboot-production.up.railway.app/sendResetEmail",
+        "https://emailsenderservice-springboot-production-1efe.up.railway.app/sendResetEmail",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
